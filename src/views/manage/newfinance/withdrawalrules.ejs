@@ -161,16 +161,14 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group-custom">
-                  <label class="form-label">Fee</label>
-                  <input type="number" step="0.01" class="form-control-custom" id="withdrawal-fee" placeholder="1999.00"
-                    value="1999.00" />
+                  <label class="form-label">Fee (INR)</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="withdrawal-fee" placeholder="0.00" value="0.00" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group-custom">
-                  <label class="form-label">Minimum Price</label>
-                  <input type="number" step="0.01" class="form-control-custom" id="min-withdrawal" placeholder="1.00"
-                    value="1.00" />
+                  <label class="form-label">Bet Multiplier</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="bet-multiplier" placeholder="1.00" value="1.00" />
                 </div>
               </div>
             </div>
@@ -178,16 +176,29 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group-custom">
-                  <label class="form-label">Maximum Price</label>
-                  <input type="number" step="0.01" class="form-control-custom" id="max-withdrawal"
-                    placeholder="9999999999.99" value="9999999999.99" />
+                  <label class="form-label">Min Withdrawal (INR ₹)</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="min-withdrawal-inr" placeholder="100.00" value="100.00" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group-custom">
-                  <label class="form-label">Bet Multiplier</label>
-                  <input type="number" step="0.01" class="form-control-custom" id="bet-multiplier" placeholder="9.00"
-                    value="9.00" />
+                  <label class="form-label">Max Withdrawal (INR ₹)</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="max-withdrawal-inr" placeholder="100000.00" value="100000.00" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label class="form-label">Min Withdrawal (USDT $)</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="min-withdrawal-usdt" placeholder="10.00" value="10.00" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label class="form-label">Max Withdrawal (USDT $)</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="max-withdrawal-usdt" placeholder="10000.00" value="10000.00" />
                 </div>
               </div>
             </div>
@@ -209,26 +220,19 @@
             <table class="table-custom">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>START TIME</th>
                   <th>END TIME</th>
-                  <th>FEE</th>
-                  <th>MIN PRICE</th>
-                  <th>MAX PRICE</th>
+                  <th>FEE (INR)</th>
+                  <th>MIN INR ₹</th>
+                  <th>MAX INR ₹</th>
+                  <th>MIN USDT $</th>
+                  <th>MAX USDT $</th>
                   <th>BET MULTIPLIER</th>
-                  <th>UPDATED AT</th>
                 </tr>
               </thead>
               <tbody id="rules-table-body">
                 <tr>
-                  <td class="text-primary">1</td>
-                  <td>01:57:00</td>
-                  <td>22:29:00</td>
-                  <td>1,999.00</td>
-                  <td>9,999,999,999.99</td>
-                  <td>9.00</td>
-                  <td></td>
-                  <td>2025-12-21<br />05:36:12</td>
+                  <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
                 </tr>
               </tbody>
             </table>
@@ -253,12 +257,14 @@
       e.preventDefault();
 
       const ruleData = {
-        start_time: $("#start-time").val(),
-        end_time: $("#end-time").val(),
-        fee: parseFloat($("#withdrawal-fee").val()),
-        min_price: parseFloat($("#min-withdrawal").val()),
-        max_price: parseFloat($("#max-withdrawal").val()),
-        bet_multiplier: parseFloat($("#bet-multiplier").val())
+        withdraw_start_time: $("#start-time").val(),
+        withdraw_end_time: $("#end-time").val(),
+        withdraw_fee: parseFloat($("#withdrawal-fee").val()),
+        withdraw_min_inr: parseFloat($("#min-withdrawal-inr").val()),
+        withdraw_max_inr: parseFloat($("#max-withdrawal-inr").val()),
+        withdraw_min_usdt: parseFloat($("#min-withdrawal-usdt").val()),
+        withdraw_max_usdt: parseFloat($("#max-withdrawal-usdt").val()),
+        withdraw_bet_multiplier: parseFloat($("#bet-multiplier").val())
       };
 
       $.ajax({
@@ -287,12 +293,14 @@
           const rule = response.data;
 
           // Populate form fields
-          $("#start-time").val(rule.start_time || '01:57:00');
-          $("#end-time").val(rule.end_time || '22:29:00');
-          $("#withdrawal-fee").val(rule.fee || 1999.00);
-          $("#min-withdrawal").val(rule.min_price || 1.00);
-          $("#max-withdrawal").val(rule.max_price || 9999999999.99);
-          $("#bet-multiplier").val(rule.bet_multiplier || 9.00);
+          $("#start-time").val(rule.withdraw_start_time || '00:00:00');
+          $("#end-time").val(rule.withdraw_end_time || '23:59:00');
+          $("#withdrawal-fee").val(rule.withdraw_fee || 0);
+          $("#min-withdrawal-inr").val(rule.withdraw_min_inr || 100);
+          $("#max-withdrawal-inr").val(rule.withdraw_max_inr || 100000);
+          $("#min-withdrawal-usdt").val(rule.withdraw_min_usdt || 10);
+          $("#max-withdrawal-usdt").val(rule.withdraw_max_usdt || 10000);
+          $("#bet-multiplier").val(rule.withdraw_bet_multiplier || 1);
 
           // Update table
           updateRulesTable(rule);
@@ -309,14 +317,14 @@
 
       const row = `
           <tr>
-            <td class="text-primary">${rule.id || 1}</td>
-            <td>${rule.start_time || '01:57:00'}</td>
-            <td>${rule.end_time || '22:29:00'}</td>
-            <td>${formatNumber(rule.fee || 1999.00)}</td>
-            <td>${formatNumber(rule.min_price || 1.00)}</td>
-            <td>${formatNumber(rule.max_price || 9999999999.99)}</td>
-            <td>${rule.bet_multiplier || 9.00}</td>
-            <td>${rule.updated_at || new Date().toISOString().split('T')[0]}<br/>${rule.updated_time || ''}</td>
+            <td>${rule.withdraw_start_time || '-'}</td>
+            <td>${rule.withdraw_end_time || '-'}</td>
+            <td>${formatNumber(rule.withdraw_fee || 0)}</td>
+            <td>₹${formatNumber(rule.withdraw_min_inr || 100)}</td>
+            <td>₹${formatNumber(rule.withdraw_max_inr || 100000)}</td>
+            <td>$${formatNumber(rule.withdraw_min_usdt || 10)}</td>
+            <td>$${formatNumber(rule.withdraw_max_usdt || 10000)}</td>
+            <td>${rule.withdraw_bet_multiplier || 1}</td>
           </tr>
         `;
       tbody.append(row);

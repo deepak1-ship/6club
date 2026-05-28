@@ -239,7 +239,11 @@
         html += `<tr class="text-center">
             <td>${data.id}</td>
             <td><b>${data.phone}</b></td>
-            <td>${data.type === "bank" ? '<b style="color: #3498db">BANKING</b>' : '<b style="color: #a50064">UPI</b>'}</td>
+            <td>${
+  data.type === "bank" ? '<b style="color: #3498db">BANKING</b>' : 
+  data.type === "usdt_manual" || data.type === "USDT" ? '<b style="color: #f39c12">USDT</b>' : 
+  '<b style="color: #a50064">UPI</b>'
+}</td>
             <td><b>₹${data.money}</b></td>
             <td style="min-width: 190px;"><b>${data.id_order}</b></td>
             <td style="min-width: 190px;"><b>${data.utr || "-"}</b></td>
@@ -268,7 +272,11 @@
         html += `<tr class="text-center">
             <td>${data.id}</td>
             <td><b>${data.phone}</b></td>
-            <td>${data.type === "bank" ? '<b style="color: #3498db">BANKING</b>' : '<b style="color: #a50064">UPI</b>'}</td>
+            <td>${
+  data.type === "bank" ? '<b style="color: #3498db">BANKING</b>' : 
+  data.type === "usdt_manual" || data.type === "USDT" ? '<b style="color: #f39c12">USDT</b>' : 
+  '<b style="color: #a50064">UPI</b>'
+}</td>
             <td><b>₹${data.money}</b></td>
             <td style="min-width: 190px;"><b>${data.id_order}</b></td>
             <td style="min-width: 190px;"><b>${data.utr || "-"}</b></td>

@@ -380,6 +380,24 @@ const getCategoryBanners = async (req, res) => {
 const getSiteSettings = async (req, res) => {
   try {
     const settings = await settingsModel.siteSettings.getAll();
+
+    const [adminRows] = await connection.query(
+      `SELECT usdt_rate, withdraw_min_inr, withdraw_max_inr,
+              withdraw_min_usdt, withdraw_max_usdt, withdraw_fee,
+              withdraw_bet_multiplier
+       FROM admin_ac LIMIT 1`
+    );
+    if (adminRows.length) {
+      const r = adminRows[0];
+      settings.withdraw_min_inr = r.withdraw_min_inr ?? 100;
+      settings.withdraw_max_inr = r.withdraw_max_inr ?? 100000;
+      settings.withdraw_min_usdt = r.withdraw_min_usdt ?? 10;
+      settings.withdraw_max_usdt = r.withdraw_max_usdt ?? 10000;
+      settings.withdraw_fee = r.withdraw_fee ?? 0;
+      settings.withdraw_bet_multiplier = r.withdraw_bet_multiplier ?? 1;
+      settings.usdt_rate = r.usdt_rate ?? 90;
+    }
+
     return res.json({ status: true, data: settings });
   } catch (error) {
     return res.json({ status: false, message: error.message });

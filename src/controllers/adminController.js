@@ -801,6 +801,17 @@ const rechargeDuyet = async (req, res) => {
     );
     const user = await getUserDataByPhone(info?.[0]?.phone);
 
+    // Debug logging for approval
+    console.log('=== RECHARGE APPROVAL DEBUG ===');
+    console.log('Recharge ID:', id);
+    console.log('Payment Type:', info[0].type);
+    console.log('Amount from DB:', info[0].money);
+    console.log('User Phone:', user.phone);
+    
+    if (info[0].type === 'usdt_manual' || info[0].type === 'USDT') {
+      console.log('USDT PAYMENT DETECTED - Amount should already be converted to INR');
+    }
+
     addUserAccountBalance({
       money: info[0].money,
       phone: user.phone,
@@ -3388,6 +3399,68 @@ const setUSDTRate = async (req, res) => {
 };
 
 // ============================================================
+// Withdrawal Rules
+// ============================================================
+
+const getWithdrawalRules = async (req, res) => {
+  try {
+    const [rows] = await connection.execute(
+      `SELECT withdraw_min_inr, withdraw_max_inr, withdraw_min_usdt, withdraw_max_usdt,
+              withdraw_fee, withdraw_bet_multiplier, withdraw_start_time, withdraw_end_time
+       FROM admin_ac LIMIT 1`
+    );
+    if (!rows.length) {
+      return res.status(200).json({ status: false, message: "No rules found" });
+    }
+    return res.status(200).json({ status: true, data: rows[0] });
+  } catch (error) {
+    console.error("getWithdrawalRules error:", error);
+    return res.status(500).json({ status: false, message: "Failed to fetch withdrawal rules. Run the ALTER TABLE SQL first." });
+  }
+};
+
+const saveWithdrawalRules = async (req, res) => {
+  try {
+    const {
+      withdraw_min_inr,
+      withdraw_max_inr,
+      withdraw_min_usdt,
+      withdraw_max_usdt,
+      withdraw_fee,
+      withdraw_bet_multiplier,
+      withdraw_start_time,
+      withdraw_end_time,
+    } = req.body;
+
+    await connection.execute(
+      `UPDATE admin_ac SET
+        withdraw_min_inr = ?,
+        withdraw_max_inr = ?,
+        withdraw_min_usdt = ?,
+        withdraw_max_usdt = ?,
+        withdraw_fee = ?,
+        withdraw_bet_multiplier = ?,
+        withdraw_start_time = ?,
+        withdraw_end_time = ?`,
+      [
+        parseFloat(withdraw_min_inr) || 100,
+        parseFloat(withdraw_max_inr) || 100000,
+        parseFloat(withdraw_min_usdt) || 10,
+        parseFloat(withdraw_max_usdt) || 10000,
+        parseFloat(withdraw_fee) || 0,
+        parseFloat(withdraw_bet_multiplier) || 1,
+        withdraw_start_time || "00:00:00",
+        withdraw_end_time || "23:59:00",
+      ]
+    );
+    return res.status(200).json({ status: true, message: "Withdrawal rules saved successfully" });
+  } catch (error) {
+    console.error("saveWithdrawalRules error:", error);
+    return res.status(500).json({ status: false, message: "Failed to save rules. Run the ALTER TABLE SQL first." });
+  }
+};
+
+// ============================================================
 
 const adminController = {
   adminPage,
@@ -3482,6 +3555,8 @@ const adminController = {
   setActiveUSDTImage,
   getUSDTRate,
   setUSDTRate,
+  getWithdrawalRules,
+  saveWithdrawalRules,
 };
 
 export default adminController;

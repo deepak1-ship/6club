@@ -1002,7 +1002,30 @@ const recharge = async (req, res) => {
       amount: money,
     };
 
-    if (type == "momo") {
+    // Handle USDT conversion before type check
+    if (type === "USDT") {
+      console.log('=== USDT CONVERSION IN MAIN RECHARGE ===');
+      console.log('Original USDT amount:', money);
+      
+      // Get USDT rate from database
+      let usdtRate = 92;
+      try {
+        const [rateRow] = await connection.query("SELECT usdt_rate FROM admin_ac LIMIT 1");
+        if (rateRow[0]?.usdt_rate && !isNaN(rateRow[0].usdt_rate)) {
+          usdtRate = parseFloat(rateRow[0].usdt_rate);
+          console.log('USDT rate from database:', usdtRate);
+        } else {
+          console.log('USDT rate not found, using default:', usdtRate);
+        }
+      } catch (error) {
+        console.log('Error fetching USDT rate, using default:', usdtRate);
+      }
+      
+      money = money * usdtRate;
+      console.log('Converted INR amount:', money);
+    }
+
+    if (type == "momo" || type === "USDT") {
       const sql = `INSERT INTO recharge SET 
             id_order = ?,
             transaction_id = ?,

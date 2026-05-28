@@ -161,8 +161,30 @@ const addManualUSDTPaymentRequest = async (req, res) => {
     const data = req.body;
     let auth = req.cookies.auth;
     let money_usdt = parseInt(data.money);
-    let money = money_usdt * 92;
-    let utr = parseInt(data.utr);
+    
+    // Get dynamic USDT rate
+    let usdtRate = 92; // Default rate
+    try {
+      const [rateRow] = await connection.query("SELECT usdt_rate FROM admin_ac LIMIT 1");
+      if (rateRow[0]?.usdt_rate && !isNaN(rateRow[0].usdt_rate)) {
+        usdtRate = parseFloat(rateRow[0].usdt_rate);
+        console.log('USDT rate from database:', usdtRate);
+      } else {
+        console.log('USDT rate not found in database, using default:', usdtRate);
+      }
+    } catch (error) {
+      console.log('Error fetching USDT rate, using default:', usdtRate, error);
+    }
+    
+    let money = money_usdt * usdtRate;
+    
+    // Debug logging
+    console.log('USDT Payment Debug:');
+    console.log('- Original USDT amount:', money_usdt);
+    console.log('- USDT Rate used:', usdtRate);
+    console.log('- Converted INR amount:', money);
+    console.log('- Storing in database:', money);
+    let utr = data.utr; // Keep as STRING for transaction hashes
     const minimumMoneyAllowed = parseInt(process.env.MINIMUM_MONEY_USDT);
 
     if (!money || !(money >= minimumMoneyAllowed)) {
@@ -173,9 +195,22 @@ const addManualUSDTPaymentRequest = async (req, res) => {
       });
     }
 
-    if (!utr) {
+    if (!utr || utr.length < 10) {
       return res.status(400).json({
-        message: `Ref No. or UTR is Required`,
+        message: `Transaction hash is required and should be at least 10 characters long`,
+        status: false,
+        timeStamp: timeNow,
+      });
+    }
+
+    // Check for duplicate transaction hash
+    const [isUsedUtr] = await connection.query(
+      "SELECT * FROM recharge WHERE utr = ? ",
+      [utr]
+    );
+    if (isUsedUtr.length) {
+      return res.status(400).json({
+        message: `Transaction hash is already used`,
         status: false,
         timeStamp: timeNow,
       });
@@ -211,6 +246,10 @@ const addManualUSDTPaymentRequest = async (req, res) => {
       url: "NULL",
       time: rechargeTable.getCurrentTimeForTimeField(),
     };
+
+    // Debug the payment type being stored
+    console.log('Storing payment type:', PaymentMethodsMap.USDT_MANUAL);
+    console.log('Full recharge record:', newRecharge);
 
     const recharge = await rechargeTable.create(newRecharge);
 
@@ -1100,7 +1139,31 @@ const submitGatewayPayment = async (req, res) => {
 
     const user = await getUserDataByAuthToken(auth);
 
-    // Use gateway name as payment type
+    const { payment_type } = req.body;
+
+    // For USDT payments: update existing pending record with UTR instead of creating new one
+    if (payment_type === 'usdt_address') {
+      const [existingPending] = await connection.query(
+        "SELECT * FROM recharge WHERE phone = ? AND status = 0 AND type = 'USDT' ORDER BY id DESC LIMIT 1",
+        [user.phone]
+      );
+
+      if (existingPending.length > 0) {
+        await connection.query(
+          "UPDATE recharge SET utr = ? WHERE id = ?",
+          [utr, existingPending[0].id]
+        );
+
+        return res.status(200).json({
+          message: "Payment submitted successfully! Your balance will update shortly.",
+          recharge: existingPending[0],
+          status: true,
+          timeStamp: Date.now(),
+        });
+      }
+    }
+
+    // For non-USDT payments: create new record as before
     let paymentType = gateway.pay_name || ("gateway_" + gateway_id);
 
     const orderId = getRechargeOrderId();

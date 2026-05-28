@@ -1418,6 +1418,16 @@ const initWebRouter = (app) => {
     adminController.middlewareAdminController,
     adminController.setUSDTRate,
   );
+  router.get(
+    "/admin/api/withdrawal-rules",
+    adminController.middlewareAdminController,
+    adminController.getWithdrawalRules,
+  );
+  router.post(
+    "/admin/api/withdrawal-rules",
+    adminController.middlewareAdminController,
+    adminController.saveWithdrawalRules,
+  );
 
   return app.use("/", router);
 };

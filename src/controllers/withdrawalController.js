@@ -375,19 +375,37 @@ const createWithdrawalRequest = async (req, res) => {
       });
     }
 
+    const [rulesRows] = await connection.query(
+      `SELECT withdraw_min_inr, withdraw_max_inr, withdraw_min_usdt, withdraw_max_usdt, usdt_rate
+       FROM admin_ac LIMIT 1`
+    );
+    const rules = rulesRows[0] || {};
     const minimumMoneyAllowed =
       withdrawalMethod === WITHDRAWAL_METHODS_MAP.USDT_ADDRESS
-        ? parseInt(process.env.MINIMUM_WITHDRAWAL_MONEY_USDT)
-        : parseInt(process.env.MINIMUM_WITHDRAWAL_MONEY_INR);
+        ? parseFloat(rules.withdraw_min_usdt) || parseInt(process.env.MINIMUM_WITHDRAWAL_MONEY_USDT) || 10
+        : parseFloat(rules.withdraw_min_inr) || parseInt(process.env.MINIMUM_WITHDRAWAL_MONEY_INR) || 100;
+    const maximumMoneyAllowed =
+      withdrawalMethod === WITHDRAWAL_METHODS_MAP.USDT_ADDRESS
+        ? parseFloat(rules.withdraw_max_usdt) || 10000
+        : parseFloat(rules.withdraw_max_inr) || 100000;
+    const usdtRate = parseFloat(rules.usdt_rate) || parseInt(process.env.USDT_INR_EXCHANGE_RATE) || 90;
 
     let actualAmount =
       withdrawalMethod === WITHDRAWAL_METHODS_MAP.USDT_ADDRESS
-        ? parseInt(amount) * parseInt(process.env.USDT_INR_EXCHANGE_RATE)
+        ? parseInt(amount) * usdtRate
         : parseInt(amount);
 
     if (amount < minimumMoneyAllowed) {
       return res.status(400).json({
-        message: `You can withdraw minimum balance of ${withdrawalMethod === WITHDRAWAL_METHODS_MAP.BANK_CARD ? "₹" : "$"} ${minimumMoneyAllowed}`,
+        message: `You can withdraw minimum balance of ${withdrawalMethod === WITHDRAWAL_METHODS_MAP.USDT_ADDRESS ? "$" : "₹"} ${minimumMoneyAllowed}`,
+        status: false,
+        timeStamp: timeNow,
+      });
+    }
+
+    if (amount > maximumMoneyAllowed) {
+      return res.status(400).json({
+        message: `Maximum withdrawal is ${withdrawalMethod === WITHDRAWAL_METHODS_MAP.USDT_ADDRESS ? "$" : "₹"} ${maximumMoneyAllowed}`,
         status: false,
         timeStamp: timeNow,
       });
