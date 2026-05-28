@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <style>
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      color: #007bff;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn-save {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .color-picker-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .color-preview {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+
+    input[type="color"] {
+      width: 60px;
+      height: 40px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .css-editor {
+      font-family: monospace;
+      font-size: 13px;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini" style="background: #f4f6f9">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper" style="background: #f4f6f9">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 style="color: #333; font-size: 20px">Web Colors</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container-fluid">
+          <div class="card-custom">
+            <!-- <div class="card-title">
+              <i class="fas fa-palette"></i> Theme Colors
+            </div> -->
+            <div class="row">
+              <div class="col-md-4">
+                <div class="color-picker-row">
+                  <label class="form-label" style="width: 150px">Primary Color</label>
+                  <input type="color" id="primary-color" value="#e74c3c" />
+                  <span id="primary-hex">#e74c3c</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="color-picker-row">
+                  <label class="form-label" style="width: 150px">Secondary Color</label>
+                  <input type="color" id="secondary-color" value="#3498db" />
+                  <span id="secondary-hex">#3498db</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="color-picker-row">
+                  <label class="form-label" style="width: 150px">Accent Color</label>
+                  <input type="color" id="accent-color" value="#f39c12" />
+                  <span id="accent-hex">#f39c12</span>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 15px">
+              <div class="col-md-4">
+                <div class="color-picker-row">
+                  <label class="form-label" style="width: 150px">Background</label>
+                  <input type="color" id="bg-color" value="#1a1a2e" />
+                  <span id="bg-hex">#1a1a2e</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="color-picker-row">
+                  <label class="form-label" style="width: 150px">Header Color</label>
+                  <input type="color" id="header-color" value="#16213e" />
+                  <span id="header-hex">#16213e</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="color-picker-row">
+                  <label class="form-label" style="width: 150px">Text Color</label>
+                  <input type="color" id="text-color" value="#ffffff" />
+                  <span id="text-hex">#ffffff</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-custom">
+            <!-- <div class="card-title"><i class="fas fa-code"></i> Custom CSS</div> -->
+            <div class="form-group">
+              <label class="form-label">Additional CSS (Advanced)</label>
+              <textarea class="form-control-custom css-editor" id="custom-css" rows="10"
+                placeholder="/* Add your custom CSS here */"></textarea>
+            </div>
+          </div>
+          <button class="btn-save" id="save-colors">
+            <i class="fas fa-save"></i> Save Theme Colors
+          </button>
+        </div>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+  <script>
+    // Update hex display when color changes
+    $('input[type="color"]').on("input", function () {
+      const id = $(this).attr("id").replace("-color", "-hex");
+      $("#" + id).text($(this).val());
+    });
+    $("#save-colors").click(function () {
+      Swal.fire("Info", "Theme colors save coming soon!", "info");
+    });
+  </script>
+</body>
+
+</html>

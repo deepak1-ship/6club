@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <style>
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      color: #007bff;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn-save {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .toggle-switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toggle-switch input {
+      width: 40px;
+      height: 20px;
+    }
+
+    .setting-row {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini" style="background: #f4f6f9">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper" style="background: #f4f6f9">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 style="color: #333; font-size: 20px">Website Setting</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container-fluid">
+          <form id="settings-form" enctype="multipart/form-data">
+            <div class="card-custom">
+              <!-- <div class="card-title"><i class="fas fa-toggle-on"></i> General Settings</div> -->
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group setting-row">
+                    <label class="form-label">Bet Allowed</label>
+                    <div class="toggle-switch">
+                      <input type="checkbox" name="bet_allowed" id="bet_allowed" value="1" <%=(typeof settings
+                        !=='undefined' && settings.bet_allowed=='1' ) ? 'checked' : '' %> />
+                      <label for="bet_allowed">Enable/Disable Betting</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group setting-row">
+                    <label class="form-label">Register Bonus</label>
+                    <input type="number" class="form-control-custom" name="register_bonus"
+                      value="<%= (typeof settings !== 'undefined') ? settings.register_bonus || 0 : 0 %>" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group setting-row">
+                    <label class="form-label">App Download URL</label>
+                    <input type="text" class="form-control-custom" name="app_download_url"
+                      value="<%= (typeof settings !== 'undefined') ? settings.app_download_url || '' : '' %>"
+                      placeholder="https://..." />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-custom">
+              <!-- <div class="card-title"><i class="fas fa-money-bill"></i> Deposit & Withdrawal Limits</div> -->
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Min Deposit</label>
+                    <input type="number" class="form-control-custom" name="min_deposit"
+                      value="<%= (typeof settings !== 'undefined') ? settings.min_deposit || 100 : 100 %>" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Max Deposit</label>
+                    <input type="number" class="form-control-custom" name="max_deposit"
+                      value="<%= (typeof settings !== 'undefined') ? settings.max_deposit || 100000 : 100000 %>" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Min Withdrawal</label>
+                    <input type="number" class="form-control-custom" name="min_withdrawal"
+                      value="<%= (typeof settings !== 'undefined') ? settings.min_withdrawal || 200 : 200 %>" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Max Withdrawal</label>
+                    <input type="number" class="form-control-custom" name="max_withdrawal"
+                      value="<%= (typeof settings !== 'undefined') ? settings.max_withdrawal || 50000 : 50000 %>" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-custom">
+              <!-- <div class="card-title"><i class="fab fa-telegram"></i> Telegram Settings</div> -->
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Telegram Active</label>
+                    <div class="toggle-switch">
+                      <input type="checkbox" name="telegram_active" id="telegram_active" value="1" <%=(typeof settings
+                        !=='undefined' && settings.telegram_active=='1' ) ? 'checked' : '' %> />
+                      <label for="telegram_active">On/Off</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="form-label">Telegram Link</label>
+                    <input type="text" class="form-control-custom" name="telegram_link"
+                      value="<%= (typeof settings !== 'undefined') ? settings.telegram_link || '' : '' %>"
+                      placeholder="https://t.me/..." />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-custom">
+              <div class="card-title"><i class="fas fa-share-alt"></i> Social Media Links</div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group setting-row">
+                    <label class="form-label"><i class="fab fa-youtube" style="color:#ff0000"></i> YouTube Link</label>
+                    <input type="text" class="form-control-custom" name="youtube_link"
+                      value="<%= (typeof settings !== 'undefined') ? settings.youtube_link || '' : '' %>"
+                      placeholder="https://youtube.com/..." />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group setting-row">
+                    <label class="form-label"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook Link</label>
+                    <input type="text" class="form-control-custom" name="facebook_link"
+                      value="<%= (typeof settings !== 'undefined') ? settings.facebook_link || '' : '' %>"
+                      placeholder="https://facebook.com/..." />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group setting-row">
+                    <label class="form-label"><i class="fab fa-x-twitter"></i> X (Twitter) Link</label>
+                    <input type="text" class="form-control-custom" name="x_link"
+                      value="<%= (typeof settings !== 'undefined') ? settings.x_link || '' : '' %>"
+                      placeholder="https://x.com/..." />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group setting-row">
+                    <label class="form-label"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp Link</label>
+                    <input type="text" class="form-control-custom" name="whatsapp_link"
+                      value="<%= (typeof settings !== 'undefined') ? settings.whatsapp_link || '' : '' %>"
+                      placeholder="https://wa.me/..." />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group setting-row">
+                    <label class="form-label"><i class="fab fa-instagram" style="color:#e1306c"></i> Instagram Link</label>
+                    <input type="text" class="form-control-custom" name="instagram_link"
+                      value="<%= (typeof settings !== 'undefined') ? settings.instagram_link || '' : '' %>"
+                      placeholder="https://instagram.com/..." />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-custom">
+              <!-- <div class="card-title"><i class="fas fa-globe"></i> Branding</div> -->
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Website Name</label>
+                    <input type="text" class="form-control-custom" name="website_name"
+                      value="<%= (typeof settings !== 'undefined') ? settings.website_name || '' : '' %>"
+                      placeholder="Your Site Name" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Website Logo</label>
+                    <input type="file" class="form-control-custom" name="website_logo" accept="image/*" />
+                    <% if (typeof settings !=='undefined' && settings.website_logo) { %>
+                      <small>Current: <%= settings.website_logo %></small>
+                      <% } %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Favicon</label>
+                    <input type="file" class="form-control-custom" name="favicon_logo" accept="image/*" />
+                    <% if (typeof settings !=='undefined' && settings.favicon_logo) { %>
+                      <small>Current: <%= settings.favicon_logo %></small>
+                      <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-save"><i class="fas fa-save"></i> Save All Settings</button>
+          </form>
+        </div>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script>
+    $("#settings-form").on("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      // Handle checkboxes
+      formData.set("bet_allowed", $("#bet_allowed").is(":checked") ? "1" : "0");
+      formData.set("telegram_active", $("#telegram_active").is(":checked") ? "1" : "0");
+
+      $.ajax({
+        url: "/api/admin/setting/website/save",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+          if (res.status) {
+            Swal.fire("Success", res.message, "success");
+          } else {
+            Swal.fire("Error", res.message, "error");
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Payment</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+        integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+        crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f1117;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: #1a1d2e;
+            border-bottom: 1px solid #2d3748;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            flex: 1;
+        }
+
+        .timer {
+            font-size: 14px;
+            font-weight: 700;
+            color: #f6c90e;
+            font-variant-numeric: tabular-nums;
+            background: rgba(246, 201, 14, 0.12);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .page-body {
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* ── Amount card ── */
+        .amount-card {
+            background: linear-gradient(135deg, #1a2a1a 0%, #1e3a2a 100%);
+            border: 1px solid #2d5a3d;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .amount-label {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .amount-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #4ade80;
+        }
+
+        .amount-value span {
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .network-tag {
+            display: inline-block;
+            margin-top: 8px;
+            background: #14532d;
+            color: #4ade80;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Info card ── */
+        .info-card {
+            background: #1a1d2e;
+            border: 1px solid #2d3748;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .info-card-title {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+        }
+
+        /* ── QR image ── */
+        .qr-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .qr-box {
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ── Address row ── */
+        .address-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #0f1117;
+            border: 1px solid #2d3748;
+            border-radius: 10px;
+            padding: 12px 14px;
+        }
+
+        .address-text {
+            flex: 1;
+            font-family: monospace;
+            font-size: 12px;
+            color: #e2e8f0;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        .btn-copy {
+            flex-shrink: 0;
+            background: #4ade80;
+            color: #0f1117;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-copy:active { opacity: 0.8; }
+
+        /* ── Warning ── */
+        .warning-box {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+        }
+
+        .warning-box p {
+            font-size: 12px;
+            color: #fca5a5;
+            line-height: 1.6;
+        }
+
+        .warning-box p + p { margin-top: 4px; }
+
+        /* ── Steps ── */
+        .steps-card {
+            background: #1a1d2e;
+            border: 1px solid #2d3748;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+
+        .steps-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .step:last-child { margin-bottom: 0; }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #4ade80;
+            color: #0f1117;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-text {
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.5;
+            padding-top: 2px;
+        }
+
+        /* ── TX Hash form ── */
+        .submit-card {
+            background: #1a1d2e;
+            border: 1px solid #2d3748;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .submit-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: #0f1117;
+            border: 1px solid #2d3748;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+        }
+
+        .input-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #4ade80;
+            margin-right: 12px;
+            white-space: nowrap;
+        }
+
+        .tx-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #e2e8f0;
+            min-width: 0;
+        }
+
+        .tx-input::placeholder { color: #4a5568; }
+
+        .btn-submit {
+            width: 100%;
+            height: 48px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ── Security badge ── */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .security-badge span {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* ── Toast ── */
+        #toast {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 999999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #toast_text {
+            height: 40px;
+            line-height: 40px;
+            background: rgba(74, 222, 128, 0.9);
+            color: #0f1117;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 0 24px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div style="flex:1"></div>
+        <div class="header-title">Crypto Payment</div>
+        <div id="timer_display" class="timer">10:00</div>
+    </div>
+
+    <div class="page-body">
+
+        <!-- Amount -->
+        <div class="amount-card">
+            <p class="amount-label">Amount to Send</p>
+            <div class="amount-value">
+                <span>$</span><%= amount %>
+            </div>
+            <span class="network-tag"><%= network_type || 'TRC20' %> Network</span>
+        </div>
+
+        <!-- Wallet address -->
+        <div class="info-card">
+            <p class="info-card-title">Send USDT to this address</p>
+
+            <% if (usdt_qr_image) { %>
+            <div class="qr-wrapper">
+                <div class="qr-box">
+                    <img src="<%= usdt_qr_image %>" alt="USDT QR" onerror="this.parentElement.style.display='none'" />
+                </div>
+            </div>
+            <% } %>
+
+            <div class="address-row">
+                <span class="address-text" id="usdt_address_text"><%= usdt_address %></span>
+                <button class="btn-copy" onclick="copyAddress()">Copy</button>
+            </div>
+        </div>
+
+        <!-- Warning -->
+        <div class="warning-box">
+            <p>⚠️ Send <strong>exactly $<%= amount %> USDT</strong> — wrong amounts will not be credited.</p>
+            <p>⚠️ Use <strong><%= network_type || 'TRC20' %> network only</strong> — other networks will result in loss of funds.</p>
+        </div>
+
+        <!-- Steps -->
+        <div class="steps-card">
+            <p class="steps-title">How to Pay</p>
+            <div class="step">
+                <div class="step-num">1</div>
+                <p class="step-text">Copy the wallet address above or scan the QR code.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <p class="step-text">Open your crypto wallet/exchange and send exactly $<%= amount %> USDT via <strong><%= network_type || 'TRC20' %></strong>.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <p class="step-text">After the transaction is confirmed on-chain, copy the TX Hash (Transaction ID) from your wallet.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <p class="step-text">Paste the TX Hash below and click Submit. Your balance will be credited after verification.</p>
+            </div>
+        </div>
+
+        <!-- Submit TX Hash -->
+        <div class="submit-card">
+            <p class="submit-title">Paid? Submit TX Hash</p>
+            <div class="input-row">
+                <span class="input-label">TX Hash</span>
+                <input type="text" id="utr_input" class="tx-input"
+                    placeholder="Paste transaction hash here" maxlength="100" />
+            </div>
+            <button class="btn-submit" id="submit_btn" onclick="submitPayment()">Submit TX Hash</button>
+            <div class="security-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"
+                        stroke="#4ade80" stroke-width="2" fill="#4ade80" fill-opacity="0.15" />
+                    <path d="M9 12l2 2 4-4" stroke="#4ade80" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>Secured &amp; encrypted transaction</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div id="toast">
+        <span id="toast_text"></span>
+    </div>
+
+    <script>
+        const gatewayId = <%= gateway_id %>;
+        const userId = '<%= user_id %>';
+        const amount = <%= amount %>;
+
+        // Timer — 10 minutes for crypto confirmations
+        let timerSeconds = 600;
+        const timerDisplay = document.getElementById('timer_display');
+
+        function updateTimer() {
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            timerDisplay.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            if (timerSeconds > 0) {
+                timerSeconds--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                showToast('Session expired. Please try again.');
+                setTimeout(() => { window.location.replace('/#/wallet/Recharge'); }, 2500);
+            }
+        }
+        updateTimer();
+
+        function showToast(message, duration = 2500) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast_text').textContent = message;
+            toast.style.display = 'flex';
+            setTimeout(() => { toast.style.display = 'none'; }, duration);
+        }
+
+        function copyAddress() {
+            const text = document.getElementById('usdt_address_text').textContent.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Address copied!');
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('Address copied!');
+            });
+        }
+
+        async function submitPayment() {
+            const utr = document.getElementById('utr_input').value.trim();
+            const submitBtn = document.getElementById('submit_btn');
+
+            if (!utr) {
+                showToast('Please enter the TX Hash');
+                return;
+            }
+
+            if (utr.length < 10) {
+                showToast('TX Hash seems too short — please check');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            try {
+                const response = await axios.post('/pay/submit', {
+                    money: amount,
+                    utr: utr,
+                    gateway_id: gatewayId,
+                    user_id: userId
+                });
+
+                if (response.data.status) {
+                    showToast('Payment submitted! Awaiting verification.', 3000);
+                    setTimeout(() => { window.location.replace('/#/wallet/Rechargehistory'); }, 2500);
+                } else {
+                    showToast(response.data.message || 'Submission failed');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit TX Hash';
+                }
+            } catch (error) {
+                showToast(error.response?.data?.message || 'Something went wrong');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit TX Hash';
+            }
+        }
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) { window.location.reload(); }
+        });
+    </script>
+</body>
+
+</html>

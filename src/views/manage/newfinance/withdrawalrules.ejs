@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <style>
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title i {
+      color: #6c757d;
+    }
+
+    .form-label {
+      color: #007bff;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+      background: #fff;
+    }
+
+    .form-control-custom:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+    }
+
+    .form-group-custom {
+      margin-bottom: 15px;
+    }
+
+    .btn-save {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      float: right;
+    }
+
+    .btn-save:hover {
+      background: #218838;
+    }
+
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table-custom th {
+      background: #f8f9fa;
+      color: #6c757d;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .table-custom td {
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .table-custom tbody tr:hover {
+      background: #f8f9fa;
+    }
+
+    .text-primary {
+      color: #007bff !important;
+    }
+
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini" style="background: #f4f6f9;">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper" style="background: #f4f6f9;">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 style="color: #333; font-size: 20px;">Withdrawal Rules</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="container-fluid">
+          <!-- Edit Form Card -->
+          <div class="card-custom">
+            <div class="card-title">
+              <i class="fas fa-edit"></i>
+              Edit Withdrawal Rule & Bet Multiplier
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label class="form-label">Start Time (HH:MM:SS)</label>
+                  <input type="text" class="form-control-custom" id="start-time" placeholder="01:57:00"
+                    value="01:57:00" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label class="form-label">End Time (HH:MM:SS)</label>
+                  <input type="text" class="form-control-custom" id="end-time" placeholder="22:29:00"
+                    value="22:29:00" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label class="form-label">Fee</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="withdrawal-fee" placeholder="1999.00"
+                    value="1999.00" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label class="form-label">Minimum Price</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="min-withdrawal" placeholder="1.00"
+                    value="1.00" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label class="form-label">Maximum Price</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="max-withdrawal"
+                    placeholder="9999999999.99" value="9999999999.99" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label class="form-label">Bet Multiplier</label>
+                  <input type="number" step="0.01" class="form-control-custom" id="bet-multiplier" placeholder="9.00"
+                    value="9.00" />
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix" style="margin-top: 15px;">
+              <button type="button" class="btn-save" id="save-rules">
+                <i class="fas fa-save"></i> Save Rules
+              </button>
+            </div>
+          </div>
+
+          <!-- Current Rules Table Card -->
+          <div class="card-custom">
+            <div class="card-title">
+              <i class="fas fa-list"></i>
+              Current Withdrawal Rule
+            </div>
+
+            <table class="table-custom">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>START TIME</th>
+                  <th>END TIME</th>
+                  <th>FEE</th>
+                  <th>MIN PRICE</th>
+                  <th>MAX PRICE</th>
+                  <th>BET MULTIPLIER</th>
+                  <th>UPDATED AT</th>
+                </tr>
+              </thead>
+              <tbody id="rules-table-body">
+                <tr>
+                  <td class="text-primary">1</td>
+                  <td>01:57:00</td>
+                  <td>22:29:00</td>
+                  <td>1,999.00</td>
+                  <td>9,999,999,999.99</td>
+                  <td>9.00</td>
+                  <td></td>
+                  <td>2025-12-21<br />05:36:12</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script>
+    // Load current rules on page load
+    $(document).ready(function () {
+      loadWithdrawalRules();
+    });
+
+    // Save rules button click
+    $("#save-rules").click(function (e) {
+      e.preventDefault();
+
+      const ruleData = {
+        start_time: $("#start-time").val(),
+        end_time: $("#end-time").val(),
+        fee: parseFloat($("#withdrawal-fee").val()),
+        min_price: parseFloat($("#min-withdrawal").val()),
+        max_price: parseFloat($("#max-withdrawal").val()),
+        bet_multiplier: parseFloat($("#bet-multiplier").val())
+      };
+
+      $.ajax({
+        url: '/admin/api/withdrawal-rules',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(ruleData),
+        success: function (response) {
+          if (response.status) {
+            Swal.fire('Success', 'Withdrawal rules saved successfully!', 'success');
+            loadWithdrawalRules();
+          } else {
+            Swal.fire('Error', response.message || 'Failed to save rules', 'error');
+          }
+        },
+        error: function (xhr) {
+          Swal.fire('Error', 'Failed to save withdrawal rules', 'error');
+        }
+      });
+    });
+
+    // Load withdrawal rules from server
+    function loadWithdrawalRules() {
+      $.get('/admin/api/withdrawal-rules', function (response) {
+        if (response.status && response.data) {
+          const rule = response.data;
+
+          // Populate form fields
+          $("#start-time").val(rule.start_time || '01:57:00');
+          $("#end-time").val(rule.end_time || '22:29:00');
+          $("#withdrawal-fee").val(rule.fee || 1999.00);
+          $("#min-withdrawal").val(rule.min_price || 1.00);
+          $("#max-withdrawal").val(rule.max_price || 9999999999.99);
+          $("#bet-multiplier").val(rule.bet_multiplier || 9.00);
+
+          // Update table
+          updateRulesTable(rule);
+        }
+      }).fail(function () {
+        console.log('Could not load withdrawal rules');
+      });
+    }
+
+    // Update the rules table display
+    function updateRulesTable(rule) {
+      const tbody = $("#rules-table-body");
+      tbody.empty();
+
+      const row = `
+          <tr>
+            <td class="text-primary">${rule.id || 1}</td>
+            <td>${rule.start_time || '01:57:00'}</td>
+            <td>${rule.end_time || '22:29:00'}</td>
+            <td>${formatNumber(rule.fee || 1999.00)}</td>
+            <td>${formatNumber(rule.min_price || 1.00)}</td>
+            <td>${formatNumber(rule.max_price || 9999999999.99)}</td>
+            <td>${rule.bet_multiplier || 9.00}</td>
+            <td>${rule.updated_at || new Date().toISOString().split('T')[0]}<br/>${rule.updated_time || ''}</td>
+          </tr>
+        `;
+      tbody.append(row);
+    }
+
+    // Format number with commas
+    function formatNumber(num) {
+      return parseFloat(num).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+  </script>
+</body>
+
+</html>

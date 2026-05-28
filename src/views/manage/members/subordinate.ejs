@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <style>
+    .filter-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .filter-card label {
+      color: white;
+      font-weight: 600;
+    }
+
+    .filter-card input,
+    .filter-card select {
+      border-radius: 5px;
+    }
+
+    .table th {
+      background-color: #2c3e50;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1><i class="fas fa-sitemap"></i> Subordinate Detail</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="container-fluid">
+          <!-- Filter Card -->
+          <div class="filter-card">
+            <div class="row">
+              <div class="col-md-3">
+                <label>User ID / Phone</label>
+                <input type="text" class="form-control" id="user-id" placeholder="Enter User ID or Phone" />
+              </div>
+              <div class="col-md-2">
+                <label>Level</label>
+                <select class="form-control" id="level-filter">
+                  <option value="">All Levels</option>
+                  <option value="1">F1 (Direct)</option>
+                  <option value="2">F2</option>
+                  <option value="3">F3</option>
+                  <option value="4">F4</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label>From Date</label>
+                <input type="date" class="form-control" id="from-date" />
+              </div>
+              <div class="col-md-2">
+                <label>To Date</label>
+                <input type="date" class="form-control" id="to-date" />
+              </div>
+              <div class="col-md-3">
+                <label>&nbsp;</label>
+                <button type="button" class="btn btn-light form-control" id="search-btn">
+                  <i class="fas fa-search"></i> Search
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Info Card -->
+          <div class="card" id="user-info-card" style="display: none">
+            <div class="card-header bg-info">
+              <h3 class="card-title">
+                <i class="fas fa-user"></i> User Information
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <strong>Phone:</strong> <span id="info-phone">-</span>
+                </div>
+                <div class="col-md-3">
+                  <strong>Total F1:</strong> <span id="info-f1">0</span>
+                </div>
+                <div class="col-md-3">
+                  <strong>Total F2:</strong> <span id="info-f2">0</span>
+                </div>
+                <div class="col-md-3">
+                  <strong>Total F3:</strong> <span id="info-f3">0</span>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-md-3">
+                  <strong>Total F4:</strong> <span id="info-f4">0</span>
+                </div>
+                <div class="col-md-3">
+                  <strong>Total Subordinates:</strong>
+                  <span id="info-total">0</span>
+                </div>
+                <div class="col-md-3">
+                  <strong>Total Recharge:</strong>
+                  <span id="info-recharge">₹0</span>
+                </div>
+                <div class="col-md-3">
+                  <strong>Total Withdrawal:</strong>
+                  <span id="info-withdraw">₹0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subordinates Table -->
+          <div class="card">
+            <div class="card-header" style="background-color: #9b59b6; color: white">
+              <h3 class="card-title">
+                <i class="fas fa-sitemap"></i> Subordinate Records
+              </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body p-0" style="overflow-x: auto">
+              <table class="table table-striped projects">
+                <thead>
+                  <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Phone</th>
+                    <th class="text-center">Level</th>
+                    <th class="text-center">Balance</th>
+                    <th class="text-center">Total Recharge</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Join Date</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="subordinate-list">
+                  <tr class="text-center">
+                    <td colspan="8">Enter User ID to search subordinates...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <nav aria-label="Page navigation" style="margin-top: 20px; display: flex; justify-content: center">
+              <ul class="pagination">
+                <li class="page-item previous">
+                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <div id="numbers" style="display: flex"></div>
+                <li class="page-item next">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script>
+    function formateT(params) {
+      return params < 10 ? "0" + params : params;
+    }
+
+    function timerJoin(params = "", addHours = 0) {
+      let date = params ? new Date(Number(params)) : new Date();
+      date.setHours(date.getHours() + addHours);
+      let years = formateT(date.getFullYear());
+      let months = formateT(date.getMonth() + 1);
+      let days = formateT(date.getDate());
+      return years + "-" + months + "-" + days;
+    }
+
+    function getLevelBadge(level) {
+      const colors = {
+        1: "success",
+        2: "info",
+        3: "warning",
+        4: "secondary",
+      };
+      return `<span class="badge badge-${colors[level] || "primary"}">F${level}</span>`;
+    }
+
+    function showSubordinates(data) {
+      if (!data || data.length === 0) {
+        $("#subordinate-list").html(
+          '<tr class="text-center"><td colspan="8">No subordinates found...</td></tr>',
+        );
+        return;
+      }
+      let html = "";
+      data.forEach((item, index) => {
+        html += `<tr class="text-center">
+            <td>${index + 1}</td>
+            <td><b style="color: #3498db">${item.phone}</b></td>
+            <td>${getLevelBadge(item.level || 1)}</td>
+            <td><b>₹${item.money || 0}</b></td>
+            <td><b style="color: #27ae60">₹${item.total_recharge || 0}</b></td>
+            <td class="project-state">
+              ${item.status == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Banned</span>'}
+            </td>
+            <td>${timerJoin(item.time)}</td>
+            <td>
+              <a class="btn btn-primary btn-sm" href="/admin/member/info/${item.phone}">
+                <i class="fas fa-eye"></i> View
+              </a>
+            </td>
+          </tr>`;
+      });
+      $("#subordinate-list").html(html);
+    }
+
+    $("#search-btn").click(function () {
+      const userId = $("#user-id").val().trim();
+      const level = $("#level-filter").val();
+      const fromDate = $("#from-date").val();
+      const toDate = $("#to-date").val();
+
+      if (!userId) {
+        Swal.fire("Error", "Please enter User ID or Phone", "error");
+        return;
+      }
+
+      // Show loading
+      $("#subordinate-list").html(
+        '<tr class="text-center"><td colspan="8"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>',
+      );
+
+      $.ajax({
+        type: "POST",
+        url: "/api/webapi/admin/subordinateDetail",
+        data: {
+          phone: userId,
+          level: level,
+          fromDate: fromDate,
+          toDate: toDate,
+        },
+        dataType: "json",
+        success: function (response) {
+          if (response.status) {
+            // Show user info
+            $("#user-info-card").show();
+            $("#info-phone").text(response.userInfo?.phone || userId);
+            $("#info-f1").text(response.f1 || 0);
+            $("#info-f2").text(response.f2 || 0);
+            $("#info-f3").text(response.f3 || 0);
+            $("#info-f4").text(response.f4 || 0);
+            $("#info-total").text(
+              (response.f1 || 0) +
+              (response.f2 || 0) +
+              (response.f3 || 0) +
+              (response.f4 || 0),
+            );
+            $("#info-recharge").text(
+              "₹" + (response.totalRecharge || 0).toLocaleString(),
+            );
+            $("#info-withdraw").text(
+              "₹" + (response.totalWithdraw || 0).toLocaleString(),
+            );
+
+            showSubordinates(response.subordinates || []);
+          } else {
+            $("#user-info-card").hide();
+            Swal.fire(
+              "Not Found",
+              response.message || "User not found",
+              "warning",
+            );
+            $("#subordinate-list").html(
+              '<tr class="text-center"><td colspan="8">No data found...</td></tr>',
+            );
+          }
+        },
+        error: function () {
+          Swal.fire("Error", "Failed to fetch data", "error");
+        },
+      });
+    });
+
+    // Allow enter key to search
+    $("#user-id").keypress(function (e) {
+      if (e.which == 13) {
+        $("#search-btn").click();
+      }
+    });
+  </script>
+</body>
+
+</html>

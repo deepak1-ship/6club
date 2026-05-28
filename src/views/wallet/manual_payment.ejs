@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rajagame1</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+    integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+
+  <link href="/assets/css/mobile.b39a3f0c.css" rel="prefetch">
+  <link href="/assets/css/app.3ecc1e64.css" rel="preload" as="style">
+  <link href="/assets/css/chunk-vendors.074a8077.css" rel="preload" as="style">
+  <link href="/assets/css/chunk-vendors.074a8077.css" rel="stylesheet">
+  <link href="/assets/css/app.3ecc1e64.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/mobile.b39a3f0c.css">
+</head>
+
+<body>
+
+  <div data-v-1529704d="" class="mobile">
+    <header data-v-1529704d=""><img data-v-1529704d="" src="/assets/png/upi.png" alt=""> Payment </header>
+    <div data-v-1529704d="" class="jine">
+      <p data-v-1529704d=""></p>
+      <div data-v-1529704d="">₹ <span id="display_amount">
+          <%=Amount%>
+        </span></div>
+    </div>
+    <div data-v-1529704d="" class="scanCode">
+      <p data-v-1529704d="">Use Mobile Scan code to pay</p>
+      <div data-v-1529704d="">
+        <img data-v-1529704d="" src="<%=QrCodeImage%>" alt="UPI QR Code" class="upi_qr__img">
+        <br data-v-1529704d="">
+        <button data-v-1529704d="" id="save_qr_btn"
+          class="van-button van-button--default van-button--small van-button--plain">
+          <span data-v-1529704d="" class="van-button__text">Save QRCode</span>
+        </button>
+        <ol data-v-1529704d="" class="imgCodeTips">
+          <li data-v-1529704d=""> For IOS phones, please long-press the QR code and enter the. wallet for
+            payment. </li>
+          <li data-v-1529704d=""> For Android phones, please take a screenshot and manually open the wallet to
+            upload the QR code for payment. </li>
+          <li data-v-1529704d="">Please avoid making duplicate payments.</li>
+          <li data-v-1529704d=""> After completing the payment, please fill in the 12-digit UTR below. </li>
+        </ol>
+      </div>
+    </div>
+    <div data-v-1529704d="" class="pays">
+      <ul data-v-1529704d="">
+        <li data-v-1529704d="" onclick="openPaymentApp('paytm')">
+          <div data-v-1529704d="" class="inner">
+            <div data-v-1529704d="">
+              <img data-v-1529704d="" src="/assets/png/paytm.png" alt="">
+              <span data-v-1529704d="">Paytm</span>
+            </div><i data-v-1529704d="" class="van-icon van-icon-arrow"><!----></i>
+          </div>
+        </li>
+        <li data-v-1529704d="" onclick="openPaymentApp('phonepe')">
+          <div data-v-1529704d="" class="inner">
+            <div data-v-1529704d=""><img data-v-1529704d="" src="/assets/png/phonepe.png" alt=""><span
+                data-v-1529704d="">PhonePe</span></div><i data-v-1529704d="" class="van-icon van-icon-arrow"><!----></i>
+          </div>
+        </li>
+        <li data-v-1529704d="" onclick="openPaymentApp('googlepay')">
+          <div data-v-1529704d="" class="inner">
+            <div data-v-1529704d=""><img data-v-1529704d="" src="/assets/png/googlepay.png" alt=""><span
+                data-v-1529704d="">G Pay</span></div><i data-v-1529704d="" class="van-icon van-icon-arrow"><!----></i>
+          </div>
+        </li><!---->
+      </ul>
+    </div>
+    <div data-v-1529704d="" class="UPI" id="copy_upi_id">
+      <pre data-v-1529704d="">a. Copy the below given UPI.</pre>
+      <div data-v-1529704d="" class="inputBox">
+        <span class="upi-id" id="upi_id_field">
+          <%=UpiId%>
+        </span>
+        <button class="copy-btn" onclick="copyUpiId()">Copy</button>
+      </div>
+      <pre data-v-1529704d="">b. Select the app to do payment.</pre>
+      <a class="upi_pay_now" id="upi_pay_now" href="upi://pay?pa=<%=UpiId%>&cu=INR&am=<%=Amount%>"> Pay Now With
+        App!</a>
+      <div data-v-1529704d="" class="payment">
+        <div data-v-1529704d="" class="item" onclick="openPaymentApp('paytm')">
+          <img data-v-1529704d="" src="/assets/png/paytm.png" alt="Paytm">
+        </div>
+        <div data-v-1529704d="" class="item" onclick="openPaymentApp('phonepe')">
+          <img data-v-1529704d="" src="/assets/png/phonepe.png" alt="PhonePe">
+        </div>
+        <div data-v-1529704d="" class="item" onclick="openPaymentApp('googlepay')">
+          <img data-v-1529704d="" src="/assets/png/googlepay.png" alt="Google Pay">
+        </div>
+      </div>
+      <pre data-v-1529704d="">c. Submit utr after payment is completed </pre>
+    </div>
+    <div data-v-1529704d="" class="UTR">
+      <p data-v-1529704d=""> UTR <span data-v-1529704d="" onclick="showUTRHelp()"
+          style="color: #007bff; cursor: pointer; text-decoration: underline;">How to find UTR? Click here.</span></p>
+      <input data-v-1529704d="" type="number" id="upi_ref_no" placeholder="Input 12-digit here" class="defaultInput">
+      <button data-v-1529704d="" class="defaultButton" id="submit_button"> Submit Ref Number </button>
+    </div>
+    <div data-v-1529704d="" class="Notice">
+      <p data-v-1529704d="">Notice</p>
+      <div data-v-1529704d="">
+        <ol data-v-1529704d="">
+          <li data-v-1529704d=""> If your gold coins have not been credited to your account, please fill in
+            UTR to recover your funds </li><br data-v-1529704d="">
+          <li data-v-1529704d=""> Please select the payment method you need and make sure your phone has the
+            corresponding wallet software installed. </li><br data-v-1529704d=""><!----><!---->
+        </ol>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Prevent back navigation to this page after successful payment
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+        // Check if we came from recharge record page (back button)
+        if (document.referrer.includes('/#/wallet/Rechargehistory')) {
+          window.location.replace('/#/wallet/Rechargehistory');
+        }
+      }
+    });
+
+    // Toast message function
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'toast-message';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        if (document.body.contains(toast)) {
+          document.body.removeChild(toast);
+        }
+      }, 2000);
+    }
+
+    // Copy UPI ID function
+    function copyUpiId() {
+      const upiIdElement = document.getElementById("upi_id_field");
+      const upiId = upiIdElement.textContent;
+
+      navigator.clipboard.writeText(upiId).then(() => {
+        showToast('UPI ID copied successfully!');
+      }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = upiId;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showToast('UPI ID copied successfully!');
+      });
+    }
+
+    // Open payment app function
+    function openPaymentApp(appName) {
+      const upiId = '<%=UpiId%>';
+      const amount = '<%=Amount%>';
+      const transactionNote = 'Payment for ' + amount;
+
+      let appUrl = '';
+
+      switch (appName) {
+        case 'paytm':
+          appUrl = `paytmmp://cash_wallet?pa=${upiId}&pn=${transactionNote}&am=${amount}&cu=INR`;
+          break;
+        case 'phonepe':
+          appUrl = `phonepe://pay?pa=${upiId}&pn=${transactionNote}&am=${amount}&cu=INR`;
+          break;
+        case 'googlepay':
+          appUrl = `tez://upi/pay?pa=${upiId}&pn=${transactionNote}&am=${amount}&cu=INR`;
+          break;
+        default:
+          appUrl = `upi://pay?pa=${upiId}&pn=${transactionNote}&am=${amount}&cu=INR`;
+      }
+
+      // Try to open the app
+      const link = document.createElement('a');
+      link.href = appUrl;
+      link.click();
+
+      // Fallback to generic UPI if app-specific URL doesn't work
+      setTimeout(() => {
+        const fallbackUrl = `upi://pay?pa=${upiId}&pn=${transactionNote}&am=${amount}&cu=INR`;
+        window.location.href = fallbackUrl;
+      }, 1000);
+    }
+
+    // Save QR Code function
+    document.getElementById('save_qr_btn').addEventListener('click', function () {
+      const qrImage = document.querySelector('.upi_qr__img');
+      if (qrImage && qrImage.src) {
+        const link = document.createElement('a');
+        link.href = qrImage.src;
+        link.download = 'payment_qr_code.png';
+        link.click();
+        showToast('QR Code download started!');
+      } else {
+        showToast('QR Code not available for download');
+      }
+    });
+
+    // Show UTR help function
+    function showUTRHelp() {
+      alert(`How to find UTR (Unique Transaction Reference):
+
+1. Open your payment app (PhonePe, Paytm, Google Pay, etc.)
+2. Go to Transaction History
+3. Find your recent payment transaction
+4. Click on the transaction details
+5. Look for "Transaction ID", "UTR", "Reference Number", or "Transaction Reference"
+6. Copy this 12-digit number and paste it below
+
+Note: UTR is usually a 12-digit number that confirms your payment.`);
+    }
+
+    // Handle QR code image load errors
+    document.addEventListener('DOMContentLoaded', function () {
+      const qrImage = document.querySelector('.upi_qr__img');
+      if (qrImage) {
+        qrImage.addEventListener('error', function () {
+          console.log('QR code image failed to load');
+          // Replace failed image with fallback
+          const fallback = document.createElement('div');
+          fallback.className = 'qr-fallback';
+          fallback.style.cssText = `
+                        padding: 40px 20px;
+                        text-align: center;
+                        background: #f8f9fa;
+                        border: 1px dashed #ccc;
+                        border-radius: 8px;
+                        color: #666;
+                    `;
+          fallback.innerHTML = `
+                        <div>
+                            <p>QR Code not available</p>
+                            <p>Please use the UPI ID below to make payment</p>
+                        </div>
+                    `;
+          qrImage.parentNode.replaceChild(fallback, qrImage);
+        });
+
+        qrImage.addEventListener('load', function () {
+          console.log('QR code image loaded successfully');
+        });
+      }
+    });
+
+    const displayAmount = document.getElementById("display_amount");
+    const urlParams = new URLSearchParams(window.location.search);
+    const amount = urlParams.get("am");
+    if (amount) {
+      displayAmount.innerText = amount;
+    }
+
+    const upiPayNow = document.getElementById("upi_pay_now");
+
+    const alertMessage = (text) => {
+      showToast(text);
+    }
+
+    const submitButton = document.getElementById("submit_button");
+    submitButton.addEventListener("click", async (event) => {
+      try {
+        event.preventDefault();
+        const upiRefNo = document.getElementById("upi_ref_no").value;
+        const amount = '<%=Amount%>';
+
+        if (!upiRefNo || upiRefNo.length !== 12) {
+          alertMessage("Please enter a valid 12-digit UTR number");
+          return;
+        }
+
+        // Disable button to prevent multiple submissions
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+
+        const response = await axios.post("/wallet/paynow/manual_upi_request", {
+          money: amount,
+          utr: upiRefNo,
+        })
+
+        if (!response?.data) {
+          alertMessage("Something went Wrong!")
+          return
+        }
+
+        if (response?.data?.status === false) {
+          alertMessage(response?.data?.message)
+          return
+        }
+
+        alertMessage(response?.data?.message)
+
+        // Use replace instead of href to prevent back navigation to payment page
+        setTimeout(() => {
+          window.location.replace("/#/wallet/Rechargehistory");
+        }, 1500);
+      } catch (error) {
+        console.log(error);
+        alertMessage("Something went Wrong!")
+      } finally {
+        // Re-enable button
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit Ref Number';
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <style>
+    .gateway-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .gateway-form {
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      flex-shrink: 0;
+    }
+
+    .gateway-form h4 {
+      color: #333;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #28a745;
+      font-size: 16px;
+    }
+
+    .gateway-form h4 .badge {
+      float: right;
+      font-size: 12px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+      display: block;
+      font-size: 13px;
+    }
+
+    .form-label i {
+      margin-right: 6px;
+      color: #666;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      transition: border-color 0.3s ease;
+      background: #fff;
+      color: #333;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #28a745;
+      box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.1);
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      min-height: 80px;
+      resize: vertical;
+      font-family: inherit;
+      background: #fff;
+      color: #333;
+    }
+
+    .form-textarea:focus {
+      outline: none;
+      border-color: #28a745;
+      box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.1);
+    }
+
+    .save-btn {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+
+    .save-btn:hover {
+      background: #218838;
+    }
+
+    .save-btn i {
+      margin-right: 6px;
+    }
+
+    .content-wrapper {
+      background: #f4f6f9;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 50px;
+      color: #666;
+    }
+
+    .add-new-card {
+      background: #f8f9fa;
+      border: 2px dashed #dee2e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .add-new-card:hover {
+      border-color: #28a745;
+      background: #e8f5e9;
+    }
+
+    .add-new-content {
+      text-align: center;
+      color: #666;
+    }
+
+    .add-new-content i {
+      font-size: 48px;
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+
+    .add-new-content p {
+      margin: 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1><i class="fas fa-credit-card mr-2"></i>Payment Gateways</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item">
+                    <a href="/admin/manager/index">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item active">Payment Gateways</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content">
+          <div class="container-fluid">
+            <div id="loading" class="loading-spinner">
+              <i class="fas fa-spinner fa-spin fa-3x"></i>
+              <p class="mt-3">Loading gateways...</p>
+            </div>
+            <div id="gateway-container" class="gateway-container" style="display: none">
+              <!-- Gateway cards will be rendered here -->
+            </div>
+          </div>
+        </section>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script>
+    const MAX_GATEWAYS = 10;
+
+    // Load gateways on page load
+    $(document).ready(function () {
+      loadGateways();
+    });
+
+    function loadGateways() {
+      $.get("/api/admin/newfinance/gateways", function (response) {
+        $("#loading").hide();
+        $("#gateway-container").show();
+
+        if (response.status && response.data) {
+          renderGateways(response.data);
+        } else {
+          renderGateways([]);
+        }
+      }).fail(function () {
+        $("#loading").hide();
+        $("#gateway-container").show();
+        renderGateways([]);
+      });
+    }
+
+    function renderGateways(gateways) {
+      const container = $("#gateway-container");
+      container.empty();
+
+      // Render existing gateways
+      gateways.forEach((gateway, index) => {
+        container.append(createGatewayCard(gateway, index + 1));
+      });
+
+      // Add "Add New" card if less than MAX_GATEWAYS
+      if (gateways.length < MAX_GATEWAYS) {
+        container.append(createAddNewCard());
+      }
+
+      // Bind form events
+      bindFormEvents();
+    }
+
+    function createGatewayCard(gateway, index) {
+      const rechargeAmounts = gateway.recharge_amounts || "";
+      const giftAmounts = gateway.gift_amounts || "";
+
+      return `
+                <div class="gateway-form" data-id="${gateway.id}">
+                    <h4>
+                        <i class="fas fa-credit-card mr-2"></i>Gateway ${index}
+                        <span class="badge badge-success">Active</span>
+                    </h4>
+                    <form class="gateway-save-form">
+                        <input type="hidden" name="id" value="${gateway.id || ''}">
+                        
+                        <label class="form-label">
+                            <i class="fas fa-tag"></i> Pay Name
+                        </label>
+                        <input type="text" class="form-input" name="pay_name" value="${gateway.pay_name || ""}" placeholder="e.g., bKash">
+
+                        <label class="form-label">
+                            <i class="fas fa-arrow-down"></i> Min Price
+                        </label>
+                        <input type="number" class="form-input" name="min_price" value="${gateway.min_price || 100}" placeholder="100">
+
+                        <label class="form-label">
+                            <i class="fas fa-arrow-up"></i> Max Price
+                        </label>
+                        <input type="number" class="form-input" name="max_price" value="${gateway.max_price || 50000}" placeholder="50000">
+
+                        <label class="form-label">
+                            <i class="fas fa-percentage"></i> Bonus %
+                        </label>
+                        <input type="number" class="form-input" name="bonus_percent" value="${gateway.bonus_percent || 0}" placeholder="10" step="0.01">
+
+                        <label class="form-label">
+                            <i class="fas fa-bolt"></i> Recharge Amounts
+                        </label>
+                        <textarea class="form-textarea" name="recharge_amounts" placeholder="e.g., 10,20,30">${rechargeAmounts}</textarea>
+
+                        <label class="form-label">
+                            <i class="fas fa-gift"></i> Gift Amounts
+                        </label>
+                        <textarea class="form-textarea" name="gift_amounts" placeholder="e.g., 10,0,0">${giftAmounts}</textarea>
+
+                        <button type="submit" class="save-btn">
+                            <i class="fas fa-save"></i> Save Gateway
+                        </button>
+                    </form>
+                </div>
+            `;
+    }
+
+    function createAddNewCard() {
+      return `
+                <div class="gateway-form add-new-card" id="add-new-gateway">
+                    <div class="add-new-content">
+                        <i class="fas fa-plus-circle"></i>
+                        <p>Add New Gateway</p>
+                    </div>
+                </div>
+            `;
+    }
+
+    function bindFormEvents() {
+      // Save form submission
+      $(".gateway-save-form")
+        .off("submit")
+        .on("submit", function (e) {
+          e.preventDefault();
+          const form = $(this);
+          const data = {
+            id: form.find('[name="id"]').val(),
+            pay_name: form.find('[name="pay_name"]').val(),
+            min_price:
+              parseFloat(form.find('[name="min_price"]').val()) || 100,
+            max_price:
+              parseFloat(form.find('[name="max_price"]').val()) || 50000,
+            bonus_percent:
+              parseFloat(form.find('[name="bonus_percent"]').val()) || 0,
+            recharge_amounts: form.find('[name="recharge_amounts"]').val(),
+            gift_amounts: form.find('[name="gift_amounts"]').val(),
+          };
+
+          $.post(
+            "/api/admin/newfinance/gateways/save",
+            data,
+            function (response) {
+              if (response.status) {
+                Swal.fire("Success", response.message, "success");
+                loadGateways();
+              } else {
+                Swal.fire("Error", response.message, "error");
+              }
+            },
+          ).fail(function () {
+            Swal.fire("Error", "Failed to save gateway", "error");
+          });
+        });
+
+      // Add new gateway
+      $("#add-new-gateway")
+        .off("click")
+        .on("click", function () {
+          const newGateway = {
+            id: null,
+            pay_name: "",
+            min_price: 100,
+            max_price: 50000,
+            bonus_percent: 0,
+            recharge_amounts: "",
+            gift_amounts: "",
+          };
+
+          // Replace add button with form
+          $(this).replaceWith(
+            createGatewayCard(newGateway, $(".gateway-form").length + 1),
+          );
+          bindFormEvents();
+        });
+    }
+  </script>
+</body>
+
+</html>

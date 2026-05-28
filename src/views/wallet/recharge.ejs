@@ -1,0 +1,439 @@
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 37px">
+
+<head>
+  <script src="/app.config.js?v=1718968461132"></script>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  <meta name="google" content="notranslate" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css" />
+  <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css" />
+  <link rel="stylesheet" href="/assets/css/index-2c2fee84.css" />
+  <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css" />
+  <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css" />
+  <link rel="stylesheet" href="/assets/css/page-test-24de9c20.css" />
+  <link rel="stylesheet" href="/assets/css/page-main-284c07ba.css" />
+  <link rel="stylesheet" href="/assets/css/page-promotion-14ce89d7.css" />
+  <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.1/axios.min.js"
+    integrity="sha512-w9PRLSWbo+Yqin/AzSMGoP+qe8UF1njFtd1rEnR58Xv2GEJNEa6O6Bv53mkPbNyAwGCn1HVt1OOvd5i+E55t+w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    .toast-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      z-index: 9999;
+      animation: fadeInOut 2s ease-in-out;
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .Recharge__container-rechageBtn {
+      cursor: pointer;
+    }
+
+    .Recharge__container-rechageBtn.rechage_active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+  </style>
+</head>
+
+<body style="font-size: 12px" data-np-autofill-form-type="other" data-np-checked="1" data-np-watching="1">
+  <div data-v-36cc3380="" class="Recharge__container">
+    <div data-v-12a80a3e="" data-v-36cc3380="" class="navbar white">
+      <div data-v-12a80a3e="" class="navbar-fixed">
+        <div data-v-12a80a3e="" class="navbar__content">
+          <div data-v-12a80a3e="" class="navbar__content-left" onclick="history.back()">
+            <i data-v-12a80a3e="" class="van-badge__wrapper van-icon van-icon-arrow-left"></i>
+          </div>
+          <div data-v-12a80a3e="" class="navbar__content-center">
+            <div data-v-12a80a3e="" class="navbar__content-title">
+              Deposit
+            </div>
+          </div>
+          <div data-v-12a80a3e="" class="navbar__content-right" onclick="location.href='/wallet/rechargerecord'">
+            <div data-v-36cc3380="" class="title">Deposit history</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance Display -->
+    <div data-v-98c90f53="" class="balanceAssets">
+      <div data-v-98c90f53="" class="balanceAssets__header">
+        <div data-v-98c90f53="" class="balanceAssets__header__left">
+          <img data-v-98c90f53="" src="/assets/png/balance-e39ce400.png" />Balance
+        </div>
+      </div>
+      <div data-v-98c90f53="" class="balanceAssets__main">
+        <p data-v-98c90f53="">₹<span id="money_amount_display">Loading...</span></p>
+        <img data-v-98c90f53="" src="/assets/png/refresh-8e0efe26.png" alt="" id="reload_money_amount_button"
+          style="cursor:pointer;" />
+      </div>
+    </div>
+
+    <!-- Payment Gateway Tabs -->
+    <div data-v-4f3d8608="">
+      <div data-v-4f3d8608="" class="Recharge__container-tabcard" id="tabcard-container">
+        <!-- Payment gateways will be rendered here -->
+      </div>
+    </div>
+
+    <div data-v-9e03166f="" class="Recharge__content">
+      <!-- Channel Info -->
+      <div data-v-9e03166f="" class="Recharge__content-quickInfo boxStyle">
+        <div data-v-9e03166f="" class="Recharge__content-quickInfo__title">
+          <div data-v-9e03166f="" class="title">
+            <svg data-v-9e03166f="" class="svg-icon icon-quickpay2">
+              <use xlink:href="#icon-quickpay2"></use>
+            </svg>
+            <p data-v-9e03166f="">Select channel</p>
+          </div>
+        </div>
+        <div data-v-9e03166f="" class="rechargeTypes_list" id="recharge-types-container">
+          <!-- Recharge types will be rendered here -->
+        </div>
+      </div>
+
+      <!-- Deposit Amount -->
+      <div data-v-9e03166f="" class="Recharge__content-paymoney boxStyle">
+        <div data-v-9e03166f="" class="Recharge__content-paymoney__title">
+          <svg data-v-9e03166f="" class="svg-icon icon-saveWallet">
+            <use xlink:href="#icon-saveWallet"></use>
+          </svg>
+          <p data-v-9e03166f="">Deposit amount</p>
+        </div>
+        <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list" id="recharge-amounts-container">
+          <!-- Recharge amounts will be rendered here -->
+        </div>
+
+        <div data-v-9e03166f="" class="Recharge__content-paymoney__money-input">
+          <div data-v-9e03166f="" class="place-div" id="currency_indicator">₹</div>
+          <div data-v-9e03166f="" class="van-cell van-field amount-input" modelmodifiers="[object Object]">
+            <div class="van-cell__value van-field__value">
+              <div class="van-field__body">
+                <input type="tel" inputmode="numeric" id="money_amount_input" class="van-field__control"
+                  placeholder="Please enter the amount" autocomplete="new-password" />
+              </div>
+            </div>
+          </div>
+          <div data-v-9e03166f="" class="place-right" onclick="clearAmount()">
+            <img data-v-9e03166f="" src="/assets/png/clean-82487515.png" alt="" style="cursor:pointer;" />
+          </div>
+        </div>
+
+        <div data-v-9e03166f="" class="Recharge__container-rechageBtn" id="deposit_fund_btn">
+          Deposit
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div data-v-7cba6004="" class="Recharge__container-intro">
+        <div data-v-7cba6004="" class="Recharge__container-intro__title">
+          <div data-v-7cba6004="" class="img">
+            <svg data-v-7cba6004="" class="svg-icon icon-shuoming">
+              <use xlink:href="#icon-shuoming"></use>
+            </svg>
+          </div>
+          <p data-v-7cba6004="">Recharge instructions</p>
+        </div>
+        <div data-v-7cba6004="" class="Recharge__container-intro__lists">
+          <div data-v-7cba6004="" class="item">
+            <p data-v-7cba6004="">If the transfer time is up, please fill out the deposit form again.</p>
+            <p data-v-7cba6004="">The transfer amount must match the order you created, otherwise the money cannot be
+              credited successfully.</p>
+            <p data-v-7cba6004="">If you transfer the wrong amount, our company will not be responsible for the lost
+              amount!</p>
+            <p data-v-7cba6004="">Note: do not cancel the deposit order after the money has been transferred.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let gateways = [];
+    let selectedGateway = null;
+    let userData = null;
+    let inputMoney = 0;
+
+    // Toast message
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'toast-message';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
+    }
+
+    // Fetch user info
+    async function fetchUserInfo() {
+      try {
+        const response = await axios.get('/api/webapi/GetUserInfo');
+        if (response.data && response.data.data) {
+          userData = response.data.data;
+          document.getElementById('money_amount_display').textContent = userData.money_user || '0.00';
+        }
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+        document.getElementById('money_amount_display').textContent = '0.00';
+      }
+    }
+
+    // Initialize page
+    $(document).ready(function () {
+      // Fetch user info
+      fetchUserInfo();
+
+      // Fetch payment gateways
+      $.get("/api/pay/getPayTypeName", function (response) {
+        console.log('Gateways:', response);
+        if (response.status && response.datas) {
+          gateways = response.datas;
+          renderGateways();
+          if (gateways.length > 0) {
+            selectGateway(0);
+          }
+        }
+      });
+
+      // Reload balance button
+      $('#reload_money_amount_button').on('click', function () {
+        document.getElementById('money_amount_display').textContent = 'Loading...';
+        fetchUserInfo();
+      });
+
+      // Money input change
+      $('#money_amount_input').on('input', handleMoneyInputChange);
+
+      // Deposit button click
+      $('#deposit_fund_btn').on('click', handleDeposit);
+    });
+
+    function renderGateways() {
+      const container = $('#tabcard-container');
+      container.empty();
+
+      gateways.forEach((gateway, index) => {
+        const paymentType = gateway.payment_info?.type || 'upi';
+        let iconSrc = '/assets/png/upi-icon.png';
+        if (paymentType === 'usdt_address') {
+          iconSrc = 'https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon_202308241247227g2d.png';
+        } else {
+          iconSrc = 'https://ossimg.Big-Mumadmin888.com/bigmumbai/payNameIcon/payNameIcon_20240131164642ws73.png';
+        }
+
+        const html = `
+            <div data-v-4f3d8608="" class="Recharge__container-tabcard__items ${index === 0 ? 'active' : ''}" onclick="selectGateway(${index})" data-index="${index}">
+              <div data-v-4f3d8608="" class="centers">
+                <div data-v-4f3d8608="" class="Recharge__container-tabcard__top">
+                  <img data-v-4f3d8608="" class="img" src="${iconSrc}" alt="" />
+                </div>
+                <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">
+                  ${gateway.pay_name || 'Gateway ' + (index + 1)}
+                </div>
+              </div>
+            </div>
+          `;
+        container.append(html);
+      });
+    }
+
+    function selectGateway(index) {
+      selectedGateway = gateways[index];
+
+      // Update active tab
+      $('.Recharge__container-tabcard__items').removeClass('active');
+      $(`.Recharge__container-tabcard__items[data-index="${index}"]`).addClass('active');
+
+      // Update currency indicator
+      if (selectedGateway.payment_info?.type === 'usdt_address') {
+        $('#currency_indicator').text('$');
+      } else {
+        $('#currency_indicator').text('₹');
+      }
+
+      // Render recharge type info
+      renderRechargeType(selectedGateway);
+
+      // Render recharge amounts
+      renderRechargeAmounts(selectedGateway);
+    }
+
+    function renderRechargeType(gateway) {
+      const container = $('#recharge-types-container');
+      container.empty();
+
+      const bonus = gateway.bonus_percent || 0;
+      const minPrice = gateway.min_price || 100;
+      const maxPrice = gateway.max_price || 50000;
+      const paymentType = gateway.payment_info?.type || 'upi_id';
+
+      let typeLabel = 'UPI Payment';
+      if (paymentType === 'upi_qr') typeLabel = 'QR Code Payment';
+      if (paymentType === 'usdt_address') typeLabel = 'USDT Payment';
+
+      const html = `
+          <div data-v-9e03166f="" class="Recharge__content-quickInfo__item item_active">
+            <div data-v-9e03166f="" class="other">
+              <div data-v-9e03166f="">${gateway.pay_name || typeLabel}</div>
+              <div data-v-9e03166f="">Balance: ${minPrice} - ${maxPrice >= 1000 ? (maxPrice / 1000) + 'K' : maxPrice}</div>
+              ${bonus > 0 ? `<div data-v-9e03166f="" class="bouns">${bonus}% bonus</div>` : ''}
+            </div>
+          </div>
+        `;
+      container.append(html);
+    }
+
+    function renderRechargeAmounts(gateway) {
+      const container = $('#recharge-amounts-container');
+      container.empty();
+
+      // Parse recharge_amounts from gateway (comma-separated string)
+      let amounts = [];
+      if (gateway.recharge_amounts) {
+        amounts = gateway.recharge_amounts.split(',').map(a => parseInt(a.trim())).filter(a => !isNaN(a));
+      }
+
+      // Default amounts based on payment type
+      if (amounts.length === 0) {
+        if (gateway.payment_info?.type === 'usdt_address') {
+          amounts = [10, 20, 50, 100, 200, 500];
+        } else {
+          amounts = [300, 500, 1000, 2000, 5000, 10000];
+        }
+      }
+
+      const currencySymbol = gateway.payment_info?.type === 'usdt_address' ? '$' : '₹';
+
+      amounts.forEach((amount, idx) => {
+        let displayAmount = amount;
+        if (amount >= 1000 && gateway.payment_info?.type !== 'usdt_address') {
+          displayAmount = (amount / 1000) + 'K';
+        }
+
+        const html = `
+            <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item ${idx === 0 ? 'active' : ''}" onclick="setAmount(${amount}, this)" data-amount="${amount}">
+              <div data-v-9e03166f="" class="amount">
+                <span data-v-9e03166f="">${currencySymbol}</span>${displayAmount}
+              </div>
+            </div>
+          `;
+        container.append(html);
+      });
+
+      // Set first amount as default
+      if (amounts.length > 0) {
+        inputMoney = amounts[0];
+        $('#money_amount_input').val(amounts[0]);
+        updateDepositButtonState();
+      }
+    }
+
+    function setAmount(amount, element) {
+      inputMoney = amount;
+      $('#money_amount_input').val(amount);
+      $('.Recharge__content-paymoney__money-list__item').removeClass('active');
+      $(element).addClass('active');
+      updateDepositButtonState();
+    }
+
+    function clearAmount() {
+      inputMoney = 0;
+      $('#money_amount_input').val('');
+      $('.Recharge__content-paymoney__money-list__item').removeClass('active');
+      updateDepositButtonState();
+    }
+
+    function handleMoneyInputChange() {
+      const value = parseInt($('#money_amount_input').val()) || 0;
+      inputMoney = value;
+
+      // Update quick amount selection
+      $('.Recharge__content-paymoney__money-list__item').each(function () {
+        const amt = parseInt($(this).data('amount'));
+        if (amt === value) {
+          $(this).addClass('active');
+        } else {
+          $(this).removeClass('active');
+        }
+      });
+
+      updateDepositButtonState();
+    }
+
+    function updateDepositButtonState() {
+      const btn = $('#deposit_fund_btn');
+      const minPrice = selectedGateway?.min_price || 100;
+
+      if (inputMoney >= minPrice) {
+        btn.addClass('rechage_active');
+      } else {
+        btn.removeClass('rechage_active');
+      }
+    }
+
+    function handleDeposit() {
+      if (!selectedGateway) {
+        showToast('Please select a payment gateway');
+        return;
+      }
+
+      const minPrice = selectedGateway.min_price || 100;
+      const maxPrice = selectedGateway.max_price || 50000;
+
+      if (!inputMoney || inputMoney < minPrice) {
+        showToast(`Minimum deposit amount is ${selectedGateway.payment_info?.type === 'usdt_address' ? '$' : '₹'}${minPrice}`);
+        return;
+      }
+
+      if (inputMoney > maxPrice) {
+        showToast(`Maximum deposit amount is ${selectedGateway.payment_info?.type === 'usdt_address' ? '$' : '₹'}${maxPrice}`);
+        return;
+      }
+
+      if (!userData || !userData.id_user) {
+        showToast('Please login to continue');
+        return;
+      }
+
+      // Build gateway payment URL
+      const gatewayName = encodeURIComponent(selectedGateway.pay_name || 'Gateway');
+      const gatewayId = selectedGateway.id;
+      const userId = userData.id_user;
+      const amount = inputMoney;
+
+      // Redirect to dynamic payment page
+      const paymentUrl = `/pay/${gatewayName}/${gatewayId}/${userId}?amount=${amount}`;
+      console.log('Redirecting to:', paymentUrl);
+      window.location.href = paymentUrl;
+    }
+  </script>
+</body>
+
+</html>

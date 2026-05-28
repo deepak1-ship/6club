@@ -1,0 +1,72 @@
+<!-- 钱包余额 -->
+<div data-v-7dd1adab="" data-v-40958d9a="" class="Wallet__C">
+  <div data-v-7dd1adab="" class="Wallet__C-balance">
+    <div class="Wallet__C-balance-row">
+      <div class="Wallet__C-balance-item">
+        <div data-v-7dd1adab="" class="Wallet__C-balance-l1 reload_money">
+          <div data-v-7dd1adab="" id="balance_amount">₹ Loading...</div>
+        </div>
+        <div data-v-7dd1adab="" class="Wallet__C-balance-l2">
+          <div data-v-7dd1adab="">Main Wallet</div>
+        </div>
+      </div>
+      <!-- <div class="Wallet__C-balance-item">
+            <div data-v-7dd1adab="" class="Wallet__C-balance-l1 reload_money">
+               <div data-v-7dd1adab="" id="bonus_balance_amount">₹ Loading...</div>
+            </div>
+            <div data-v-7dd1adab="" class="Wallet__C-balance-l2">
+               <div data-v-7dd1adab="">Bonus Wallet</div>
+            </div>
+         </div> -->
+    </div>
+    <div data-v-7dd1adab="" class="Wallet__C-balance-l3">
+      <div data-v-7dd1adab="" onclick="window.top.postMessage({navigate: '/wallet/Withdraw'}, '*')">
+        Withdraw
+      </div>
+      <div data-v-7dd1adab="" onclick="window.top.postMessage({navigate: '/wallet/Recharge'}, '*')">
+        Deposit
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <style>
+   .Wallet__C-balance-row {
+      display: flex;
+
+      justify-content: space-between;
+      padding-left: 15px;
+      padding-right: 15px;
+   }
+
+   .Wallet__C-balance-l1>div[data-v-7dd1adab]:after {
+      display: none;
+   }
+</style> -->
+<div data-v-a9660e98="" class="m-t-15 notice">
+  <div data-v-5d71c3fd="" class="noticeBar__container lottery-notice">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 26 26"
+    >
+      <path
+        fill="#24bc70"
+        d="M12.031 1.063c-.321.001-.676.145-1 .468L5.312 8H1c-.551 0-1 .449-1 1v8c0 .551.449 1 1 1h4.313L11 24.438c1 1 2 .488 2-.875V2.28c0-.791-.433-1.222-.969-1.219zm7.25 2a1 1 0 0 0-.218 1.906A8.96 8.96 0 0 1 24 13c0 3.524-2 6.55-4.938 8.031a1 1 0 1 0 .875 1.782C23.53 21 26 17.288 26 13s-2.471-8-6.063-9.813a1 1 0 0 0-.562-.124a1 1 0 0 0-.094 0m-2.375 3.874a1 1 0 0 0-.406 1.875C18.043 9.771 19 11.29 19 13c0 1.722-.972 3.261-2.531 4.219a1 1 0 1 0 1.062 1.687C19.601 17.636 21 15.476 21 13c0-2.461-1.387-4.633-3.438-5.906A1 1 0 0 0 17 6.937a1 1 0 0 0-.094 0"
+      />
+    </svg>
+    <div class="noticeBar__container-body">
+      <div data-v-b3a5ca79="" class="noticeBar__container-body-text">
+        If the withdrawal is successful but the bank does not arrive at
+            the account within 72 hours, please contact our self-service
+            center with your bank statement (PDF/VIDEO) and PDF password (if
+            it applies) for us to do the verification and we will assist you
+            in resolving the issue immediately, due to the strict control of
+            the Bank of India, the bank merchant change frequently, so more
+            than 1 month of the withdrawal will not be able to verify. Thank
+            you for your patience! 🙏
+      </div>
+    </div>
+    <button data-v-b3a5ca79="">Detail</button>
+  </div>
+</div>

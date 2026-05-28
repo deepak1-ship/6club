@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <style>
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      color: #007bff;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn-search {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-update {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #f8f9fa;
+      font-weight: 600;
+    }
+
+    .balance-tag {
+      background: #28a745;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini" style="background: #f4f6f9">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper" style="background: #f4f6f9">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 style="color: #333; font-size: 20px">Manage User Wallet</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container-fluid">
+          <div class="card-custom">
+            <div class="card-title"><i class="fas fa-search"></i> Search User</div>
+            <div class="row">
+              <div class="col-md-8">
+                <input type="text" class="form-control-custom" id="search-input"
+                  placeholder="Search by User ID or Phone..." />
+              </div>
+              <div class="col-md-4">
+                <button class="btn-search" onclick="searchUsers()"><i class="fas fa-search"></i> Search</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-custom">
+            <div class="card-title"><i class="fas fa-wallet"></i> User List</div>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Phone</th>
+                    <th>Real Balance</th>
+                    <th>Demo Balance</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="users-table">
+                  <% if (typeof users !=='undefined' && users.length> 0) { %>
+                    <% users.forEach(function(u) { %>
+                      <tr data-id="<%= u.id %>">
+                        <td>
+                          <%= u.id %>
+                        </td>
+                        <td>
+                          <%= u.phone %>
+                        </td>
+                        <td><span class="balance-tag">₹<%= u.money ? u.money.toFixed(2) : '0.00' %></span></td>
+                        <td>₹<%= u.money_demo ? u.money_demo.toFixed(2) : '0.00' %>
+                        </td>
+                        <td>
+                          <button class="btn-update" onclick="updateBalance('<%= u.id %>', '<%= u.phone %>')"><i
+                              class="fas fa-edit"></i> Update</button>
+                        </td>
+                      </tr>
+                      <% }); %>
+                        <% } else { %>
+                          <tr>
+                            <td colspan="5" class="text-muted">No users found.</td>
+                          </tr>
+                          <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script>
+    function searchUsers() {
+      const query = $("#search-input").val();
+      $.get("/api/admin/setting/user-wallet/search", { query }, function (res) {
+        if (res.status && res.data) {
+          let html = "";
+          res.data.forEach(u => {
+            html += `<tr data-id="${u.id}">
+                <td>${u.id}</td>
+                <td>${u.phone}</td>
+                <td><span class="balance-tag">₹${u.money ? u.money.toFixed(2) : '0.00'}</span></td>
+                <td>₹${u.money_demo ? u.money_demo.toFixed(2) : '0.00'}</td>
+                <td><button class="btn-update" onclick="updateBalance(${u.id}, '${u.phone}')"><i class="fas fa-edit"></i> Update</button></td>
+              </tr>`;
+          });
+          if (!html) html = '<tr><td colspan="5" class="text-muted">No users found.</td></tr>';
+          $("#users-table").html(html);
+        }
+      });
+    }
+
+    function updateBalance(id, phone) {
+      Swal.fire({
+        title: 'Update Balance for ' + phone,
+        html: `
+            <select id="swal-type" class="swal2-input" style="width: 100%">
+              <option value="add">Add Money</option>
+              <option value="subtract">Subtract Money</option>
+            </select>
+            <input type="number" id="swal-amount" class="swal2-input" placeholder="Amount" min="0" />
+            <input type="text" id="swal-remark" class="swal2-input" placeholder="Remark (optional)" />
+          `,
+        showCancelButton: true,
+        confirmButtonText: 'Update',
+        preConfirm: () => {
+          return {
+            type: document.getElementById('swal-type').value,
+            amount: parseFloat(document.getElementById('swal-amount').value),
+            remark: document.getElementById('swal-remark').value
+          };
+        }
+      }).then((result) => {
+        if (result.isConfirmed && result.value.amount > 0) {
+          $.ajax({
+            url: "/api/admin/setting/user-wallet/update/" + id,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(result.value),
+            success: function (res) {
+              if (res.status) {
+                Swal.fire("Success", res.message, "success").then(() => location.reload());
+              } else {
+                Swal.fire("Error", res.message, "error");
+              }
+            }
+          });
+        }
+      });
+    }
+
+    $("#search-input").on("keypress", function (e) {
+      if (e.which === 13) searchUsers();
+    });
+  </script>
+</body>
+
+</html>

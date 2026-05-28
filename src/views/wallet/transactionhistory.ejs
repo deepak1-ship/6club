@@ -1,0 +1,478 @@
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 36px">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  <meta name="google" content="notranslate" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!--Select configuration files dynamically-->
+  <link rel="manifest" href="/manifest/manifest.bigmumbai.json?version=1.1" />
+  <title>Rajagame21</title>
+  <script type="module" crossorigin="" src="/assets/js/index-a812a803.js"></script>
+  <link rel="modulepreload" crossorigin="" href="/assets/js/vi-60d1c3eb.js" />
+  <link rel="stylesheet" href="/assets/css/modules-8b01ca49.css" />
+  <link rel="stylesheet" href="/assets/css/page-activity-9da3f4e3.css" />
+  <link rel="stylesheet" href="/assets/css/page-home-482c7bbf.css" />
+  <link rel="stylesheet" href="/assets/css/index-8560823f.css" />
+  <link rel="stylesheet" href="/assets/css/reset-910da13b.css" />
+  <link rel="stylesheet" href="/assets/css/page-login-5dee7998.css" />
+  <link rel="stylesheet" href="/assets/css/page-test-294f10d3.css" />
+  <link rel="stylesheet" href="/assets/css/page-main-b60516e4.css" />
+  <link rel="stylesheet" href="/assets/css/page-promotion-c5d99bfe.css" />
+  <link rel="stylesheet" href="/assets/css/page-wallet-5b1813bb.css" />
+  <script src="/lib/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <style>
+    #date_picker {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: #f0f0f5;
+      color: #000;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    #pagination {
+      display: flex;
+      justify-content: center;
+      /* margin-top: 20px; */
+      padding-bottom: 20px;
+    }
+
+    .page-btn {
+      margin: 0 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #fff 0%, #4550b0 100%);
+    }
+
+    .page-btn.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .page-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+
+<body style="font-size: 12px">
+  <div id="app" data-v-app="">
+    <!---->
+    <div data-v-9cb7105e="" class="transRecord__container"
+      style="--76181987: &quot;Roboto&quot;, &quot;Inter&quot;, sans-serif">
+      <div data-v-19888208="" data-v-9cb7105e="" class="navbar">
+        <div data-v-19888208="" class="navbar-fixed" style="background: rgb(255, 255, 255)">
+          <div data-v-19888208="" class="navbar__content">
+            <div data-v-19888208="" class="navbar__content-left" onclick="history.back()">
+              <i data-v-19888208="" class="van-badge__wrapper van-icon van-icon-arrow-left">
+                <!---->
+                <!---->
+                <!---->
+              </i>
+            </div>
+            <div data-v-19888208="" class="navbar__content-center">
+              <!---->
+              <div data-v-19888208="" class="navbar__content-title">
+                Transaction history
+              </div>
+            </div>
+            <div data-v-19888208="" class="navbar__content-right"></div>
+          </div>
+        </div>
+      </div>
+      <div data-v-9cb7105e="" style="height: 65px">
+        <div data-v-9cb7105e="" class="ar">
+          <div data-v-9cb7105e="" class="ar-searchbar">
+            <div data-v-3b481cc4="" data-v-9cb7105e="" class="ar-searchbar__selector">
+              <div data-v-10d1559c="" id="tier_picker_btn">
+                <span data-v-10d1559c="" class="default">All</span>
+                <i data-v-10d1559c="" class="van-badge__wrapper van-icon van-icon-arrow-down"></i>
+              </div>
+            </div>
+            <div data-v-3b481cc4="" data-v-9cb7105e="" class="ar-searchbar__selector">
+              <!-- <div data-v-10d1559c="" > -->
+              <input type="date" id="date_picker" />
+              <!-- <span data-v-10d1559c="" class="default">2024-06-14</span>
+                        <i data-v-10d1559c="" class="van-badge__wrapper van-icon van-icon-arrow-down"></i> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---->
+      <!---->
+      <!---->
+      <!---->
+      <div data-v-004096dd="" data-v-9cb7105e="" class="infiniteScroll" id="refresh8d6d4bd72bd04a598888621ba502d13b">
+        <div data-v-9cb7105e="" class="transRecord__container-content">
+          <div data-v-9cb7105e="" class="transRecord__container-content__item"></div>
+        </div>
+        <div id="pagination"></div>
+        <!-- <div data-v-004096dd="" class="infiniteScroll__loading"> -->
+        <!---->
+        <!---->
+        <!-- </div> -->
+      </div>
+    </div>
+    <div id="bottom_slider_tier_picker_overlay" class="van-overlay" role="button" tabindex="0" data-v-10d1559c=""
+      style="z-index: 2003; display: none"></div>
+    <div id="bottom_slider_tier_picker" role="dialog" tabindex="0" class="van-popup van-popup--round van-popup--bottom"
+      data-v-10d1559c="" style="z-index: 2003; display: none">
+      <div data-v-10d1559c="" class="van-picker">
+        <div class="van-picker__toolbar">
+          <button type="button" class="van-picker__cancel van-haptics-feedback cancel">
+            Cancel
+          </button>
+          <button type="button" class="van-picker__confirm van-haptics-feedback confirm">
+            Confirm
+          </button>
+        </div>
+        <div class="van-picker__columns" style="height: 264px">
+          <div class="van-picker-column swiper">
+            <ul class="van-picker-column__wrapper swiper-wrapper" style="
+                  transform: translate3d(0px, 22px, 0px);
+                  transition-duration: 500ms;
+                  transition-property: all;
+                ">
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">All</div>
+              </li>
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">Bets</div>
+              </li>
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">Bet Win</div>
+              </li>
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">Recharge</div>
+              </li>
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">Withdraw</div>
+              </li>
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">Commissions</div>
+              </li>
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">Gift Vouchers</div>
+              </li>
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">Salary</div>
+              </li>
+              <li role="button" tabindex="0" class="van-picker-column__item swiper-slide" style="height: 44px">
+                <div class="van-ellipsis">Claimed Rewards</div>
+              </li>
+            </ul>
+          </div>
+          <div class="van-picker__mask" style="background-size: 100% 110px"></div>
+          <div class="van-hairline-unset--top-bottom van-picker__frame" style="height: 44px"></div>
+        </div>
+      </div>
+    </div>
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="/js/client.js"></script>
+  <script>
+    $(document).ready(function () {
+      $(".ar-loading-view").fadeIn();
+
+      function formateT(params) {
+        let result = params < 10 ? "0" + params : params;
+        return result;
+      }
+
+      let current = $("#tier_picker_btn .default").text();
+      let startDate = "";
+      let filterType = "All";
+      let page = 1;
+      let limit = 10;
+      let totalPages = 0;
+      let loading = false;
+
+      let swiper = new Swiper(".van-picker-column", {
+        // on: {
+        //    slideChange: function () {
+        //       level=this.activeIndex.toString()
+        //    },
+        // },
+        slidesPerView: 5,
+        direction: "vertical",
+        centeredSlides: true,
+        clickable: true,
+      });
+
+      $("#tier_picker_btn").click(function () {
+        $("body").addClass("van-overflow-hidden");
+        $("#bottom_slider_tier_picker_overlay").fadeIn();
+        $("#bottom_slider_tier_picker").fadeIn();
+
+        current = $("#tier_picker_btn .default").text();
+
+        const index = $(
+          "#bottom_slider_tier_picker .van-picker-column__item .van-ellipsis",
+        )
+          .toArray()
+          .findIndex((item) => {
+            return $(item).text() === current;
+          });
+        swiper.slideTo(index, 0);
+      });
+
+      $("#bottom_slider_tier_picker .van-picker-column__item").click(
+        function () {
+          const index = $(
+            "#bottom_slider_tier_picker .van-picker-column__item",
+          )
+            .toArray()
+            .findIndex((item) => {
+              return (
+                $(item).find(".van-ellipsis").text() ===
+                $(this).find(".van-ellipsis").text()
+              );
+            });
+          swiper.slideTo(index, 500, true);
+        },
+      );
+
+      $(".cancel").click(function () {
+        $("body").removeClass("van-overflow-hidden");
+        $("#bottom_slider_tier_picker_overlay").fadeOut();
+        $("#bottom_slider_tier_picker").fadeOut();
+      });
+
+      $(".confirm").click(function () {
+        $("#tier_picker_btn .default").text(
+          $(".swiper-slide-active .van-ellipsis").text(),
+        );
+        current = $(".swiper-slide-active .van-ellipsis").text();
+
+        filterType = current;
+        $(".ar-loading-view").fadeIn();
+        loadTransactions(filterType, startDate, 1);
+        $("html, body").animate(
+          {
+            scrollTop: 0,
+          },
+          "slow",
+        );
+        $("body").removeClass("van-overflow-hidden");
+        $("#bottom_slider_tier_picker_overlay").fadeOut();
+        $("#bottom_slider_tier_picker").fadeOut();
+      });
+
+      // function updatePaginationUI(currentPage, totalPages) {
+      //   const paginationContainer = $("#pagination");
+      //   const noMoreData = paginationContainer.empty();
+
+      //   if (totalPages <= 1) {
+      //     paginationContainer.hide();
+      //     return;
+      //   }
+
+      //   paginationContainer.show();
+
+      //   function createPageButton(page, label = page, disabled = false) {
+      //     const button = $("<button>")
+      //       .text(label)
+      //       .attr("data-page", page)
+      //       .addClass("page-btn")
+      //       .prop("disabled", disabled);
+      //     if (page === currentPage) {
+      //       button.addClass("active");
+      //     }
+      //     return button;
+      //   }
+
+      //   paginationContainer.append(
+      //     createPageButton(1, "First", currentPage === 1),
+      //   );
+      //   paginationContainer.append(
+      //     createPageButton(currentPage - 1, "Previous", currentPage === 1),
+      //   );
+
+      //   paginationContainer.append(
+      //     createPageButton(
+      //       currentPage + 1,
+      //       "Next",
+      //       currentPage === totalPages,
+      //     ),
+      //   );
+      //   paginationContainer.append(
+      //     createPageButton(totalPages, "Last", currentPage === totalPages),
+      //   );
+
+      //   $(".page-btn").on("click", function () {
+      //     const page = $(this).attr("data-page");
+      //     if (page != currentPage) {
+      //       $(".ar-loading-view").fadeIn();
+      //       loadTransactions(filterType, startDate, page);
+      //     }
+      //   });
+      // }
+
+      function timerJoin(params = "", addHours = 0) {
+        let date = "";
+        if (params) {
+          date = new Date(Number(params));
+        } else {
+          date = new Date();
+        }
+
+        date.setHours(date.getHours() + addHours);
+
+        let years = formateT(date.getFullYear());
+        let months = formateT(date.getMonth() + 1);
+        let days = formateT(date.getDate());
+
+        let hours = date.getHours() % 12;
+        hours = hours === 0 ? 12 : hours;
+        let ampm = date.getHours() < 12 ? "AM" : "PM";
+
+        let minutes = formateT(date.getMinutes());
+        let seconds = formateT(date.getSeconds());
+
+        return (
+          years +
+          "-" +
+          months +
+          "-" +
+          days +
+          " " +
+          hours +
+          ":" +
+          minutes +
+          ":" +
+          seconds +
+          " " +
+          ampm
+        );
+      }
+
+      function loadsData(datas, isFirstPage) {
+        let html = datas
+          .map((data) => {
+            return `
+            <div data-v-9cb7105e="" class="transRecord__container-content__item">
+                     <div data-v-9cb7105e="" class="transRecord__container-content__card">
+                        <div data-v-9cb7105e="" class="transRecord__container-content__card-top card-background">
+                           <h3 data-v-9cb7105e="">${data.name}</h3>
+                        </div>
+                        <div data-v-9cb7105e="" class="transRecord__container-content__card-mid">
+                           <div data-v-9cb7105e="" class="line">
+                              <div data-v-9cb7105e="" class="left">Detail</div>
+                              <div data-v-9cb7105e="" class="right">${data.name}</div>
+                           </div>
+                           <div data-v-9cb7105e="" class="line">
+                              <div data-v-9cb7105e="" class="left">Time</div>
+                              <div data-v-9cb7105e="" class="right">${timerJoin(data.time)}</div>
+                           </div>
+                           <div data-v-9cb7105e="" class="line">
+                              <div data-v-9cb7105e="" class="left">Balance</div>
+                              <div data-v-9cb7105e="" class="right red" style="color: ${data.type === "positive" ? "rgb(107, 190, 88);" : "red"}">₹${data.money.toFixed(2)}</div>
+                           </div>
+                        </div>
+                        <div data-v-9cb7105e="" class="transRecord__container-content__card-bot"><textarea data-v-9cb7105e="" class="textarea" name="remark" cols="30" rows="10" readonly=""></textarea></div>
+                     </div>
+                  </div>
+            <br>
+        `;
+          })
+          .join("");
+
+        $(".transRecord__container-content__item").html(html);
+      }
+
+      let data = [];
+      function loadTransactions(filterType, startDate, page) {
+        if (loading) return;
+        loading = true;
+        $.ajax({
+          type: "GET",
+          url: `/api/webapi/withdraw/transactionRecord?startDate=${startDate}&filterType=${filterType}&page=${page}&limit=${limit}`,
+          dataType: "json",
+          success: function (response) {
+            if (response.data.length > 0) {
+              totalPages = response.totalPages;
+              if (page === 1) data = response.data;
+              else data.push(...response.data);
+              // updatePaginationUI(response.currentPage, response.totalPages);
+
+              loadsData(data);
+              loading = false;
+            } else {
+              $(".transRecord__container-content__item").html(
+                "<p>No data available</p>",
+              );
+              loading = false;
+              // $("#pagination").hide();
+            }
+          },
+        });
+        $(".ar-loading-view").fadeOut();
+      }
+
+      let previousScrollTop = 0;
+      $(window).on("scroll", function () {
+        if (loading) return;
+        const currentScrollTop = $(this).scrollTop();
+
+        if (currentScrollTop >= previousScrollTop) {
+          if (
+            $(window).scrollTop() + $(window).height() >=
+            $(document).height() - 100
+          ) {
+            if (!loading && page < totalPages) {
+              console.log("hit)");
+              page++;
+              loadTransactions(filterType, startDate, page);
+            }
+          }
+        }
+        previousScrollTop = currentScrollTop;
+      });
+
+      loadTransactions(filterType, startDate, page);
+
+      var date = new Date(startDate);
+      var year = date.getFullYear();
+      var month = ("0" + (date.getMonth() + 1)).slice(-2);
+      var day = ("0" + date.getDate()).slice(-2);
+      var formattedDate = year + "-" + month + "-" + day;
+
+      $("#date_picker").val(formattedDate);
+
+      $("#date_picker").on("change", function () {
+        startDate = moment(this.value).valueOf();
+        $(".ar-loading-view").fadeIn();
+        loadTransactions(filterType, startDate, 1);
+        $("html, body").animate(
+          {
+            scrollTop: 0,
+          },
+          "slow",
+        );
+      });
+
+      $("#date_picker_root").click(function () {
+        $("#date_picker").click();
+      });
+      // Other functions like clipboard and alertMess can remain unchanged
+    });
+  </script>
+</body>
+
+</html>

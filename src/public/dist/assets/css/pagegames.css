@@ -1,0 +1,1248 @@
+/* 
+
+.hot_container .platform,.hot_container .popular {
+    margin-bottom: .34667rem
+}
+
+.hot_container .platform .title,.hot_container .popular .title {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-bottom: .21333rem
+}
+
+.hot_container .platform .title span,.hot_container .popular .title span {
+    font-size: .32rem;
+    line-height: .4rem
+}
+
+.hot_container .platform .list,.hot_container .popular .list {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: .18667rem
+}
+
+.hot_container .platform .list>div,.hot_container .popular .list>div {
+    width: 2.21333rem
+}
+
+.hot_container .platform .list .item,.hot_container .popular .list .item {
+    position: relative;
+    width: 2.21333rem;
+    height: 2.21333rem;
+    background: -webkit-linear-gradient(325deg,#FF8E89 12.38%,#FFC3A2 87.13%);
+    background: linear-gradient(125deg,#FF8E89 12.38%,#FFC3A2 87.13%);
+    box-shadow: var(--BoxShadowColor-9),var(--BoxShadowColor-20);
+    border-radius: .21333rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-bottom: .16rem
+}
+
+.hot_container .platform .list .item img,.hot_container .popular .list .item img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .21333rem
+}
+
+.hot_container .platform .list .item .hot_bage,.hot_container .popular .list .item .hot_bage {
+    position: absolute;
+    right: -.08rem;
+    top: -.10667rem;
+    width: .50667rem;
+    height: .48rem
+}
+
+.hot_container .platform .list .win-odds,.hot_container .popular .list .win-odds {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    height: .48rem;
+    background: var(--bg_color_L2);
+    color: var(--text_color_L1);
+    width: 100%;
+    border-radius: .13333rem;
+    font-size: .29333rem;
+    overflow: hidden;
+    margin-top: .08rem;
+    margin-bottom: .13333rem;
+    position: relative
+}
+
+.hot_container .platform .list .win-odds span,.hot_container .popular .list .win-odds span {
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 100%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    line-height: .53333rem;
+    color: var(--darkTextW, var(--text_color_L1))
+}
+
+.hot_container .platform .list .win-odds span:first-child,.hot_container .popular .list .win-odds span:first-child {
+    padding-left: .13333rem
+}
+
+.hot_container .platform .list .win-odds span:last-child,.hot_container .popular .list .win-odds span:last-child {
+    text-align: right;
+    padding-right: .13333rem
+}
+
+.hot_container .platform .list .win-odds .win-p,.hot_container .popular .list .win-odds .win-p {
+    background: var(--darkLight, var(--main-color));
+    position: absolute;
+    left: 0;
+    height: 100%
+}
+
+html:lang(ar) .hot_container .platform .list .win-odds .win-p,html:lang(ar) .hot_container .popular .list .win-odds .win-p {
+    left: unset;
+    right: 0
+}
+
+.hot_container .pupularAll .list>div {
+    width: 2.88rem
+}
+
+.hot_container .pupularAll .list .item {
+    width: 2.88rem;
+    height: 2.88rem
+}
+
+.hot_container .pupularAll .list .item img {
+    width: 2.66667rem;
+    height: 2.66667rem
+}
+
+.hot_container .look_all {
+    width: 100%;
+    height: 1.06667rem;
+    border: .01333rem solid var(--main-color);
+    border-radius: .53333rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: var(--bg_color_L2);
+    font-size: .34667rem;
+    color: var(--main-color)
+}
+
+.hot_container .look_all img {
+    width: .64rem;
+    height: .64rem;
+    margin-right: .18667rem
+}
+
+.gameRec,.hotGames {
+    width: .48rem;
+    height: .48rem;
+    margin-right: .16rem
+}
+
+ .hotGames g path {
+    fill: var(--colorText-26)
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.minGame_container {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: .24rem;
+    margin-bottom: .4rem
+}
+
+.onlineGamesItem {
+    width: 3.36rem;
+    height: 4.26667rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    grid-gap: .18667rem
+}
+
+.onlineGamesItem .fish_img,.onlineGamesItem .min_game_img {
+    width: 3.36rem;
+    height: 4.26667rem
+}
+
+.all_game {
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: .34667rem
+}
+
+.all_game .onlineGamesItem {
+    width: 2.88rem;
+    height: -webkit-fit-content;
+    height: fit-content;
+    border-radius: .26667rem
+}
+
+.all_game .onlineGamesItem .fish_img {
+    width: 2.82667rem;
+    height: auto;
+    border-radius: .26667rem
+}
+
+.all_game .onlineGamesItem .min_game_img {
+    width: 2.88rem;
+    height: -webkit-fit-content;
+    height: fit-content;
+    max-height: 3.89333rem
+}
+
+.all_game .onlineGamesItem.fish {
+    background: transparent
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.lotterySlotItem {
+    position: relative;
+    width: 100%;
+    height: 2.26667rem;
+    text-align: end;
+    background: var(--bg_color_L3);
+    margin-bottom: .26667rem;
+    border-radius: .53333rem
+}
+
+.lotterySlotItem img {
+    height: 100%
+}
+
+.lotterySlotItem span {
+    position: absolute;
+    top: .26667rem;
+    left: .4rem;
+    color: var(--text_color_L1);
+    white-space: break-spaces;
+    font-weight: 700;
+    font-size: .46667rem
+}
+
+.lotterySlotItem h4 {
+    color: var(--text_color_L2);
+    font-weight: 400;
+    font-size: .29333rem;
+    position: absolute;
+    bottom: .26667rem;
+    left: .4rem;
+    white-space: pre-wrap;
+    text-align: left;
+    line-height: .46667rem;
+    opacity: .7
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.lotterySlotItem__container {
+    width: 100%;
+    height: -webkit-fit-content;
+    height: fit-content;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: var(--textW);
+    margin-bottom: .26667rem;
+    position: relative;
+    border-radius: .10667rem;
+    overflow: hidden
+}
+
+.lotterySlotItem__container .title {
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    border-radius: .10667rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding-bottom: .08rem
+}
+
+.lotterySlotItem__container .title .tit {
+    text-align: center;
+    font-size: .29333rem
+}
+
+.lotterySlotItem__container .game_img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.onlineGamesItem__container {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: .21333rem;
+    margin-bottom: .82667rem
+}
+
+.onlineGamesItem__container .item {
+    width: 3.36rem;
+    height: 4.26667rem;
+    background: var(--main_gradient-color2);
+    border-radius: .26667rem
+}
+
+.onlineGamesItem__container .item .gameImg {
+    width: 3.36rem;
+    height: 4.26667rem;
+    border-radius: .26667rem
+}
+
+.allGame {
+    grid-template-columns: repeat(3,1fr)
+}
+
+.allGame .item,.allGame .item .gameImg {
+    width: 2.96rem;
+    height: 3.73333rem
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.WinRate {
+    width: 6.96rem;
+    height: 1.70667rem;
+    margin-bottom: .4rem
+}
+
+.WinRate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.slot_list .slot_item {
+    margin-bottom: .61333rem
+}
+
+.slot_list .slot_item .slot_title {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    font-size: .4rem;
+    font-weight: 700;
+    color: var(--darkTextW, var(--text_color_L1));
+    margin-bottom: .21333rem
+}
+
+.slot_list .slot_item .slot_title svg {
+    height: .64rem;
+    font-size: .90667rem;
+    vertical-align: middle;
+    color: var(--main-color)
+}
+
+.slot_list .slot_item .slot_img_box {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: .24rem;
+    margin-bottom: .4rem
+}
+
+.slot_list .slot_item .slot_img_box img {
+    width: 2.90667rem;
+    height: 3.92rem;
+    border-radius: .10667rem
+}
+
+.slot_list .slot_item .all_slot {
+    margin: auto;
+    width: 3.84rem;
+    height: .8rem;
+    background: var(--main_gradient-color);
+    box-shadow: 0 .04rem .08rem .01333rem #00000029;
+    border-radius: .4rem;
+    line-height: .8rem;
+    color: #fff;
+    text-align: center;
+    font-size: .32rem
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.gameListGrid__container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 2.45333rem;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    width: 7.3852rem;
+    height: -webkit-min-content;
+    height: min-content;
+    padding-left: .26667rem
+}
+
+.gameListGrid__container-gameRec {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-bottom: .22173rem;
+    font-size: .32rem;
+    font-weight: 700
+}
+
+.gameListGrid__container-gameRec svg {
+    width: .48387rem;
+    height: .48387rem;
+    margin-right: .11147rem
+}
+
+.gameListGrid__container-gameRec .hotGames g path {
+    fill: var(--colorText-26)
+}
+
+.gameListGrid__container-wrapper {
+    display: grid;
+    gap: .2rem .26667rem;
+    padding-left: .13333rem
+}
+
+.gameListGrid__container-wrapper__item {
+    position: relative;
+    width: 3.28rem;
+    height: 2.13333rem
+}
+
+.gameListGrid__container-wrapper__item img {
+    width: 100%;
+    height: 100%
+}
+
+.gameListGrid__container-wrapper__item .hotBadge {
+    position: absolute;
+    top: -.10667rem;
+    right: -.10667rem;
+    width: .51653rem;
+    height: .48013rem
+}
+
+.gameListGrid__container-wrapper__item.hot {
+    width: 2.21747rem;
+    height: 2.21747rem
+}
+
+.look_all {
+    width: 100%;
+    height: 1.06667rem;
+    border: .01333rem solid var(--main-color);
+    border-radius: .53333rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: var(--bg_color_L2);
+    font-size: .34667rem;
+    color: var(--main-color)
+}
+
+.look_all img {
+    width: .64rem;
+    height: .64rem;
+    margin-right: .18667rem
+}
+
+.all_container {
+    width: 100%;
+    padding-left: 0
+}
+
+.skeleton_hot {
+    width: 100%;
+    height: 100%;
+    margin-right: .16rem
+}
+
+.skeleton_hot .hot_tit {
+    width: 100%;
+    height: .48rem;
+    margin-bottom: .21333rem
+}
+
+.skeleton_hot .hot_list {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: .18667rem;
+    margin-bottom: .34667rem
+}
+
+.skeleton_hot .hot_list div {
+    width: 2.21333rem;
+    height: 2.21333rem;
+    background: -webkit-linear-gradient(325deg,#FF8E89 12.38%,#FFC3A2 87.13%);
+    background: linear-gradient(125deg,#FF8E89 12.38%,#FFC3A2 87.13%);
+    box-shadow: var(--BoxShadowColor-9),var(--BoxShadowColor-20);
+    border-radius: .21333rem;
+    margin-bottom: .16rem
+}
+
+.skeleton_other {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.skeleton_other div {
+    width: 100%;
+    height: 2.66667rem;
+    border-radius: .53333rem;
+    background: var(--main_gradient-color2);
+    box-shadow: var(--BoxShadowColor-20),var(--BoxShadowColor-25);
+    margin-bottom: .26667rem
+}
+
+.skeleton_slot {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: .21333rem
+}
+
+.skeleton_slot div {
+    width: 3.36rem;
+    height: 4.26667rem;
+    background: var(--main_gradient-color2);
+    box-shadow: var(--BoxShadowColor-9),var(--BoxShadowColor-20);
+    border-radius: .26667rem
+}
+
+.skeleton_flash {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: .45333rem;
+    margin-bottom: .4rem
+}
+
+.skeleton_flash div {
+    width: 3.25333rem;
+    height: 3.25333rem;
+    background: var(--main_gradient-color2);
+    box-shadow: var(--BoxShadowColor-9),var(--BoxShadowColor-20);
+    border-radius: .26667rem
+}
+
+.otherGame {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 0 .24rem
+}
+
+ .van-skeleton {
+    padding: 0
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.gamesList__container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 0 .32rem
+}
+
+.gamesList__container-title {
+    margin-top: .34667rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-bottom: .32rem;
+    color: var(--darkTextW, var(--text_color_L1));
+    font-size: .4rem;
+    font-weight: 600
+}
+
+.gamesList__container-title:before {
+    content: "";
+    display: block;
+    width: .08rem;
+    height: .4rem;
+    background: var(--darkLight2, var(--main-color));
+    margin-right: .13333rem
+}
+
+.gamesList__container-list {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    justify-items: center;
+    gap: .41333rem .26667rem
+}
+
+.gamesList__container-list__item {
+    width: 2.88rem;
+    min-height: 2.13333rem;
+    max-height: 3.46667rem;
+    background: var(--main_gradient-color2);
+    border-radius: .53333rem;
+    position: relative
+}
+
+.gamesList__container-list__item .lottery_text {
+    color: var(--textW);
+    font-size: .4rem;
+    font-weight: 9.33333rem;
+    position: absolute;
+    top: .37333rem;
+    left: .26667rem
+}
+
+html:lang(ar) .gamesList__container-list__item .lottery_text {
+    left: unset;
+    right: .26667rem
+}
+
+.gamesList__container-list__item .item_default {
+    width: 100%;
+    height: 100%;
+    border-radius: .53333rem;
+    object-fit: fill!important
+}
+
+.gamesList__container-list__item .item_img {
+    height: 2rem;
+    object-fit: cover;
+    position: absolute;
+    border-radius: .53333rem;
+    left: .26667rem
+}
+
+html:lang(ar) .gamesList__container-list__item .item_img {
+    left: unset;
+    right: .26667rem
+}
+
+.gamesList__container-list__item .lottery_img {
+    max-width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    position: absolute;
+    border-radius: .53333rem;
+    right: .26667rem
+}
+
+.gamesList__container-list__item .logo_img {
+    position: absolute;
+    top: .13333rem;
+    right: .37333rem;
+    width: 1.30667rem
+}
+
+.gamesList__container-other {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-top: .26667rem;
+    color: var(--text_color_L2);
+    font-size: .32rem;
+    font-weight: 500;
+    cursor: pointer
+}
+
+.gamesList__container-other__item {
+    width: 100%;
+    height: 2.66667rem
+}
+
+.fun-tab-item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.fun-tab-item__wrap {
+    position: relative
+}
+
+.fun-tab-item__badge {
+    position: absolute;
+    top: .05333rem;
+    right: -.13333rem;
+    padding: 0 .05333rem;
+    min-width: .10667rem;
+    height: .18667rem;
+    font-size: .12rem;
+    line-height: .18667rem;
+    color: #fff;
+    background: #ff411c;
+    white-space: nowrap;
+    border-radius: 1.33333rem;
+    -webkit-transform: translate(50%,-50%);
+    transform: translate(50%,-50%);
+    text-align: center
+}
+
+.fun-tab-bar-wrap {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    min-height: .66667rem;
+    background: var(--bg_color_L2)
+}
+
+.fun-tab-bar .fun-tab-item {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1;
+    flex: 1 1;
+    font-size: .16rem
+}
+
+.fun-tab-bar .fun-tab-item__badge {
+    top: .02667rem;
+    right: 0
+}
+
+.fun-tabs {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: var(--bg_color_L1)
+}
+
+.fun-tabs__tab-list {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    min-width: 100%;
+    width: -webkit-min-content;
+    width: min-content
+}
+
+.fun-tabs__active-line {
+    position: absolute;
+    bottom: .04rem;
+    left: 0;
+    width: .4rem;
+    height: .04rem;
+    border-radius: .05333rem
+}
+
+.fun-tabs .fun-tab-item {
+    padding: .13333rem .05333rem;
+    font-size: .18667rem;
+    text-align: center;
+    white-space: nowrap
+}
+
+:root {
+    --van-tabs-card-height: auto
+}
+
+.van-toast {
+    word-break: break-word!important
+}
+
+.cg-default.van-button {
+    font-weight: 700;
+    font-size: .4rem
+}
+
+.cg-default.van-button .van-button__icon {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.cg-default.van-button .van-button__icon>img {
+    height: 80%
+}
+
+@media (orientation: landscape) {
+    html.landscape {
+        font-size:9vh!important
+    }
+}
+
+.isAppForcedDownloadEnabled-dialog {
+    z-index: 9999999!important
+}
+
+.allGames__container {
+    overflow: hidden
+}
+
+.allGames__container .alGames__container-sticky {
+    padding: 0 .32rem
+}
+
+.allGames__container .van-nav-bar {
+    background-color: var(--bg_color_L2)
+}
+
+.allGames__container .van-nav-bar .van-nav-bar__content .van-nav-bar__left .van-icon {
+    color: var(--text_color_L1)
+}
+
+.allGames__container .tabs {
+    background: transparent
+}
+
+.allGames__container .tab_item {
+    width: 2.53333rem;
+    height: 1.33333rem;
+    margin-inline:.06667rem;padding: 0;
+    color: var(--text_color_L2)!important;
+    border-radius: .13333rem;
+    background: var(--bg_color_L2);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center
+}
+
+.allGames__container .tab_item img {
+    height: .66667rem
+}
+
+.allGames__container .tab_item span {
+    font-size: .32rem
+}
+
+.allGames__container .tab_active {
+    color: var(--text_color_L4)!important;
+    background: var(--main_gradient-color)
+}
+
+.allGames__container .fun-tabs .fun-tab-item {
+    padding: .18667rem 0
+}
+
+.allGames__container-tabBar {
+    padding-inline:.32rem}
+
+.allGames__container-tabBar .van-tabs__nav--card {
+    height: 1.86667rem;
+    margin: 0
+}
+
+.allGames__container-tabBar .van-tabs__nav--card .van-tab--card {
+    width: 2.53333rem;
+    height: 1.33333rem;
+    margin-inline:.06667rem;padding: 0;
+    color: var(--text_color_L2)!important;
+    border-radius: .13333rem;
+    background: var(--bgDark-2, var(--bg_color_L2));
+    box-shadow: var(--BoxShadowColor-42)
+}
+
+.allGames__container-tabBar .van-tabs__nav--card .van-tab--card>span {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%
+}
+
+.allGames__container-tabBar .van-tabs__nav--card .van-tab--card>span img {
+    width: .66667rem;
+    height: auto
+}
+
+.allGames__container-tabBar .van-tabs__nav--card .van-tab--card>span span {
+    font-size: .32rem
+}
+
+.allGames__container-tabBar .van-tabs__nav--card .van-tab--card.van-tab--active {
+    color: var(--textW)!important;
+    background: var(--main_gradient-color);
+    box-shadow: var(--BoxShadowColor-42)
+}
+
+.allGames__container-list {
+    height: calc(100vh - 3.09334rem);
+    overflow: auto
+} */

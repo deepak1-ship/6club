@@ -1,0 +1,1 @@
+const r="/assets/png/logo.png";function o(e){if(typeof e!="string"||!e.trim())return r;let n=`/assets/png/${e.replace(/^\/+/,"").replace(/\.(png|jpg|jpeg|webp)$/i,"")}.png`;if(typeof window<"u"){const t=new window.Image;return t.src=n,t.onerror=()=>t.src=r,n}return n}export{o as g};

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <style>
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      color: #007bff;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn-save {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-delete {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #f8f9fa;
+      font-weight: 600;
+    }
+
+    textarea.form-control-custom {
+      min-height: 80px;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini" style="background: #f4f6f9">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper" style="background: #f4f6f9">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 style="color: #333; font-size: 20px">Custom Activity Banner</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container-fluid">
+          <div class="card-custom">
+            <!-- <div class="card-title"><i class="fas fa-plus"></i> Add Custom Banner</div> -->
+            <form id="custom-form" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Banner ID</label>
+                    <input type="text" class="form-control-custom" name="banner_id" placeholder="CUST001" required />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control-custom" name="title" placeholder="Banner Title" required />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Jump Type</label>
+                    <select class="form-control-custom" name="jump_type">
+                      <option value="internal">Internal</option>
+                      <option value="external">External</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="form-label">Content Type</label>
+                    <select class="form-control-custom" name="content_type">
+                      <option value="image">Image</option>
+                      <option value="html">HTML</option>
+                      <option value="json">JSON</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 10px">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-control-custom" name="description" placeholder="Short description" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Cover Image</label>
+                    <input type="file" class="form-control-custom" name="cover" accept="image/*" />
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 10px">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Content (HTML/JSON/URL)</label>
+                    <textarea class="form-control-custom" name="content"
+                      placeholder="Enter content based on content type..."></textarea>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn-save" style="margin-top: 15px"><i class="fas fa-plus"></i> Add
+                Banner</button>
+            </form>
+          </div>
+
+          <div class="card-custom">
+            <div class="card-title"><i class="fas fa-list"></i> All Custom Banners</div>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Jump</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (typeof banners !=='undefined' && banners.length> 0) { %>
+                    <% banners.forEach(function(b) { %>
+                      <tr data-id="<%= b.id %>">
+                        <td>
+                          <%= b.banner_id %>
+                        </td>
+                        <td>
+                          <%= b.title %>
+                        </td>
+                        <td>
+                          <%= b.content_type %>
+                        </td>
+                        <td>
+                          <%= b.jump_type %>
+                        </td>
+                        <td>
+                          <%= b.is_active ? '✅ Active' : '❌ Inactive' %>
+                        </td>
+                        <td><button class="btn-delete" onclick="deleteBanner('<%= b.id %>')"><i
+                              class="fas fa-trash"></i></button></td>
+                      </tr>
+                      <% }); %>
+                        <% } else { %>
+                          <tr>
+                            <td colspan="6" class="text-muted">No custom banners yet.</td>
+                          </tr>
+                          <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script>
+    $("#custom-form").on("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      $.ajax({
+        url: "/api/admin/setting/custom-banner/create",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+          if (res.status) {
+            Swal.fire("Success", res.message, "success").then(() => location.reload());
+          } else {
+            Swal.fire("Error", res.message, "error");
+          }
+        }
+      });
+    });
+
+    function deleteBanner(id) {
+      Swal.fire({
+        title: "Delete Banner?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#dc3545",
+        confirmButtonText: "Delete"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.post("/api/admin/setting/custom-banner/delete/" + id, function (res) {
+            if (res.status) location.reload();
+          });
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

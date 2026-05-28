@@ -1,0 +1,303 @@
+<!-- doone -->
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 37px;">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <meta name="google" content="notranslate">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rajagame21</title>
+    <link rel="stylesheet" href="/assets/css/index-f3f1dfe8.css">
+    <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css">
+    <link rel="stylesheet" href="/assets/css/index-2c2fee84.css">
+    <link rel="stylesheet" href="/assets/css/page-home-482c7bbf.css">
+    <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css">
+    <!-- <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+        integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+        integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .message_alert_root {
+            font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, Hiragino Sans GB, Microsoft Yahei, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            max-width: 12.8rem;
+            width: max-content;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100000;
+            border-radius: 5px;
+        }
+
+        .message_alert_text {
+            font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, Hiragino Sans GB, Microsoft Yahei, sans-serif;
+            margin: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            transition: opacity .5s;
+            animation: bounce-in-data-v-1dcba851 .5s;
+            position: relative;
+            padding: .32rem .66667rem;
+            text-align: center;
+            line-height: .64rem;
+            overflow: hidden;
+            font-size: .37333rem;
+            color: #fff;
+            background-color: rgba(0, 0, 0, .8);
+            border-radius: 5px;
+        }
+
+        @keyframes bounce-in-data-v-1dcba851 {
+            0% {
+                transform: scale(.4)
+            }
+
+            50% {
+                transform: scale(1.03)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        .c-popups {
+            display: none;
+            position: fixed;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #222121;
+            z-index: 9999;
+            width: 276px;
+            color: #fff;
+            border-radius: 23px;
+        }
+
+        .c-popups .header-section {
+            background: var(--main_gradient-color) !important;
+            padding: 10px;
+            text-align: center;
+            color: white;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .c-popups .header-section h2 {
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .c-popups p {
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .c-popups .middle-content-section {
+            height: 35vh;
+            position: relative;
+            overflow-y: scroll;
+        }
+
+        .c-popups .middle-content-section .text {
+            padding: 15px;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .c-popups .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 13px 20px;
+            align-items: center;
+            box-shadow: 0 20px 50px gainsboro;
+        }
+
+        .c-popups .bottom-section.com {
+            padding-top: 5px;
+        }
+
+        .c-popups .bottom-section.com .activity {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            font-size: 18px;
+            padding: 9px 78px;
+            border: none;
+            background: var(--main_gradient-color);
+            color: white;
+            border-radius: 20px;
+        }
+
+        .MyGameRecordList__C-item-m-top[data-v-373b3197] {
+            color: #fff
+        }
+    </style>
+</head>
+
+<body class="" style="font-size: 12px;">
+
+    <div id="app" data-v-app="">
+
+        <div data-v-5d71c3fd="" class="WinGo__C">
+            <%- include('element/navbar.ejs') %>
+                <%- include('element/wallet_notice.ejs') %>
+                    <div data-v-a9660e98="" class="m-t-15 notice">
+                        <%- include('element/e_tab_time.ejs') %>
+                            <%- include('element/time_left.ejs') %>
+                                <%- include('element/e_bet.ejs') %>
+                                    <!-- 记录导航 -->
+                                    <div data-v-a9660e98="" class="game-list p-b-20">
+                                        <%- include('element/list-order.ejs') %>
+                                            <%- include('element/result_popup.ejs') %>
+                                                <div data-v-481307ec="" data-v-5d71c3fd=""
+                                                    class="GameRecord__C game-record"
+                                                    apifun="e=>f(v.WinGoGetMyEmerdList,e).then(t=>t.data)"
+                                                    listapi="e=>f(v.WinGoGetNoaverageEmerdList,e).then(t=>t.data)"
+                                                    emerdapi="e=>f(v.WinGoGetEmerdList,e).then(t=>t.data)"
+                                                    gopathname="AllLotteryGames-BettingRecordWin"></div>
+
+                                                <!-- 中奖提示组件 -->
+                                                <div data-v-e44179e3="" data-v-5d71c3fd="" class="WinningTip__C"
+                                                    style="display: none;">
+                                                    <div data-v-e44179e3="" class="WinningTip__C-body">
+                                                        <div data-v-e44179e3="" class="WinningTip__C-body-l1">
+                                                            Congratulations</div>
+                                                        <div data-v-e44179e3=""
+                                                            class="WinningTip__C-body-l2 typeundefined">
+                                                            Lottery results <div data-v-e44179e3=""></div>
+                                                            <div data-v-e44179e3="" class="WinningNum"></div>
+                                                            <div data-v-e44179e3="">Small</div>
+                                                        </div>
+                                                        <div data-v-e44179e3="" class="WinningTip__C-body-l3">
+                                                            <div data-v-e44179e3="" class="head">Bonus</div>
+                                                            <div data-v-e44179e3="" class="bonus"></div>
+                                                            <div data-v-e44179e3="" class="gameDetail">Period: </div>
+                                                        </div>
+                                                        <div data-v-e44179e3="" class="WinningTip__C-body-l4">
+                                                            <div data-v-e44179e3="" class="acitveBtn"></div>
+                                                            3 seconds auto close
+
+                                                        </div>
+                                                        <div data-v-e44179e3="" class="closeBtn"></div>
+                                                    </div>
+                                                </div>
+                                                <!--v-if-->
+                                                <audio id="voice1">
+                                                    <source src="/assets/mp3/di1-0f3d86cb.mp3" type="audio/mpeg">
+                                                </audio>
+                                                <audio id="voice2">
+                                                    <source src="/assets/mp3/di2-ad9aa8fb.mp3" type="audio/mpeg">
+                                                </audio>
+                                    </div>
+                                    <!--online custom service-->
+                                    <div class="customer" id="draggable" onclick="window.top.postMessage({navigate: '/Customersupport'}, '*')">
+                                        <img class="" data-origin="/assets/png/icon_sevice.webp"
+                                            src="/assets/png/icon_sevice.webp">
+                                    </div>
+                                    <!--v-if-->
+                                    <!--v-if-->
+                                    <!--v-if-->
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            const n = document.getElementById("draggable");
+                            var t = $("#draggable").offset();
+                            const e = t => t * parseFloat(getComputedStyle(document.documentElement).fontSize);
+                            if (!n)
+                                return;
+                            let o, i = t.left, d, s = t.top;
+                            const c = function (t) {
+                                var e = t.touches[0].clientX - o
+                                    , t = t.touches[0].clientY - d
+                                    , e = Math.max(0, Math.min(window.innerWidth - n.offsetWidth, e))
+                                    , t = Math.max(0, Math.min(window.innerHeight - n.offsetHeight, t));
+                                i = e,
+                                    s = t,
+                                    n.style.left = i + "px",
+                                    n.style.top = s + "px"
+                            }
+                                , f = function () {
+                                    window.removeEventListener("touchmove", c),
+                                        window.removeEventListener("touchend", f)
+                                };
+                            n.addEventListener("touchstart", function (t) {
+                                o = t.touches[0].clientX - i,
+                                    d = t.touches[0].clientY - s,
+                                    window.addEventListener("touchmove", c),
+                                    window.addEventListener("touchend", f)
+                            }),
+                                window.addEventListener("resize", function () {
+                                    i = window.innerWidth - n.offsetWidth - e(.4),
+                                        s = window.innerHeight - n.offsetHeight - e(2.8),
+                                        n.style.left = i + "px",
+                                        n.style.top = s + "px"
+                                }),
+                                i = window.innerWidth - n.offsetWidth - e(.4),
+                                s = window.innerHeight - n.offsetHeight - e(2.8),
+                                n.style.left = i + "px",
+                                n.style.top = s + "px"
+                        });
+                    </script>
+                    <div data-v-app="">
+                        <!--teleport start-->
+                        <!--teleport end-->
+                    </div>
+                    <!---->
+                    <div role="dialog" tabindex="0"
+                        class="van-popup van-popup--center van-toast van-toast--middle van-toast--break-word van-toast--fail"
+                        style="z-index: 2001; display: none;">
+                        <i class="van-badge__wrapper van-icon van-icon-fail van-toast__icon">
+                            <!---->
+                            <!---->
+                            <!---->
+                        </i>
+                        <div class="van-toast__text">Error: 101
+                            User does not exist</div>
+                        <!---->
+                    </div>
+                    <script src="/js/client.js"></script>
+                    <script src="/wingo/helpers.js"></script>
+                    <script src="/wingo/audio.js"></script>
+                    <script src="/wingo/timer.js"></script>
+                    <script src="/wingo/display.js"></script>
+                    <script src="/wingo/my-bets-display.js"></script>
+                    <script src="/wingo/socket-handler.js"></script>
+                    <script src="/wingo/game-logic.js"></script>
+                    <script src="/wingo/main.js"></script>
+</body>
+<style>
+    @media print {
+        #simplify-jobs-container {
+            display: none;
+        }
+    }
+</style>
+<div id="simplify-jobs-container"
+    style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px; overflow: visible; z-index: 2147483647;">
+</div>
+<script id="simplify-jobs-page-script"
+    src="chrome-extension://pbanhockgagggenencehbnadejlgchfc/js/pageScript.bundle.js"></script>
+<%- include('element/how_to_play.ejs') %>
+
+</html>

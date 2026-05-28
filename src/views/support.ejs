@@ -1,0 +1,77 @@
+<style>
+  #draggable-customer {
+    position: fixed;
+    z-index: 9999;
+    cursor: move;
+    width: 60px;
+    height: 60px;
+  }
+
+  #draggable-customer img {
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+<div class="customer" id="draggable" onclick="location.href='/#/Customersupport'">
+  <img class="" data-origin="/assets/png/icon_sevice.png" src="/assets/png/icon_sevice.png">
+</div>
+
+<script>
+  $(document).ready(function() {
+    // Initialize drag functionality
+    initDrag();
+    
+    // Set click handler for the draggable element
+    $('#draggable').click(function() {
+      fetchCustomerData();
+    });
+  });
+
+ 
+
+  // Drag and drop functionality
+  function initDrag() {
+    const n = document.getElementById("draggable");
+    const rect = n ? n.getBoundingClientRect() : { left: 0, top: 0 };
+    var t = { left: rect.left + window.scrollX, top: rect.top + window.scrollY };
+    const e = t => t * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    if (!n) return;
+    
+    let o, i = t.left, d, s = t.top;
+    const c = function(t) {
+      var e = t.touches[0].clientX - o,
+          t = t.touches[0].clientY - d,
+          e = Math.max(0, Math.min(window.innerWidth - n.offsetWidth, e)),
+          t = Math.max(0, Math.min(window.innerHeight - n.offsetHeight, t));
+      i = e,
+      s = t,
+      n.style.left = i + "px",
+      n.style.top = s + "px"
+    };
+    
+    const f = function() {
+      window.removeEventListener("touchmove", c),
+      window.removeEventListener("touchend", f)
+    };
+    
+    n.addEventListener("touchstart", function(t) {
+      o = t.touches[0].clientX - i,
+      d = t.touches[0].clientY - s,
+      window.addEventListener("touchmove", c),
+      window.addEventListener("touchend", f)
+    });
+    
+    window.addEventListener("resize", function() {
+      i = window.innerWidth - n.offsetWidth - e(.4),
+      s = window.innerHeight - n.offsetHeight - e(2.8),
+      n.style.left = i + "px",
+      n.style.top = s + "px"
+    });
+    
+    i = window.innerWidth - n.offsetWidth - e(.4),
+    s = window.innerHeight - n.offsetHeight - e(2.8),
+    n.style.left = i + "px",
+    n.style.top = s + "px"
+  }
+</script>

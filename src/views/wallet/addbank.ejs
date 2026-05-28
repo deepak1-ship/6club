@@ -1,0 +1,312 @@
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 36px">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml"
+    href="https://ossimg.tirangaagent.com/Tiranga/other/h5setting_20231017190406lyb3.ico" />
+  <meta name="google" content="notranslate" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <link rel="manifest" href="/manifest.tiranga.json?version=1.1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css" />
+  <link rel="stylesheet" href="/assets/css/page-activity-15aec14d.css" />
+  <link rel="stylesheet" href="/assets/css/page-home-cd3ca502.css" />
+  <link rel="stylesheet" href="/assets/css/page-login-0a6284d7.css" />
+  <link rel="stylesheet" href="/assets/css/index-2ce02a2b.css" />
+  <link rel="stylesheet" href="/assets/css/page-test-24de9c20.css" />
+  <link rel="stylesheet" href="/assets/css/page-promotion-7e3541ac.css" />
+  <link rel="stylesheet" href="/assets/css/page-wallet-27ab35e0.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.1/axios.min.js"
+    integrity="sha512-w9PRLSWbo+Yqin/AzSMGoP+qe8UF1njFtd1rEnR58Xv2GEJNEa6O6Bv53mkPbNyAwGCn1HVt1OOvd5i+E55t+w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="/js/client.js"></script>
+</head>
+
+<body class="" style="font-size: 12px">
+  <div id="app" data-v-app="">
+    <div data-v-1726638e="" class="addBankCard__container" style="
+          --f13b4d11-currentFontFamily: &quot;Roboto&quot;, &quot;Inter&quot;,
+            sans-serif;
+        ">
+      <div data-v-12a80a3e="" data-v-1726638e="" class="navbar">
+        <div data-v-12a80a3e="" class="navbar-fixed">
+          <div data-v-12a80a3e="" class="navbar__content">
+            <div data-v-12a80a3e="" class="navbar__content-left" onclick="history.back()">
+              <i data-v-12a80a3e="" class="van-badge__wrapper van-icon van-icon-arrow-left"><!----><!----><!----></i>
+            </div>
+            <div data-v-12a80a3e="" class="navbar__content-center">
+              <!--v-if-->
+              <div data-v-12a80a3e="" class="navbar__content-title">
+                Add a bank account number
+              </div>
+            </div>
+            <div data-v-12a80a3e="" class="navbar__content-right"></div>
+          </div>
+        </div>
+      </div>
+      <div data-v-1726638e="" class="addBankCard__container-content" data-np-autofill-form-type="other"
+        data-np-checked="1" data-np-watching="1">
+        <div data-v-1726638e="" class="addBankCard__container-content-top">
+          <img data-v-1726638e="" src="/assets/png/hint-f8a7f7d4.png" /><span data-v-1726638e="">To ensure the safety of
+            your funds, please bind your bank
+            account</span>
+        </div>
+        <div data-v-1726638e="" class="addBankCard__container-content-item">
+          <div data-v-1726638e="" class="label">
+            <svg data-v-1726638e="" class="svg-icon icon-bank">
+              <use xlink:href="#icon-bank"></use>
+            </svg>
+            Choose a bank
+          </div>
+          <div data-v-1726638e="" class="selectB" onclick="location.href='/wallet/selectBank'">
+            <span id="bank_name_display">Please select a bank</span>
+            <i data-v-1726638e="" class="van-badge__wrapper van-icon van-icon-arrow"><!----><!----><!----></i>
+          </div>
+        </div>
+        <!--验证收款人姓名-->
+        <div data-v-1726638e="" class="addBankCard__container-content-item">
+          <div data-v-1726638e="" class="label">
+            <svg data-v-1726638e="" class="svg-icon icon-name">
+              <use xlink:href="#icon-name"></use>
+            </svg>
+            Full recipient's name
+          </div>
+          <input data-v-1726638e="" placeholder="Please enter the recipient's name"
+            maxlength="50" /><!--v-if--><!--v-if-->
+        </div>
+        <div data-v-1726638e="" class="addBankCard__container-content-item">
+          <div data-v-1726638e="" class="label">
+            <svg data-v-1726638e="" class="svg-icon icon-bankCard">
+              <use xlink:href="#icon-bankCard"></use>
+            </svg>
+            Bank account number
+          </div>
+          <input data-v-1726638e="" placeholder="Please enter your bank account number" maxlength="25" />
+        </div>
+        <div data-v-1726638e="" class="addBankCard__container-content-item">
+          <div data-v-1726638e="" class="label phone_icon">
+            <svg data-v-1726638e="" class="svg-icon icon-phone">
+              <use xlink:href="#icon-phone"></use>
+            </svg>
+            Phone number
+          </div>
+          <input data-v-1726638e="" placeholder="Please enter your phone number" maxlength="12" />
+        </div>
+        <!--v-if-->
+        <div data-v-1726638e="" class="addBankCard__container-content-item">
+          <div data-v-1726638e="" class="label">
+            <svg data-v-1726638e="" class="svg-icon icon-ifscCode">
+              <use xlink:href="#icon-ifscCode"></use>
+            </svg>
+            IFSC code
+          </div>
+          <input data-v-1726638e="" placeholder="Please enterIFSC code" maxlength="11" />
+        </div>
+        <!--v-if--><!--v-if-->
+        <div data-v-1726638e="" class="addBankCard__container-content-btn">
+          <button id="submit_button" data-v-1726638e="" class="">Save</button>
+        </div>
+      </div>
+    </div>
+    <!--online custom service-->
+    <div class="customer" id="customerId" style="
+          --f13b4d11-currentFontFamily: &quot;Roboto&quot;, &quot;Inter&quot;,
+            sans-serif;
+          --f6a705e1-currentFontFamily: bahnschrift;
+        ">
+      <img class="" data-origin="/assets/png/icon_sevice-8a1f5628.png" src="/assets/png/icon_sevice-8a1f5628.png" />
+    </div>
+    <!--v-if--><!--v-if--><!--v-if--><!----><!----><!----><!----><!----><!---->
+  </div>
+
+  <div data-v-app=""><!--teleport start--><!--teleport end--></div>
+  <!---->
+  <div role="dialog" tabindex="0" class="van-popup van-popup--center van-toast van-toast--middle van-toast--fail"
+    style="z-index: 2001; display: none">
+    <i class="van-badge__wrapper van-icon van-icon-fail van-toast__icon"><!----><!----><!----></i>
+    <div class="van-toast__text">Token has expired, please login again!</div>
+    <!---->
+  </div>
+  <div><!--teleport start--><!--teleport end--></div>
+  <!----><!---->
+
+  <style>
+    .message_alert_root {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        Helvetica Neue,
+        Helvetica,
+        Segoe UI,
+        Arial,
+        Roboto,
+        PingFang SC,
+        Hiragino Sans GB,
+        Microsoft Yahei,
+        sans-serif;
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      max-width: 12.8rem;
+      width: 80%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100000;
+      border-radius: 14px;
+    }
+
+    .message_alert_text {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        Helvetica Neue,
+        Helvetica,
+        Segoe UI,
+        Arial,
+        Roboto,
+        PingFang SC,
+        Hiragino Sans GB,
+        Microsoft Yahei,
+        sans-serif;
+      margin: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      transition: opacity 0.5s;
+      animation: bounce-in-data-v-1dcba851 0.5s;
+      position: relative;
+      padding: 0.32rem 0.66667rem;
+      text-align: center;
+      line-height: 0.64rem;
+      overflow: hidden;
+      font-size: 0.37333rem;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    @keyframes bounce-in-data-v-1dcba851 {
+      0% {
+        transform: scale(0.4);
+      }
+
+      50% {
+        transform: scale(1.03);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+  </style>
+
+  <script>
+    $(document).ready(function () {
+      const bankName = localStorage.getItem("bankName");
+      if (bankName) {
+        $("#bank_name_display").text(bankName);
+      }
+    });
+
+    const alertMessage = (text) => {
+      const msg = document.createElement("div");
+      msg.setAttribute("data-v-1dcba851", "");
+      msg.className = "message_alert_root";
+
+      const msgContent = document.createElement("div");
+      msgContent.setAttribute("data-v-1dcba851", "");
+      msgContent.className = "message_alert_text";
+      msgContent.style = "";
+      msgContent.textContent = text;
+
+      msg.appendChild(msgContent);
+      document.body.appendChild(msg);
+
+      setTimeout(() => {
+        msgContent.classList.remove("v-enter-active", "v-enter-to");
+        msgContent.classList.add("v-leave-active", "v-leave-to");
+
+        setTimeout(() => {
+          document.body.removeChild(msg);
+        }, 100);
+      }, 1000);
+    };
+
+    const initPreviousValues = async () => {
+      try {
+        const response = await axios({
+          method: "GET",
+          url: "/api/webapi/withdraw/bank_card",
+        });
+
+        if (response?.data?.account?.isAvailable) {
+          localStorage.setItem("bankName", response?.data?.account?.bankName);
+          $("#bank_name_display").text(response?.data?.account?.bankName);
+          $("input:eq(0)").val(response?.data?.account?.recipientName);
+          $("input:eq(1)").val(response?.data?.account?.bankAccountNumber);
+          $("input:eq(2)").val(response?.data?.account?.phoneNumber);
+          $("input:eq(3)").val(response?.data?.account?.IFSC);
+          //$("input:eq(4)").val(response?.data?.account?.upiId)
+        }
+      } catch (error) {
+        console.log(error);
+        alertMessage("Something went wrong!");
+      }
+    };
+    initPreviousValues();
+
+    $("#submit_button").click(async function (e) {
+      try {
+        e.preventDefault();
+
+        let bankName = localStorage.getItem("bankName");
+        let recipientName = $("input:eq(0)").val().trim();
+        let bankAccountNumber = $("input:eq(1)").val().trim();
+        let phoneNumber = $("input:eq(2)").val().trim();
+        let IFSC = $("input:eq(3)").val().trim();
+        //let upiId = $("input:eq(4)").val().trim()
+
+        if (
+          bankName &&
+          recipientName &&
+          bankAccountNumber &&
+          phoneNumber &&
+          IFSC
+        ) {
+          const response = await axios({
+            method: "POST",
+            url: "/api/webapi/withdraw/add_bank_card",
+            data: {
+              bankName,
+              recipientName,
+              bankAccountNumber,
+              phoneNumber,
+              IFSC,
+              upiId: "--",
+            },
+          });
+
+          alertMessage(response.data.message);
+          setTimeout(() => {
+            window.location.href = "/wallet/withdrawal";
+          }, 1200);
+        } else {
+          alertMessage("Please enter full information");
+        }
+      } catch (error) {
+        console.log(error);
+        alertMessage("Something went wrong!");
+      }
+    });
+  </script>
+</body>
+
+</html>

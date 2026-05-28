@@ -1,0 +1,129 @@
+<div id="c-popups" class="c-popups">
+  <div class="header-section">
+    <h2>How to play</h2>
+  </div>
+  <div class="middle-content-section">
+    <div class="text">
+      <p>
+        Presale Rule: The game offers 1440 trading issues daily. Simply wait for
+        the draw after checking the schedule.
+      </p>
+      <p>
+        If you trade 100, 2% service fee is deducted, making your contract
+        amount 98.
+      </p>
+      <p>
+        1. Select Green: If the result is 1, 3, 7, or 9, you win (98 * 2) = 196.
+        If the result is 5, you win (98 * 1.5) = 147.
+      </p>
+      <p>
+        2. Select Red: If the result is 2, 4, 6, or 8, you win (98 * 2) = 196.
+      </p>
+      <p>3. Select Violet: If the result is 0 or 5, you win (98 * 2) = 196.</p>
+      <br />
+      <p>
+        4. Select Number: If the result matches your selection, you win (98 * 9)
+        = 882.
+      </p>
+      <p>
+        5. Select Big: If the result is 5, 6, 7, 8, or 9, you win (98 * 2) =
+        196.
+      </p>
+      <p>
+        6. Select Small: If the result is 0, 1, 2, 3, or 4, you win (98 * 2) =
+        196.
+      </p>
+    </div>
+  </div>
+  <div class="bottom-section com" style="text-align: center">
+    <button class="activity">close</button>
+  </div>
+</div>
+<script>
+  $(".TimeLeft__C-rule").click(function (e) {
+    $(".c-popups").css("display", "block");
+    $("#app").removeClass("over-lay");
+  });
+
+  $(".activity").click(function (e) {
+    $(".c-popups").css("display", "none");
+  });
+</script>
+<style>
+  .c-popups {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--darkBg, var(--bg_color_L2));
+    z-index: 9999;
+    width: 300px;
+    color: #fff;
+    border-radius: 23px;
+  }
+
+  .c-popups .header-section {
+    background: var(--main_gradient-color) !important;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .c-popups .header-section h2 {
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .c-popups p {
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .c-popups .middle-content-section {
+    height: 35vh;
+    position: relative;
+    overflow-y: scroll;
+  }
+
+  .c-popups .middle-content-section .text {
+    padding: 15px;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .c-popups .middle-content-section .text p {
+    margin-bottom: 10px;
+  }
+
+  .c-popups .bottom-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 20px;
+    align-items: center;
+  }
+
+  .c-popups .bottom-section.com {
+    padding-top: 5px;
+  }
+
+  .c-popups .bottom-section.com .activity {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    font-size: 18px;
+    padding: 9px 78px;
+    border: none;
+    background: var(--main_gradient-color);
+    color: white;
+    border-radius: 20px;
+  }
+
+  /* .MyGameRecordList__C-item-m-top[data-v-373b3197] {
+    color: #0c0707;
+  } */
+</style>

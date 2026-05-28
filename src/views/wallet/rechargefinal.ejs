@@ -1,0 +1,205 @@
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 37px">
+
+<head>
+  <script src="/app.config.js?v=1718968461132"></script>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  <meta name="google" content="notranslate" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css" />
+  <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css" />
+  <link rel="stylesheet" href="/assets/css/index-2c2fee84.css" />
+  <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css" />
+  <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css" />
+  <link rel="stylesheet" href="/assets/css/page-test-24de9c20.css" />
+  <link rel="stylesheet" href="/assets/css/page-main-284c07ba.css" />
+  <link rel="stylesheet" href="/assets/css/page-promotion-14ce89d7.css" />
+  <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.1/axios.min.js"
+    integrity="sha512-w9PRLSWbo+Yqin/AzSMGoP+qe8UF1njFtd1rEnR58Xv2GEJNEa6O6Bv53mkPbNyAwGCn1HVt1OOvd5i+E55t+w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body style="font-size: 12px" data-np-autofill-form-type="other" data-np-checked="1" data-np-watching="1">
+  <div data-v-36cc3380="" class="Recharge__container">
+    <div data-v-12a80a3e="" data-v-36cc3380="" class="navbar white">
+      <div data-v-12a80a3e="" class="navbar-fixed">
+        <div data-v-12a80a3e="" class="navbar__content">
+          <div data-v-12a80a3e="" class="navbar__content-left">
+            <i data-v-12a80a3e="" class="van-badge__wrapper van-icon van-icon-arrow-left"></i>
+          </div>
+          <div data-v-12a80a3e="" class="navbar__content-center">
+            <div data-v-12a80a3e="" class="navbar__content-title">
+              पुनर्भरण
+            </div>
+          </div>
+          <div data-v-12a80a3e="" class="navbar__content-right">
+            <div data-v-36cc3380="" class="title">रिचार्ज रिकॉर्ड</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-v-4f3d8608="">
+      <div data-v-4f3d8608="" class="Recharge__container-tabcard" id="tabcard-container">
+        <!-- Payment gateways will be rendered here -->
+      </div>
+    </div>
+
+    <div data-v-9e03166f="" class="Recharge__content">
+      <div data-v-9e03166f="" class="Recharge__content-quickInfo boxStyle">
+        <div data-v-9e03166f="" class="Recharge__content-quickInfo__title">
+          <div data-v-9e03166f="" class="title">
+            <svg data-v-9e03166f="" class="svg-icon icon-quickpay2">
+              <use xlink:href="#icon-quickpay2"></use>
+            </svg>
+            <p data-v-9e03166f="">चैनल चुनें</p>
+          </div>
+        </div>
+        <div data-v-9e03166f="" class="rechargeTypes_list" id="recharge-types-container">
+          <!-- Recharge types will be rendered here -->
+        </div>
+      </div>
+      <div data-v-9e03166f="" class="Recharge__content-paymoney boxStyle">
+        <div data-v-9e03166f="" class="Recharge__content-paymoney__title">
+          <svg data-v-9e03166f="" class="svg-icon icon-saveWallet">
+            <use xlink:href="#icon-saveWallet"></use>
+          </svg>
+          <p data-v-9e03166f="">रिचार्ज राशि</p>
+        </div>
+        <div id="recharge-amounts-container" style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <!-- Recharge amounts will be rendered here -->
+        </div>
+      </div>
+
+      <div data-v-9e03166f="" class="Recharge__content-paymoney__money-input">
+        <div data-v-9e03166f="" class="place-div">₹</div>
+        <div data-v-9e03166f="" class="van-cell van-field amount-input" modelmodifiers="[object Object]">
+          <div class="van-cell__value van-field__value">
+            <div class="van-field__body">
+              <input type="tel" inputmode="numeric" id="van-field-1-input" class="van-field__control"
+                placeholder="कृपया राशि दर्ज करें" autocomplete="new-password" data-allow-mismatch="attribute" />
+            </div>
+          </div>
+        </div>
+
+        <div data-v-9e03166f="" class="place-right">
+          <img data-v-9e03166f="" src="/assets/png/clean-82487515.png" alt="" />
+        </div>
+      </div>
+
+      <div data-v-9e03166f="" class="Recharge__container-rechageBtn">
+        पुनर्भरण
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <script>
+    let gateways = [];
+    let selectedGateway = null;
+
+    $(document).ready(function () {
+      $.get("/api/pay/getPayTypeName", function (response) {
+        console.log(response);
+        if (response.status && response.datas) {
+          gateways = response.datas;
+          renderGateways();
+          if (gateways.length > 0) {
+            selectGateway(0);
+          }
+        }
+      });
+    });
+
+    function renderGateways() {
+      const container = $('#tabcard-container');
+      container.empty();
+
+      gateways.forEach((gateway, index) => {
+        const html = `
+            <div data-v-4f3d8608="" class="Recharge__container-tabcard__items ${index === 0 ? 'active' : ''}" onclick="selectGateway(${index})" data-index="${index}">
+              <div data-v-4f3d8608="" class="centers">
+                <div data-v-4f3d8608="" class="Recharge__container-tabcard__top">
+                  <img data-v-4f3d8608="" class="img" src="/assets/img/${gateway.pay_name || 'UPI'}.png" alt="" onerror="this.src='/assets/img/default.png'" />
+                </div>
+                <div data-v-4f3d8608="" class="Recharge__container-tabcard__bot">
+                  ${gateway.pay_name || 'Gateway ' + (index + 1)}
+                </div>
+              </div>
+            </div>
+          `;
+        container.append(html);
+      });
+    }
+
+    function selectGateway(index) {
+      selectedGateway = gateways[index];
+
+      // Update active tab
+      $('.Recharge__container-tabcard__items').removeClass('active');
+      $(`.Recharge__container-tabcard__items[data-index="${index}"]`).addClass('active');
+
+      // Render recharge type info
+      renderRechargeType(selectedGateway);
+
+      // Render recharge amounts
+      renderRechargeAmounts(selectedGateway);
+    }
+
+    function renderRechargeType(gateway) {
+      const container = $('#recharge-types-container');
+      container.empty();
+
+      const bonus = gateway.bonus_percent || 0;
+      const html = `
+          <div data-v-9e03166f="" class="Recharge__content-quickInfo__item item_active">
+            <div data-v-9e03166f="" class="other">
+              <div data-v-9e03166f="">${gateway.pay_name || 'Gateway'}</div>
+              <div data-v-9e03166f="">मात्रा: ${gateway.min_price || 0} - ${gateway.max_price || '50K'}</div>
+              <div data-v-9e03166f="" class="bouns">${bonus}% bonus</div>
+            </div>
+          </div>
+        `;
+      container.append(html);
+    }
+
+    function renderRechargeAmounts(gateway) {
+      const container = $('#recharge-amounts-container');
+      container.empty();
+
+      // Parse recharge_amounts from gateway (comma-separated string)
+      let amounts = [];
+      if (gateway.recharge_amounts) {
+        amounts = gateway.recharge_amounts.split(',').map(a => parseInt(a.trim())).filter(a => !isNaN(a));
+      }
+
+      // Default amounts if none defined
+      if (amounts.length === 0) {
+        amounts = [100, 300, 500, 1000, 5000, 10000];
+      }
+
+      amounts.forEach(amount => {
+        const html = `
+            <div data-v-9e03166f="" class="Recharge__content-paymoney__money-list__item" onclick="setAmount(${amount})">
+              <div data-v-9e03166f="" class="amount">
+                <span data-v-9e03166f="">₹</span> ${amount}
+              </div>
+            </div>
+          `;
+        container.append(html);
+      });
+    }
+
+    function setAmount(amount) {
+      $('#van-field-1-input').val(amount);
+      $('.Recharge__content-paymoney__money-list__item').removeClass('active');
+      event.currentTarget && $(event.currentTarget).addClass('active');
+    }
+  </script>
+</body>
+
+</html>

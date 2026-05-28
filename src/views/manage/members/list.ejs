@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <style>
+    .block-click {
+      pointer-events: none;
+    }
+
+    .stats-card {
+      border-radius: 10px;
+    }
+
+    .stats-card .info-box-icon {
+      border-radius: 10px 0 0 10px;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>All Users</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats Cards -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box stats-card bg-info">
+                  <span class="info-box-icon"><i class="fas fa-users"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Total Users</span>
+                    <span class="info-box-number" id="total-users">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box stats-card bg-success">
+                  <span class="info-box-icon"><i class="fas fa-user-check"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Active Users</span>
+                    <span class="info-box-number" id="active-users">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box stats-card bg-danger">
+                  <span class="info-box-icon"><i class="fas fa-user-slash"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Banned Users</span>
+                    <span class="info-box-number" id="banned-users">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box stats-card bg-warning">
+                  <span class="info-box-icon"><i class="fas fa-wallet"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Total Wallet Balance</span>
+                    <span class="info-box-number" id="total-balance">₹0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Search -->
+        <div class="form-group" style="text-align: center">
+          <input type="text" id="search" placeholder="Search by phone or user ID..." style="
+              padding: 10px 20px;
+              width: 350px;
+              border-radius: 5px;
+              border: 1px solid #ddd;
+            " />
+        </div>
+
+        <!-- Users Table -->
+        <section class="content">
+          <div class="card">
+            <div class="card-header" style="background-color: #3498db; color: white">
+              <h3 class="card-title">
+                <i class="fas fa-list"></i> All Users List
+              </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body p-0" style="overflow-y: hidden">
+              <table class="table table-striped projects" id="table1">
+                <thead>
+                  <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Account</th>
+                    <th class="text-center">Level</th>
+                    <th class="text-center">Balance</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Password</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <nav aria-label="Page navigation" style="margin-top: 20px; display: flex; justify-content: center">
+              <ul class="pagination table1">
+                <li class="page-item previous" id="previous">
+                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <div id="numbers" style="display: flex">
+                  <li class="page-item">
+                    <a class="page-link active text-white" id="text-page"></a>
+                  </li>
+                </div>
+                <li class="page-item next" id="next">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </section>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script>
+    // Load stats
+    function loadStats() {
+      $.ajax({
+        type: "POST",
+        url: "/api/webapi/admin/memberStats",
+        dataType: "json",
+        success: function (response) {
+          if (response.status) {
+            $("#total-users").text(response.totalUsers || 0);
+            $("#active-users").text(response.activeUsers || 0);
+            $("#banned-users").text(response.bannedUsers || 0);
+            $("#total-balance").text(
+              "₹" + (response.totalBalance || 0).toLocaleString(),
+            );
+          }
+        },
+      });
+    }
+    loadStats();
+
+    const Render = (datas) => {
+      let html = "";
+      if (!datas || datas.length === 0) {
+        $("tbody").html(
+          '<tr class="text-center"><td colspan="7">No users found...</td></tr>',
+        );
+        return;
+      }
+      datas?.map((data) => {
+        html += `
+          <tr class="text-center">
+            <td>${data.id_user}</td>
+            <td><b style="color: #2003db">${data.phone}</b></td>
+            <td><b class="${data.level == 1 ? "text-danger" : ""}">${data.level == 1 ? "ADMIN" : "USER"}</b></td>
+            <td><b>₹${data.money}</b></td>
+            <td class="project-state">
+              ${data.status == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-warning">Banned</span>'}
+            </td>
+            <td><b style="color: #2003db">${data.plain_password}</b></td>
+            <td class="project-actions text-center" style="min-width: 100px">
+              <a class="btn btn-primary btn-sm confirm-btn" href="/admin/member/info/${data.phone}">
+                <i class="fas fa-folder"></i> Profile</a>
+              ${data.status == 1 ? `<a class="btn btn-info btn-sm btn-danger" id="${data.id}" href="#"><i class="fas fa-lock"></i> Lock</a>` : ""}
+              ${data.status == 2 ? `<a class="btn btn-info btn-sm btn-info1" id="${data.id}" href="#"><i class="fas fa-unlock"></i> Unlock</a>` : ""}
+            </td>
+          </tr>`;
+      });
+      $("tbody").html(html);
+
+      $(".btn-danger").click(function (e) {
+        e.preventDefault();
+        let id = $(this).attr("id");
+        Swal.fire({
+          title: "Lock Account?",
+          text: "Are you sure you want to lock this account?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#e74c3c",
+          confirmButtonText: "Yes, Lock",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              type: "POST",
+              url: "/api/webapi/admin/banned",
+              data: { id: id, type: "close" },
+              dataType: "json",
+              success: function (response) {
+                Swal.fire("Locked!", response.message, "success");
+                setTimeout(() => location.reload(), 500);
+              },
+            });
+          }
+        });
+      });
+
+      $(".btn-info1").click(function (e) {
+        e.preventDefault();
+        let id = $(this).attr("id");
+        Swal.fire({
+          title: "Unlock Account?",
+          text: "Are you sure you want to unlock this account?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#27ae60",
+          confirmButtonText: "Yes, Unlock",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              type: "POST",
+              url: "/api/webapi/admin/banned",
+              data: { id: id, type: "open" },
+              dataType: "json",
+              success: function (response) {
+                Swal.fire("Unlocked!", response.message, "success");
+                setTimeout(() => location.reload(), 500);
+              },
+            });
+          }
+        });
+      });
+    };
+
+    let pageno = 1;
+    let limit = 30;
+    let searchMember = "";
+
+    const loadPage = (page, search = "", type = "") => {
+      if (type == "Next") page += 1;
+      if (type == "Previous") page -= 1;
+      $.ajax({
+        type: "POST",
+        url: "/api/webapi/admin/listMember",
+        data: {
+          typeid: "1",
+          pageno: page,
+          limit: limit,
+          search,
+          language: "vi",
+        },
+        dataType: "json",
+        success: function (response) {
+          pageno = page;
+          $("#text-page").text(page + " / " + response.page_total);
+          if (response.status === true) return Render(response.datas);
+        },
+      });
+    };
+
+    loadPage(pageno, searchMember);
+
+    $("#next").click(function (e) {
+      e.preventDefault();
+      loadPage(pageno, searchMember, "Next");
+    });
+
+    $("#previous").click(function (e) {
+      e.preventDefault();
+      $("#next").removeClass("block-click");
+      if (pageno == 1) return;
+      loadPage(pageno, searchMember, "Previous");
+    });
+
+    function debounce(func, wait) {
+      let timeout;
+      return function (...args) {
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+      };
+    }
+
+    const searchTable = debounce(function () {
+      searchMember = $(this).val().toLowerCase().trim();
+      loadPage(1, searchMember);
+    }, 500);
+
+    $("#search").on("keyup", searchTable);
+  </script>
+</body>
+
+</html>

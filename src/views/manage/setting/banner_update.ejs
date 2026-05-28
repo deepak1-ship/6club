@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <style>
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      color: #007bff;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn-save {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-delete {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .banner-item {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .banner-item img {
+      width: 120px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .banner-info {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .banner-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    @media (max-width: 576px) {
+      .banner-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .banner-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .banner-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini" style="background: #f4f6f9">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper" style="background: #f4f6f9">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 style="color: #333; font-size: 20px">Banner Update</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container-fluid">
+          <div class="card-custom">
+            <div class="card-title"><i class="fas fa-upload"></i> Upload New Banner</div>
+            <form id="banner-form" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Banner Image</label>
+                    <input type="file" class="form-control-custom" id="banner_image" name="banner_image"
+                      accept="image/*" required />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Redirect URL (Optional)</label>
+                    <input type="text" class="form-control-custom" id="redirect_url" name="redirect_url"
+                      placeholder="https://..." />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Position</label>
+                    <input type="number" class="form-control-custom" id="position" name="position" value="0" min="0" />
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn-save" style="margin-top: 15px"><i class="fas fa-upload"></i> Upload
+                Banner</button>
+            </form>
+          </div>
+
+          <div class="card-custom">
+            <div class="card-title"><i class="fas fa-images"></i> All Banners</div>
+            <div id="banners-list">
+              <% if (typeof banners !=='undefined' && banners.length> 0) { %>
+                <% banners.forEach(function(banner) { %>
+                  <div class="banner-item" data-id="<%= banner.id %>">
+                    <img src="<%= banner.banner_image %>" alt="Banner" onerror="this.src='/images/placeholder.png'" />
+                    <div class="banner-info">
+                      <strong>ID: <%= banner.id %></strong><br>
+                      <small>URL: <%= banner.redirect_url || 'No redirect' %></small><br>
+                      <small>Position: <%= banner.position %> | Status: <%= banner.is_active ? 'Active' : 'Inactive' %>
+                            </small>
+                    </div>
+                    <div class="banner-actions">
+                      <button class="btn-delete" onclick="deleteBanner('<%= banner.id %>')"><i class="fas fa-trash"></i>
+                        Delete</button>
+                    </div>
+                  </div>
+                  <% }); %>
+                    <% } else { %>
+                      <p class="text-muted">No banners uploaded yet.</p>
+                      <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js" defer></script>
+  <script>
+    $("#banner-form").on("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      $.ajax({
+        url: "/api/admin/setting/banner/create",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+          if (res.status) {
+            Swal.fire("Success", res.message, "success").then(() => location.reload());
+          } else {
+            Swal.fire("Error", res.message, "error");
+          }
+        },
+        error: function () { Swal.fire("Error", "Failed to upload banner", "error"); }
+      });
+    });
+
+    function deleteBanner(id) {
+      Swal.fire({
+        title: "Delete Banner?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#dc3545",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.post("/api/admin/setting/banner/delete/" + id, function (res) {
+            if (res.status) {
+              Swal.fire("Deleted!", res.message, "success").then(() => location.reload());
+            } else {
+              Swal.fire("Error", res.message, "error");
+            }
+          });
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

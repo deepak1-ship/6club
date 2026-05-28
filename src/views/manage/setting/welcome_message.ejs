@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <style>
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      color: #007bff;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn-save {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    textarea.form-control-custom {
+      min-height: 80px;
+      resize: vertical;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini" style="background: #f4f6f9">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper" style="background: #f4f6f9">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 style="color: #333; font-size: 20px">
+                  Site Welcome Message
+                </h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container-fluid">
+          <form id="message-form">
+            <div class="card-custom">
+              <!-- <div class="card-title">
+                <i class="fas fa-bull horn"></i> Popup Message Configuration
+              </div> -->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Popup Title</label>
+                    <input type="text" class="form-control-custom" name="popup_title"
+                      value="<%= (typeof message !== 'undefined' && message) ? message.popup_title || '' : '' %>"
+                      placeholder="Welcome!" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Popup Heading</label>
+                    <input type="text" class="form-control-custom" name="popup_heading"
+                      value="<%= (typeof message !== 'undefined' && message) ? message.popup_heading || '' : '' %>"
+                      placeholder="Special Offer" />
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Announcement</label>
+                    <textarea class="form-control-custom" name="announcement"
+                      placeholder="Important announcement text...">
+<%= (typeof message !== 'undefined' && message) ? message.announcement || '' : '' %></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Body Message</label>
+                    <textarea class="form-control-custom" name="body_message"
+                      placeholder="Main content of the popup...">
+<%= (typeof message !== 'undefined' && message) ? message.body_message || '' : '' %></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-custom">
+              <!-- <div class="card-title">
+                <i class="fab fa-telegram"></i> Links & Actions
+              </div> -->
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Telegram Text</label>
+                    <input type="text" class="form-control-custom" name="telegram_text"
+                      value="<%= (typeof message !== 'undefined' && message) ? message.telegram_text || '' : '' %>"
+                      placeholder="Join Telegram" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Reward Text</label>
+                    <input type="text" class="form-control-custom" name="reward_text"
+                      value="<%= (typeof message !== 'undefined' && message) ? message.reward_text || '' : '' %>"
+                      placeholder="Claim Reward" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">VIP Link</label>
+                    <input type="text" class="form-control-custom" name="vip_link"
+                      value="<%= (typeof message !== 'undefined' && message) ? message.vip_link || '' : '' %>"
+                      placeholder="https://..." />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-save">
+              <i class="fas fa-save"></i> Save Welcome Message
+            </button>
+          </form>
+        </div>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script>
+    $("#message-form").on("submit", function (e) {
+      e.preventDefault();
+      const data = {
+        popup_title: $("input[name=popup_title]").val(),
+        popup_heading: $("input[name=popup_heading]").val(),
+        announcement: $("textarea[name=announcement]").val(),
+        body_message: $("textarea[name=body_message]").val(),
+        telegram_text: $("input[name=telegram_text]").val(),
+        reward_text: $("input[name=reward_text]").val(),
+        vip_link: $("input[name=vip_link]").val(),
+      };
+      $.ajax({
+        url: "/api/admin/setting/welcome-message/save",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (res) {
+          if (res.status) {
+            Swal.fire("Success", res.message, "success");
+          } else {
+            Swal.fire("Error", res.message, "error");
+          }
+        },
+      });
+    });
+  </script>
+</body>
+
+</html>

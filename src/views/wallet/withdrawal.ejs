@@ -1,0 +1,751 @@
+<html lang="en" translate="no" data-dpr="1" dir="ltr" style="font-size: 37px">
+
+<head>
+  <script src="/app.config.js?v=1718968461132"></script>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  <meta name="google" content="notranslate" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="manifest" />
+  <title>Rajagame21</title>
+  <link rel="modulepreload" crossorigin="" href="/assets/js/modules-6b0d6df4.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/native/index-7b2487e5.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/en-93cdab10.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/rus-ecb14220.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/vi-40bd560a.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/id-24cc3835.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/hd-c5b1d7e8.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/tha-330057b2.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/md-02b1fc1c.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/bra-1f3ea623.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/my-80d37f62.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/bdt-d8f19d0c.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/zh-3589f8b3.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/pak-9f46abf2.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/ar-64903102.js" />
+  <link rel="modulepreload" crossorigin="" href="/assets/js/page-activity-d3ba61d1.js" />
+  <link rel="stylesheet" href="/assets/css/modules-b642e9bc.css" />
+  <link rel="stylesheet" href="/assets/css/page-activity-4fe5c6bf.css" />
+  <link rel="stylesheet" href="/assets/css/index-2c2fee84.css" />
+  <link rel="stylesheet" href="/assets/css/page-home-522c97b9.css" />
+  <link rel="stylesheet" href="/assets/css/page-login-49518e3f.css" />
+  <link rel="stylesheet" href="/assets/css/page-main-284c07ba.css" />
+  <link rel="modulepreload" as="script" crossorigin="" href="/assets/js/page-vip-cf1db7c1.js" />
+  <link rel="stylesheet" href="/assets/css/page-vip-896cf332.css" />
+  <link rel="stylesheet" href="/assets/css/page-test-24de9c20.css" />
+  <link rel="stylesheet" href="/assets/css/page-promotion-14ce89d7.css" />
+  <link rel="stylesheet" href="/assets/css/page-wallet-b9af2085.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.1/axios.min.js"
+    integrity="sha512-w9PRLSWbo+Yqin/AzSMGoP+qe8UF1njFtd1rEnR58Xv2GEJNEa6O6Bv53mkPbNyAwGCn1HVt1OOvd5i+E55t+w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="/js/client.js"></script>
+</head>
+
+<body class="" style="font-size: 12px">
+  <div id="app" data-v-app="">
+    <!--v-if-->
+    <div data-v-80a607a5="" class="withdraw__container" style="
+          --f13b4d11-currentFontFamily: &quot;Roboto&quot;, &quot;Inter&quot;,
+            sans-serif;
+        ">
+      <div data-v-12a80a3e="" data-v-80a607a5="" class="navbar">
+        <div data-v-12a80a3e="" class="navbar-fixed">
+          <div data-v-12a80a3e="" class="navbar__content">
+            <div data-v-12a80a3e="" class="navbar__content-left" onclick="history.back()">
+              <i data-v-12a80a3e="" class="van-badge__wrapper van-icon van-icon-arrow-left">
+                <!---->
+                <!---->
+                <!---->
+              </i>
+            </div>
+            <div data-v-12a80a3e="" class="navbar__content-center">
+              <!--v-if-->
+              <div data-v-12a80a3e="" class="navbar__content-title">
+                Withdraw
+              </div>
+            </div>
+            <div data-v-12a80a3e="" class="navbar__content-right" onclick="location.href='/wallet/withdrawalrecord'">
+              <span data-v-80a607a5="">Withdrawal history</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-v-80a607a5="" class="withdraw__container-content">
+        <!--资产余额-->
+        <div data-v-0879c174="" data-v-80a607a5="" class="balanceAssets">
+          <div data-v-0879c174="" class="balanceAssets__header">
+            <div data-v-0879c174="" class="balanceAssets__header__left">
+              <img data-v-0879c174="" src="/assets/png/balance-e39ce400.png" />
+              <!-- 可用余额 -->
+              Available balance
+            </div>
+          </div>
+          <div data-v-0879c174="" class="balanceAssets__main">
+            <p data-v-0879c174="">
+              ₹<span id="money_amount_display">0.00</span>
+            </p>
+            <img id="reload_money_amount_button" data-v-0879c174="" src="/assets/png/refresh-8e0efe26.png" alt="" />
+          </div>
+        </div>
+        <!--提款方式-->
+        <div data-v-9bae072d="" data-v-80a607a5="" class="withdrawWay" id="withdrawal_methods">
+          <!--v-if-->
+          <!--v-if-->
+          <div data-v-9bae072d="" class="select" type="BANK_CARD">
+            <div data-v-9bae072d="">
+              <img data-v-9bae072d=""
+                src="https://ossimg.6club-club.com/6club/payNameIcon/WithBeforeImgIcon_20240913142805ft4s.png" />
+            </div>
+            <span data-v-9bae072d="">BANK CARD</span>
+          </div>
+          <div data-v-9bae072d="" class="" type="USDT_ADDRESS">
+            <div data-v-9bae072d="">
+              <img data-v-9bae072d=""
+                src="https://ossimg.6club-club.com/6club/payNameIcon/WithBeforeImgIcon2_20240913142817jwjk.png" />
+            </div>
+            <span data-v-9bae072d="">USDT</span>
+          </div>
+        </div>
+        <!-- upi -->
+        <!--v-if-->
+        <!-- c2cupi -->
+        <!--银行卡模块-->
+        <!--v-if-->
+        <div data-v-ef5c8333="" data-v-80a607a5="" class="addWithdrawType">
+          <div data-v-ef5c8333="" class="addWithdrawType-top" id="main_account_info_holder">
+            <img onclick="handleOpenAddMethod()" data-v-ef5c8333="" src="/assets/png/add-1ad7f3f5.png" />
+            <span data-v-ef5c8333="" id="add_method_type_text">Add a bank account number</span>
+          </div>
+          <div data-v-ef5c8333="" class="addWithdrawType-text">
+            Need to add beneficiary information to be able to withdraw money
+          </div>
+        </div>
+        <!--输入区-->
+        <div data-v-cb5583fe="" class="explain">
+          <div data-v-cb5583fe="" class="input">
+            <div data-v-cb5583fe="" class="place-div" id="currency_indicator">
+              ₹
+            </div>
+            <input data-v-cb5583fe="" placeholder="Please enter the amount" class="inp" id="money_amount_input" />
+          </div>
+          <!--v-if-->
+          <div data-v-cb5583fe="" class="balance bank">
+            <!-- <div data-v-cb5583fe=""><span data-v-cb5583fe="">Withdrawable balance <h6 data-v-cb5583fe=""
+                           class="yellow">₹0.00</h6></span><input data-v-cb5583fe="" type="button" value="All"></div>
+                  <div data-v-cb5583fe=""><span data-v-cb5583fe="">Withdrawal amount received</span>
+                     <div data-v-cb5583fe="" class="rightD"><span data-v-cb5583fe="" class="yellow">₹0.00</span></div>
+                  </div> -->
+          </div>
+        </div>
+        <div data-v-cb5583fe="" class="explain usdt" style="display: none">
+          <div data-v-cb5583fe="" class="head">
+            <img data-v-cb5583fe="" src="/assets/png/1-1c23fcb3.png" />
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <div data-v-cb5583fe="" class="input">
+            <div data-v-cb5583fe="" class="place-div">₹</div>
+            <input data-v-cb5583fe="" type="number" placeholder="Please enter withdrawal amount" class="inp" />
+          </div>
+          <div data-v-cb5583fe="" class="balance usdt">
+            <div data-v-cb5583fe="">
+              <span data-v-cb5583fe="">
+                Withdrawable balance
+                <h6 data-v-cb5583fe="" class="yellow">₹0.00</h6>
+              </span>
+              <input data-v-cb5583fe="" type="button" value="All" />
+            </div>
+          </div>
+        </div>
+        <div data-v-80a607a5="" class="recycleBtnD">
+          <button id="submit_withdraw_btn" data-v-80a607a5="" class="recycleBtn" disabled>
+            Withdraw
+          </button>
+        </div>
+        <!--提现说明组件-->
+        <div data-v-76eb7f31="" data-v-80a607a5="" class="Recharge__container-intro">
+          <div data-v-76eb7f31="" class="br">
+            <!--v-if-->
+            <p data-v-76eb7f31="">
+              Need to bet
+              <span data-v-470caa86="" id="need_to_bet" class="red">₹0.00</span>
+              to be able to withdraw
+            </p>
+            <p data-v-76eb7f31="">
+              Withdraw time
+              <span data-v-76eb7f31="" class="red">00:00-23:59</span>
+            </p>
+            <p data-v-76eb7f31="">
+              Inday Remaining Withdrawal Times<span data-v-76eb7f31="" class="red">3</span>
+            </p>
+            <p data-v-76eb7f31="">
+              Withdrawal amount range
+              <span data-v-76eb7f31="" class="red">₹110.00-₹10,000,000.00</span>
+            </p>
+            <!--v-if-->
+            <!--v-if-->
+            <!--v-if-->
+            <p data-v-76eb7f31="">
+              Please confirm your beneficial account information before
+              withdrawing. If your information is incorrect, our company will
+              not be liable for the amount of loss
+            </p>
+            <p data-v-76eb7f31="">
+              If your beneficial information is incorrect, please contact
+              customer service
+            </p>
+          </div>
+        </div>
+        <!--提现记录-->
+        <div data-v-30972a14="" data-v-80a607a5="" class="rechargeh__container">
+          <div data-v-30972a14="" class="rechargeh__container-head">
+            <svg data-v-30972a14="" class="svg-icon icon-historyHead">
+              <use xlink:href="#icon-historyHead"></use>
+            </svg>
+            <h1 data-v-30972a14="">Withdrawal history</h1>
+          </div>
+          <div data-v-30972a14="" class="rechargeh__container-content">
+            <div data-v-f84b843f="" data-v-30972a14="" class="empty__container">
+              <svg data-v-f84b843f="" class="svg-icon icon-empty">
+                <use xlink:href="#icon-empty"></use>
+              </svg>
+              <p data-v-f84b843f="">No data</p>
+            </div>
+          </div>
+          <div data-v-30972a14="" class="rechargeh__container-footer">
+            <button data-v-30972a14="">All history</button>
+          </div>
+        </div>
+      </div>
+      <!--提现成功弹窗-->
+      <!---->
+      <!---->
+      <div data-v-3e71d3da="" data-v-80a607a5="" class="dialog inactive c2c">
+        <div data-v-3e71d3da="" class="dialog__container" role="dialog" tabindex="0">
+          <div data-v-3e71d3da="" class="dialog__container-img">
+            <img data-v-80a607a5="" class="succeedImg" data-origin="/assets/png/succeed-e6221c47.png"
+              src="/assets/png/succeed-e6221c47.png" />
+          </div>
+          <div data-v-3e71d3da="" class="dialog__container-title">
+            <h1 data-v-3e71d3da="">C2C withdrawal successful</h1>
+          </div>
+          <div data-v-3e71d3da="" class="dialog__container-content">
+            <div data-v-80a607a5="" class="c2cTip">
+              <h1 data-v-80a607a5="">
+                Please come back and click [Confirm Payment] after receiving
+                the transfer
+              </h1>
+              <p data-v-80a607a5="">
+                C2C withdrawal rewards will be automatically issued after you
+                click
+                <span>[Confirm Arrival]</span>
+                !
+              </p>
+            </div>
+          </div>
+          <div data-v-3e71d3da="" class="dialog__container-footer">
+            <button data-v-3e71d3da="">Confirm</button>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div data-v-3e71d3da="" class="dialog__outside"></div>
+      </div>
+      <!--输入密码弹窗-->
+      <!--v-if-->
+      <!--不在提现时间内提示-->
+      <!---->
+      <!---->
+      <!---->
+      <!---->
+      <div data-v-3e71d3da="" data-v-80a607a5="" class="dialog inactive">
+        <div data-v-3e71d3da="" class="dialog__container" role="dialog" tabindex="0">
+          <div data-v-3e71d3da="" class="dialog__container-img">
+            <img data-v-3e71d3da="" class="" alt="" data-origin="/assets/png/tip-2298bb83.png"
+              src="/assets/png/tip-2298bb83.png" />
+          </div>
+          <div data-v-3e71d3da="" class="dialog__container-title">
+            <h1 data-v-3e71d3da=""></h1>
+          </div>
+          <div data-v-3e71d3da="" class="dialog__container-content">
+            <h1 data-v-80a607a5="">
+              You must recharge to enable the withdrawal function
+            </h1>
+          </div>
+          <div data-v-3e71d3da="" class="dialog__container-footer">
+            <button data-v-3e71d3da="">Confirm</button>
+            <!--v-if-->
+          </div>
+          <img data-v-3e71d3da="" class="close_img" src="/assets/png/close-84ce5e6a.png" />
+        </div>
+        <div data-v-3e71d3da="" class="dialog__outside"></div>
+      </div>
+    </div>
+    <!--online custom service-->
+    <div class="customer" id="customerId" onclick="location.href='/support'" style="
+          --f13b4d11-currentFontFamily: &quot;Roboto&quot;, &quot;Inter&quot;,
+            sans-serif;
+          --f6a705e1-currentFontFamily: bahnschrift;
+        ">
+      <img class="" data-origin="/customer.png" src="/customer.png" />
+    </div>
+  </div>
+</body>
+<style>
+  .account_info_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.3rem 0.4rem;
+  }
+
+  .account_info_field {
+    display: flex;
+    gap: 10px;
+  }
+
+  .account_info_field_name {
+    font-weight: 600;
+  }
+
+  .account_info_field_value {
+    font-weight: 500;
+  }
+
+  .account_change_info {
+    color: #2a82f3;
+    font-size: 0.37333rem;
+    /* margin-left: auto; */
+    text-align: right;
+    width: 100%;
+    border-top: 1px dashed #707070;
+    padding-top: 0.2rem;
+    margin-top: 0.2rem;
+  }
+
+  .message_alert_root {
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      Helvetica Neue,
+      Helvetica,
+      Segoe UI,
+      Arial,
+      Roboto,
+      PingFang SC,
+      Hiragino Sans GB,
+      Microsoft Yahei,
+      sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    max-width: 12.8rem;
+    width: 80%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100000;
+    border-radius: 14px;
+  }
+
+  .message_alert_text {
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      Helvetica Neue,
+      Helvetica,
+      Segoe UI,
+      Arial,
+      Roboto,
+      PingFang SC,
+      Hiragino Sans GB,
+      Microsoft Yahei,
+      sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    transition: opacity 0.5s;
+    animation: bounce-in-data-v-1dcba851 0.5s;
+    position: relative;
+    padding: 0.32rem 0.66667rem;
+    text-align: center;
+    line-height: 0.64rem;
+    overflow: hidden;
+    font-size: 0.37333rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  @keyframes bounce-in-data-v-1dcba851 {
+    0% {
+      transform: scale(0.4);
+    }
+
+    50% {
+      transform: scale(1.03);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
+</style>
+<script>
+  const WithdrawalMethodOptions = document.querySelector(
+    "#withdrawal_methods",
+  );
+  const ReloadMoneyAmountButton = document.querySelector(
+    "#reload_money_amount_button",
+  );
+  const SubmitWithdrawButton = document.querySelector("#submit_withdraw_btn");
+  let MoneyAmountInput = document.querySelector("#money_amount_input");
+
+  const WithdrawalMethodsMap = {
+    USDT_ADDRESS: "USDT_ADDRESS",
+    BANK_CARD: "BANK_CARD",
+  };
+
+  const userInfoTypes = {
+    phoneNumber: "phone_user",
+    username: "name_user",
+    balance: "money_user",
+    userId: "id_user",
+    referCode: "code",
+    betAmount: "total_bet_amount",
+    level: "level",
+  };
+
+  let userData = null;
+  let AllowedWithdrawAmount = 0;
+  let totalBetAmountRemaining = 0;
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.post("/api/webapi/check/Info");
+      userData = response?.data?.userInfo;
+      AllowedWithdrawAmount = response.data.allowedWithdrawAmount;
+      totalBetAmountRemaining = response.data.totalBetAmountRemaining;
+      console.log("===================", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const setUserInfoDisplay = async (idName, userInfoType, prefix) => {
+    let display = document.getElementById(idName);
+    display.textContent = "Loading...";
+    console.log(userData);
+    try {
+      // if (userData === null) {
+      //     const response = await axios.get('/api/webapi/GetUserInfo');
+      //     userData = response?.data?.data
+      // }
+
+      if (userData === null || userData === undefined) {
+        throw Error(
+          "Something went wrong while fetching the user wallet balance!",
+        );
+      }
+
+      display.textContent = prefix
+        ? prefix(userData?.[userInfoType])
+        : userData?.[userInfoType];
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const setUserNeedToBet = (remainingBet) => {
+    // console.log(remainingBet);
+    const needToBet = document.querySelector("#need_to_bet");
+
+    if (needToBet) {
+      needToBet.textContent = remainingBet;
+    } else {
+      console.error("Element not found");
+    }
+  };
+  const alertMessage = (text) => {
+    const msg = document.createElement("div");
+    msg.setAttribute("data-v-1dcba851", "");
+    msg.className = "message_alert_root";
+
+    const msgContent = document.createElement("div");
+    msgContent.setAttribute("data-v-1dcba851", "");
+    msgContent.className = "message_alert_text";
+    msgContent.style = "";
+    msgContent.textContent = text;
+
+    msg.appendChild(msgContent);
+    document.body.appendChild(msg);
+
+    setTimeout(() => {
+      msgContent.classList.remove("v-enter-active", "v-enter-to");
+      msgContent.classList.add("v-leave-active", "v-leave-to");
+
+      setTimeout(() => {
+        document.body.removeChild(msg);
+      }, 100);
+    }, 1000);
+  };
+  const initBankCard = async () => {
+    try {
+      const response = await axios({
+        method: "GET",
+        url: "/api/webapi/withdraw/BANK_CARD",
+      });
+
+      if (response?.data?.account?.isAvailable) {
+        document.querySelector(
+          ".addWithdrawType-top[data-v-ef5c8333]",
+        ).style.height = "3.76667rem";
+        document.querySelector("#main_account_info_holder").innerHTML = `
+                     <div class="account_info_container">
+                         <div class="account_info_field">
+                             <div class="account_info_field_name">
+                                 Bank Name:
+                             </div>
+                             <div class="account_info_field_value">
+                                 ${response?.data?.account?.bankName}
+                             </div>
+                         </div>
+                         <div class="account_info_field">
+                             <div class="account_info_field_name">
+                                 Recipient's Name:
+                             </div>
+                             <div class="account_info_field_value">
+                                 ${response?.data?.account?.recipientName}
+                             </div>
+                         </div>
+                         <div class="account_info_field">
+                             <div class="account_info_field_name">
+                                 Account Number:
+                             </div>
+                             <div class="account_info_field_value">
+                                 ${response?.data?.account?.bankAccountNumber}
+                             </div>
+                         </div>
+                          <!-- <div class="account_info_field">
+                             <div class="account_info_field_name">
+                                 UPI Id:
+                             </div>
+                             <div class="account_info_field_value">
+                                 ${response?.data?.account?.upiId}
+                             </div>
+                         </div>-->
+
+                         <div class="account_change_info" onclick="handleOpenAddMethod()">
+                             Change Bank Card Information
+                         </div>
+                     </div
+                 `;
+      } else {
+        document.querySelector(
+          ".addWithdrawType-top[data-v-ef5c8333]",
+        ).style.height = "2.66667rem";
+        document.querySelector("#main_account_info_holder").innerHTML = `
+                     <img onclick="handleOpenAddMethod()" data-v-ef5c8333="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAACwCAMAAACYaRRsAAAAM1BMVEUAAAC3u8+4vNC5vNC5vdG4vNC3us+3t8+4vNC2vM+5vNG4vM+vv8+vr8+5vNC4vNC4vNB5o5b1AAAAEHRSTlMAQN/vj59gIM+QX5AQEK+/+pPJwgAAAbpJREFUeNrt3MuSokAQRuGsKkS8/+//tMPEbCYygDCbjs7CPt8a5QjKAos0AAAAAMAHKsPUtGywRdeV7evVFg1aMZ3OFvV4akOxJVUrmi0p2hBNPlfFg5tW1Hiw6vkbey+2aFx5VRtt0W27+B4IPmk2lYelePz75M/AAdbsZIlOmpXQ5tVSvdw3b9skabRURdJk79Lsbqnukloo2BL4BoL/QzDBDsEEOwQT7BBMsEMwwQ7BBDsEf3bwTbpYonhDKZauhwb84hM6SIMdSQ8XRoK7QrBDMMEOwQQ7BBPsEEzwtmur18TgeEOVWkawb9i/u17fgWCCCSa4q90RvGzQDsPPBxftUgh+41+THS786AgmmGCC+9ndLwxuUk0MjjeMtY0JwbGGQ9+qIrh/BDsEE+wQTLBDMMEOwQR/0aHWeH/2clwc4ISWcqz11X8bDnVR+uwnZQgmmGCCCSaYYIdggh2CCXYIJtghONTQ+hgjqdCgzmKpxtCgzpukl6WqoemxpY9hs2d721OzOmaN8y2v6BG7Vzk/MEN774jnhBnavjdUfMqdof18mFk0eUqaod2mSwc31AEAAAAA3+4PU1FviV2McX8AAAAASUVORK5CYII=">
+                     <span data-v-dc48260d="" id="add_method_type_text">Add a bank account number</span>
+                 `;
+      }
+    } catch (error) {
+      console.log(error);
+      alertMessage("Something went wrong!");
+    }
+  };
+  const initUSDTAddress = async () => {
+    try {
+      const response = await axios({
+        method: "GET",
+        url: "/api/webapi/withdraw/usdt_address",
+      });
+
+      if (response?.data?.account?.isAvailable) {
+        document.querySelector(
+          ".addWithdrawType-top[data-v-ef5c8333]",
+        ).style.height = "2.66667rem";
+        document.querySelector("#main_account_info_holder").innerHTML = `
+                     <div class="account_info_container">
+                         <div class="account_info_field">
+                             <div class="account_info_field_name">
+                                 USDT Address:
+                             </div>
+                             <div class="account_info_field_value">
+                                 ${response?.data?.account?.usdtAddress}
+                             </div>
+                         </div>
+                         <div class="account_info_field">
+                             <div class="account_info_field_name">
+                                 Address Alias:
+                             </div>
+                             <div class="account_info_field_value">
+                                 ${response?.data?.account?.addressAlias}
+                             </div>
+                         </div>
+
+                         <div class="account_change_info" onclick="handleOpenAddMethod()">
+                             Change USDT Address Information
+                         </div>
+                     </div
+                 `;
+      } else {
+        document.querySelector(
+          ".addWithdrawType-top[data-v-ef5c8333]",
+        ).style.height = "2.66667rem";
+        document.querySelector("#main_account_info_holder").innerHTML = `
+                     <img onclick="handleOpenAddMethod()" data-v-ef5c8333="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAACwCAMAAACYaRRsAAAAM1BMVEUAAAC3u8+4vNC5vNC5vdG4vNC3us+3t8+4vNC2vM+5vNG4vM+vv8+vr8+5vNC4vNC4vNB5o5b1AAAAEHRSTlMAQN/vj59gIM+QX5AQEK+/+pPJwgAAAbpJREFUeNrt3MuSokAQRuGsKkS8/+//tMPEbCYygDCbjs7CPt8a5QjKAos0AAAAAMAHKsPUtGywRdeV7evVFg1aMZ3OFvV4akOxJVUrmi0p2hBNPlfFg5tW1Hiw6vkbey+2aFx5VRtt0W27+B4IPmk2lYelePz75M/AAdbsZIlOmpXQ5tVSvdw3b9skabRURdJk79Lsbqnukloo2BL4BoL/QzDBDsEEOwQT7BBMsEMwwQ7BBDsEf3bwTbpYonhDKZauhwb84hM6SIMdSQ8XRoK7QrBDMMEOwQQ7BBPsEEzwtmur18TgeEOVWkawb9i/u17fgWCCCSa4q90RvGzQDsPPBxftUgh+41+THS786AgmmGCC+9ndLwxuUk0MjjeMtY0JwbGGQ9+qIrh/BDsEE+wQTLBDMMEOwQR/0aHWeH/2clwc4ISWcqz11X8bDnVR+uwnZQgmmGCCCSaYYIdggh2CCXYIJtghONTQ+hgjqdCgzmKpxtCgzpukl6WqoemxpY9hs2d721OzOmaN8y2v6BG7Vzk/MEN774jnhBnavjdUfMqdof18mFk0eUqaod2mSwc31AEAAAAA3+4PU1FviV2McX8AAAAASUVORK5CYII=">
+                     <span data-v-dc48260d="" id="add_method_type_text">Add address</span>
+            `;
+      }
+    } catch (error) {
+      console.log(error);
+      alertMessage("Something went wrong!");
+    }
+  };
+  const handleCheckAndSelectWithdrawalMethod = () => {
+    let withdrawalMethodList = Array.from(WithdrawalMethodOptions.children);
+
+    withdrawalMethodList = withdrawalMethodList.filter((item) => {
+      return !Array.from(item.classList).includes("disabled");
+    });
+
+    let currentWithdrawalMethod = withdrawalMethodList.find((item) => {
+      return Array.from(item.classList).includes("select");
+    });
+    console.log(currentWithdrawalMethod.getAttribute("type"));
+    switch (currentWithdrawalMethod.getAttribute("type")) {
+      case WithdrawalMethodsMap.BANK_CARD:
+        document.querySelector("#currency_indicator").innerHTML = "₹";
+        initBankCard();
+        break;
+      case WithdrawalMethodsMap.USDT_ADDRESS:
+        document.querySelector("#currency_indicator").innerHTML = "$";
+        initUSDTAddress();
+        break;
+      default:
+        document.querySelector("#currency_indicator").innerHTML = "₹";
+        initBankCard();
+        break;
+    }
+  };
+  const handleSelectPaymentGateway = (event) => {
+    Array.from(WithdrawalMethodOptions.children).forEach((child) => {
+      child.classList.remove("select");
+      if (
+        event.currentTarget.getAttribute("type") ===
+        child.getAttribute("type")
+      ) {
+        child.classList.add("select");
+      }
+    });
+
+    handleCheckAndSelectWithdrawalMethod();
+  };
+  const handleNumericInput = (event) => {
+    const key = event.keyCode;
+    // Only allow numbers to be entered
+    if (key < 48 || key > 57) {
+      event.preventDefault();
+    }
+  };
+  const handleMoneyAmountInput = (event) => {
+    inputMoney = parseInt(MoneyAmountInput.value);
+    console.log(inputMoney);
+    if (inputMoney >= 110) {
+      $("#submit_withdraw_btn")
+        .css("background", "linear-gradient(90deg, #3BAF4C 0%, #00D08A 100%)")
+        .prop("disabled", false);
+    } else {
+      $("#submit_withdraw_btn")
+        .css(
+          "background",
+          "linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%)",
+        )
+        .prop("disabled", true);
+    }
+  };
+  $("#money_amount_input").on("input", handleMoneyAmountInput);
+
+  const handleOpenAddMethod = () => {
+    let withdrawalMethodList = Array.from(WithdrawalMethodOptions.children);
+
+    withdrawalMethodList = withdrawalMethodList.filter((item) => {
+      return !Array.from(item.classList).includes("disabled");
+    });
+
+    let currentWithdrawalMethod = withdrawalMethodList.find((item) => {
+      return Array.from(item.classList).includes("select");
+    });
+
+    switch (currentWithdrawalMethod.getAttribute("type")) {
+      case WithdrawalMethodsMap.BANK_CARD:
+        window.location.href = "/wallet/addBank";
+        break;
+      case WithdrawalMethodsMap.USDT_ADDRESS:
+        window.location.href = "/wallet/addAddress";
+        break;
+      default:
+        window.location.href = "";
+        break;
+    }
+  };
+  const handleSubmitWithdrawRequest = async () => {
+    try {
+      let withdrawalMethodList = Array.from(WithdrawalMethodOptions.children);
+
+      withdrawalMethodList = withdrawalMethodList.filter((item) => {
+        return !Array.from(item.classList).includes("disabled");
+      });
+
+      let currentWithdrawalMethod = withdrawalMethodList.find((item) => {
+        return Array.from(item.classList).includes("select");
+      });
+      const response = await axios({
+        method: "POST",
+        url: "/api/webapi/withdraw/create",
+        data: {
+          amount: parseInt(MoneyAmountInput.value),
+          withdrawalMethod: currentWithdrawalMethod.getAttribute("type"),
+          AllowedWithdrawAmount,
+          totalBetAmountRemaining,
+        },
+      });
+      alertMessage(response.data.message);
+
+      setTimeout(() => {
+        window.location.href = "/wallet/withdrawalrecord";
+      }, 1200);
+    } catch (error) {
+      console.log(error);
+      alertMessage(error?.response?.data?.message || error);
+    }
+  };
+  // Below code will run on Page Load
+  handleCheckAndSelectWithdrawalMethod();
+  fetchUser().then(() => {
+    setUserInfoDisplay("money_amount_display", userInfoTypes.balance);
+    setUserNeedToBet(`₹ ${totalBetAmountRemaining.toFixed(2)}`);
+  });
+  // --------------------------------
+
+  // Even Listeners
+  ReloadMoneyAmountButton.addEventListener("click", () => {
+    fetchUser().then(() => {
+      setUserInfoDisplay("money_amount_display", userInfoTypes.balance);
+    });
+  });
+
+  SubmitWithdrawButton.addEventListener("click", handleSubmitWithdrawRequest);
+
+  Array.from(WithdrawalMethodOptions.children).forEach((child) => {
+    if (Array.from(child.classList).includes("disabled")) return;
+    child.addEventListener("click", handleSelectPaymentGateway);
+  });
+</script>
+
+</html>

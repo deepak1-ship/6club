@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <style>
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .form-label {
+      color: #007bff;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .form-control-custom {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .btn-upload {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-upload:hover { background: #0056b3; }
+    .btn-delete {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .banner-thumb {
+      width: 80px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+    .badge-category {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #e3f2fd;
+      color: #1565c0;
+      text-transform: capitalize;
+    }
+    .table th { font-size: 13px; color: #666; font-weight: 600; }
+    .table td { vertical-align: middle; font-size: 13px; }
+    .empty-row td { text-align: center; color: #aaa; padding: 30px; }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini" style="background: #f4f6f9">
+  <div class="wrapper">
+    <%- include('../nav') %>
+    <div class="content-wrapper" style="background: #f4f6f9">
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 style="color: #333; font-size: 20px">
+                <i class="fas fa-th-large" style="color:#007bff"></i> Category Banner Update
+              </h1>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="container-fluid">
+
+        <!-- Upload Form -->
+        <div class="card-custom">
+          <div class="card-title"><i class="fas fa-upload"></i> Upload New Category Banner</div>
+          <form id="category-banner-form" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Category</label>
+                  <select class="form-control-custom" id="cat-select" name="category" required>
+                    <option value="">-- Select Category --</option>
+                    <option value="lottery">Lottery</option>
+                    <option value="popular">Popular</option>
+                    <option value="minigames">Mini Games</option>
+                    <option value="slots">Slots</option>
+                    <option value="sports">Sports</option>
+                    <option value="casino">Casino</option>
+                    <option value="cardgames">Card Games</option>
+                    <option value="fishing">Fishing</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Banner Name <span style="color:#aaa">(optional)</span></label>
+                  <input type="text" class="form-control-custom" id="banner-name" name="banner_name" placeholder="e.g. Lottery Top Banner" />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Banner Image</label>
+                  <input type="file" class="form-control-custom" id="banner-file" name="banner_image" accept="image/*" required />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="form-label">Redirect URL <span style="color:#aaa">(optional)</span></label>
+                  <input type="text" class="form-control-custom" id="redirect-url" name="redirect_url" placeholder="https://..." />
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn-upload" style="margin-top: 10px">
+              <i class="fas fa-upload"></i> Upload Banner
+            </button>
+          </form>
+        </div>
+
+        <!-- Banner List -->
+        <div class="card-custom">
+          <div class="card-title"><i class="fas fa-list"></i> Uploaded Category Banners</div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Category</th>
+                  <th>Name</th>
+                  <th>Banner</th>
+                  <th>Redirect URL</th>
+                  <th>Uploaded At</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="banner-table-body">
+                <% if (banners && banners.length > 0) { %>
+                  <% banners.forEach(function(b, i) { %>
+                    <tr id="row-<%= b.id %>">
+                      <td><%= i + 1 %></td>
+                      <td><span class="badge-category"><%= b.category %></span></td>
+                      <td><%= b.banner_name || '—' %></td>
+                      <td>
+                        <a href="<%= b.banner_image %>" target="_blank">
+                          <img src="<%= b.banner_image %>" class="banner-thumb" alt="banner" />
+                        </a>
+                      </td>
+                      <td>
+                        <% if (b.redirect_url) { %>
+                          <a href="<%= b.redirect_url %>" target="_blank" style="font-size:12px"><%= b.redirect_url %></a>
+                        <% } else { %>
+                          <span style="color:#aaa">—</span>
+                        <% } %>
+                      </td>
+                      <td><%= new Date(b.created_at).toLocaleString() %></td>
+                      <td>
+                        <button class="btn-delete" data-id="<%= b.id %>">
+                          <i class="fas fa-trash"></i> Delete
+                        </button>
+                      </td>
+                    </tr>
+                  <% }); %>
+                <% } else { %>
+                  <tr class="empty-row">
+                    <td colspan="7"><i class="fas fa-inbox"></i> No category banners uploaded yet</td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js" defer></script>
+  <script>
+    $("#category-banner-form").on("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      if (!formData.get("category")) {
+        Swal.fire("Error", "Please select a category", "error");
+        return;
+      }
+      if (!formData.get("banner_image").size) {
+        Swal.fire("Error", "Please select a banner image", "error");
+        return;
+      }
+      $.ajax({
+        url: "/api/admin/setting/category-banner/create",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+          if (res.status) {
+            Swal.fire("Success", res.message, "success").then(() => location.reload());
+          } else {
+            Swal.fire("Error", res.message || "Upload failed", "error");
+          }
+        },
+        error: function () {
+          Swal.fire("Error", "Server error. Please try again.", "error");
+        }
+      });
+    });
+
+    $(document).on("click", ".btn-delete", function () {
+      deleteBanner($(this).data("id"));
+    });
+
+    function deleteBanner(id) {
+      Swal.fire({
+        title: "Delete Banner?",
+        text: "This action cannot be undone.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#dc3545",
+        confirmButtonText: "Yes, delete it"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: "/api/admin/setting/category-banner/delete/" + id,
+            type: "POST",
+            success: function (res) {
+              if (res.status) {
+                Swal.fire("Deleted!", res.message, "success").then(() => location.reload());
+              } else {
+                Swal.fire("Error", res.message || "Delete failed", "error");
+              }
+            },
+            error: function () {
+              Swal.fire("Error", "Server error. Please try again.", "error");
+            }
+          });
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

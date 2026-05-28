@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rajagame21</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/lte/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
+  <style>
+    .content-wrapper {
+      background: #f4f6f9;
+    }
+
+    .page-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      color: #f59e0b;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .card-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-header-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .input-label {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #f59e0b;
+    }
+
+    .btn-primary-custom {
+      background: #f59e0b;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-primary-custom:hover {
+      background: #d97706;
+    }
+
+    .radio-list {
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+    }
+
+    .radio-item:last-child {
+      border-bottom: none;
+    }
+
+    .radio-item input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #f59e0b;
+    }
+
+    .radio-item label {
+      margin: 0;
+      cursor: pointer;
+      font-size: 13px;
+      color: #333;
+      flex: 1;
+    }
+
+    .radio-item .network-badge {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .image-radio-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+    }
+
+    .image-radio-item:last-child {
+      border-bottom: none;
+    }
+
+    .image-thumbnail {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .image-name {
+      font-size: 13px;
+      color: #333;
+      flex: 1;
+    }
+
+    .file-input-wrapper {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .scroll-indicator {
+      text-align: right;
+      color: #999;
+      font-size: 12px;
+      margin-top: -8px;
+      margin-bottom: 12px;
+    }
+
+    .empty-list {
+      text-align: center;
+      color: #999;
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+
+    .btn-delete {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .btn-delete:hover {
+      background: #dc2626;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-row .form-input {
+      flex: 1;
+    }
+
+    .input-row select.form-input {
+      flex: 0 0 120px;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <%- include('../nav') %>
+      <div class="content-wrapper">
+        <section class="content">
+          <div class="page-container">
+            <!-- Manage USDT Addresses Section -->
+            <h2 class="section-title">Manage USDT Addresses</h2>
+
+            <div class="card-section">
+              <div class="card-header-title">Add USDT Address</div>
+              <label class="input-label">Wallet Address & Network</label>
+              <div class="input-row">
+                <input type="text" class="form-input" id="new-usdt-address" placeholder="e.g. TXdR...abc123" />
+                <select class="form-input" id="new-usdt-network">
+                  <option value="TRC20">TRC20</option>
+                  <option value="ERC20">ERC20</option>
+                  <option value="BEP20">BEP20</option>
+                </select>
+              </div>
+              <button class="btn-primary-custom" id="add-usdt-btn">
+                Add USDT Address
+              </button>
+            </div>
+
+            <div class="card-section">
+              <div class="card-header-title">Select Active USDT Address</div>
+              <div class="radio-list" id="usdt-list">
+                <div class="loading-spinner">
+                  <i class="fas fa-spinner fa-spin"></i> Loading...
+                </div>
+              </div>
+              <div class="scroll-indicator"><i class="fas fa-sort"></i> Scroll to see more</div>
+              <button class="btn-primary-custom" id="save-usdt-selection">
+                Save Selection
+              </button>
+            </div>
+
+            <!-- Manage USDT Images Section -->
+            <h2 class="section-title" style="margin-top: 30px">
+              Manage USDT Images
+            </h2>
+
+            <div class="card-section">
+              <div class="card-header-title">Upload Image</div>
+              <label class="input-label">Select Image (JPG, PNG)</label>
+              <div class="file-input-wrapper">
+                <input type="file" class="form-input" id="usdt-image-file" accept="image/*" style="padding: 8px" />
+              </div>
+              <button class="btn-primary-custom" id="upload-image-btn">
+                Upload Image
+              </button>
+            </div>
+
+            <div class="card-section">
+              <div class="card-header-title">Select Active Image</div>
+              <div class="radio-list" id="image-list">
+                <div class="loading-spinner">
+                  <i class="fas fa-spinner fa-spin"></i> Loading...
+                </div>
+              </div>
+              <div class="scroll-indicator"><i class="fas fa-sort"></i> Scroll to see more</div>
+              <button class="btn-primary-custom" id="save-image-selection">
+                Save Selection
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+  </div>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lte/dist/js/adminlte.min.js"></script>
+  <script src="/js/admin/admin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script>
+    let usdtList = [];
+    let imageList = [];
+    let activeUsdtId = null;
+    let activeImageId = null;
+
+    $(document).ready(function () {
+      loadUSDTData();
+      loadImageData();
+      bindEvents();
+    });
+
+    function loadUSDTData() {
+      $.ajax({
+        url: "/api/admin/newfinance/usdt/list",
+        method: "GET",
+        success: function (response) {
+          if (response.status && response.data) {
+            usdtList = response.data;
+            activeUsdtId = response.activeId;
+            renderUSDTList();
+          } else {
+            renderEmptyUSDTList();
+          }
+        },
+        error: function () {
+          renderEmptyUSDTList();
+        },
+      });
+    }
+
+    function loadImageData() {
+      $.ajax({
+        url: "/api/admin/newfinance/usdt/images",
+        method: "GET",
+        success: function (response) {
+          if (response.status && response.data) {
+            imageList = response.data;
+            activeImageId = response.activeId;
+            renderImageList();
+          } else {
+            renderEmptyImageList();
+          }
+        },
+        error: function () {
+          renderEmptyImageList();
+        },
+      });
+    }
+
+    function renderUSDTList() {
+      const container = $("#usdt-list");
+      container.empty();
+
+      if (usdtList.length === 0) {
+        container.html(
+          '<div class="empty-list">No USDT addresses added yet</div>',
+        );
+        return;
+      }
+
+      usdtList.forEach((usdt) => {
+        const isActive = usdt.id === activeUsdtId;
+        const item = `
+                    <div class="radio-item">
+                        <input type="radio" name="active_usdt" id="usdt_${usdt.id}" value="${usdt.id}" ${isActive ? "checked" : ""}>
+                        <label for="usdt_${usdt.id}">${usdt.wallet_address}</label>
+                        <span class="network-badge">${usdt.network_type || "TRC20"}</span>
+                        <button class="btn-delete delete-usdt-btn" data-id="${usdt.id}" data-addr="${usdt.wallet_address}"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+        container.append(item);
+      });
+    }
+
+    function renderEmptyUSDTList() {
+      $("#usdt-list").html(
+        '<div class="empty-list">No USDT addresses added yet</div>',
+      );
+    }
+
+    function renderImageList() {
+      const container = $("#image-list");
+      container.empty();
+
+      if (imageList.length === 0) {
+        container.html(
+          '<div class="empty-list">No images uploaded yet</div>',
+        );
+        return;
+      }
+
+      imageList.forEach((img) => {
+        const isActive = img.id === activeImageId;
+        const item = `
+                    <div class="image-radio-item">
+                        <input type="radio" name="active_image" id="img_${img.id}" value="${img.id}" ${isActive ? "checked" : ""}>
+                        <img src="${img.filepath}" alt="QR" class="image-thumbnail" onerror="this.style.display='none'">
+                        <label for="img_${img.id}" class="image-name">${img.filename}</label>
+                        <button class="btn-delete delete-usdt-image-btn" data-id="${img.id}" data-name="${img.filename}"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+        container.append(item);
+      });
+    }
+
+    function renderEmptyImageList() {
+      $("#image-list").html(
+        '<div class="empty-list">No images uploaded yet</div>',
+      );
+    }
+
+    function bindEvents() {
+      // Add USDT Address
+      $("#add-usdt-btn").on("click", function () {
+        const walletAddress = $("#new-usdt-address").val().trim();
+        const networkType = $("#new-usdt-network").val();
+
+        if (!walletAddress) {
+          Swal.fire("Error", "Please enter a wallet address", "error");
+          return;
+        }
+
+        const btn = $(this);
+        btn
+          .prop("disabled", true)
+          .html('<i class="fas fa-spinner fa-spin"></i>');
+
+        $.ajax({
+          url: "/api/admin/newfinance/usdt/add",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            wallet_address: walletAddress,
+            network_type: networkType,
+          }),
+          success: function (response) {
+            btn.prop("disabled", false).text("Add USDT Address");
+            if (response.status) {
+              Swal.fire("Success", response.message, "success");
+              $("#new-usdt-address").val("");
+              loadUSDTData();
+            } else {
+              Swal.fire("Error", response.message, "error");
+            }
+          },
+          error: function () {
+            btn.prop("disabled", false).text("Add USDT Address");
+            Swal.fire("Error", "Failed to add USDT address", "error");
+          },
+        });
+      });
+
+      // Save USDT Selection
+      $("#save-usdt-selection").on("click", function () {
+        const selectedUsdt = $('input[name="active_usdt"]:checked').val();
+        if (!selectedUsdt) {
+          Swal.fire("Error", "Please select a USDT address", "error");
+          return;
+        }
+
+        const btn = $(this);
+        btn
+          .prop("disabled", true)
+          .html('<i class="fas fa-spinner fa-spin"></i>');
+
+        $.ajax({
+          url: "/api/admin/newfinance/usdt/set-active",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ id: parseInt(selectedUsdt) }),
+          success: function (response) {
+            btn.prop("disabled", false).text("Save Selection");
+            if (response.status) {
+              Swal.fire("Success", response.message, "success");
+            } else {
+              Swal.fire("Error", response.message, "error");
+            }
+          },
+          error: function () {
+            btn.prop("disabled", false).text("Save Selection");
+            Swal.fire("Error", "Failed to save selection", "error");
+          },
+        });
+      });
+
+      // Upload Image
+      $("#upload-image-btn").on("click", function () {
+        const fileInput = $("#usdt-image-file")[0];
+        if (!fileInput.files || !fileInput.files[0]) {
+          Swal.fire("Error", "Please select an image file", "error");
+          return;
+        }
+
+        const btn = $(this);
+        btn
+          .prop("disabled", true)
+          .html('<i class="fas fa-spinner fa-spin"></i>');
+
+        const formData = new FormData();
+        formData.append("image", fileInput.files[0]);
+
+        $.ajax({
+          url: "/api/admin/newfinance/usdt/upload",
+          method: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            btn.prop("disabled", false).text("Upload Image");
+            if (response.status) {
+              Swal.fire("Success", response.message, "success");
+              $("#usdt-image-file").val("");
+              loadImageData();
+            } else {
+              Swal.fire("Error", response.message, "error");
+            }
+          },
+          error: function () {
+            btn.prop("disabled", false).text("Upload Image");
+            Swal.fire("Error", "Failed to upload image", "error");
+          },
+        });
+      });
+
+      // Delete USDT Address
+      $("#usdt-list").on("click", ".delete-usdt-btn", function () {
+        const id = $(this).data("id");
+        const addr = $(this).data("addr");
+        Swal.fire({
+          title: "Delete USDT Address?",
+          text: `"${addr}" will be permanently removed.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#ef4444",
+          confirmButtonText: "Delete",
+        }).then((result) => {
+          if (!result.isConfirmed) return;
+          $.ajax({
+            url: "/api/admin/newfinance/usdt/delete",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ id }),
+            success: function (response) {
+              if (response.status) {
+                Swal.fire("Deleted", response.message, "success");
+                loadUSDTData();
+              } else {
+                Swal.fire("Error", response.message, "error");
+              }
+            },
+            error: function () {
+              Swal.fire("Error", "Failed to delete USDT address", "error");
+            },
+          });
+        });
+      });
+
+      // Delete USDT Image
+      $("#image-list").on("click", ".delete-usdt-image-btn", function () {
+        const id = $(this).data("id");
+        const name = $(this).data("name");
+        Swal.fire({
+          title: "Delete Image?",
+          text: `"${name}" will be permanently removed.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#ef4444",
+          confirmButtonText: "Delete",
+        }).then((result) => {
+          if (!result.isConfirmed) return;
+          $.ajax({
+            url: "/api/admin/newfinance/usdt/image/delete",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ id }),
+            success: function (response) {
+              if (response.status) {
+                Swal.fire("Deleted", response.message, "success");
+                loadImageData();
+              } else {
+                Swal.fire("Error", response.message, "error");
+              }
+            },
+            error: function () {
+              Swal.fire("Error", "Failed to delete image", "error");
+            },
+          });
+        });
+      });
+
+      // Save Image Selection
+      $("#save-image-selection").on("click", function () {
+        const selectedImage = $('input[name="active_image"]:checked').val();
+        if (!selectedImage) {
+          Swal.fire("Error", "Please select an image", "error");
+          return;
+        }
+
+        const btn = $(this);
+        btn
+          .prop("disabled", true)
+          .html('<i class="fas fa-spinner fa-spin"></i>');
+
+        $.ajax({
+          url: "/api/admin/newfinance/usdt/image/set-active",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ id: parseInt(selectedImage) }),
+          success: function (response) {
+            btn.prop("disabled", false).text("Save Selection");
+            if (response.status) {
+              Swal.fire("Success", response.message, "success");
+            } else {
+              Swal.fire("Error", response.message, "error");
+            }
+          },
+          error: function () {
+            btn.prop("disabled", false).text("Save Selection");
+            Swal.fire("Error", "Failed to save selection", "error");
+          },
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>
