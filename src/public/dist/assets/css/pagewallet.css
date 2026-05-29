@@ -2047,10 +2047,10 @@ html:lang(ar) .Recharge__content-paymoney__money-input .place-right {
     padding: 0 .32rem .32rem
 }
 
-.Recharge__box .Recharge__container .title {
+/* .Recharge__box .Recharge__container .title {
     font-weight: 400;
     font-size: .34667rem
-}
+} */
 
 .Recharge__box .Recharge__container-balanceAssets {
     width: 100%;
@@ -2259,14 +2259,13 @@ html:lang(ar) .Recharge__content-paymoney__money-input .place-right {
     font-size: .4rem;
     z-index: 88;
     background: var(--button_dis_color);
-    width: 100%;
-    max-width: 10rem;
-    height: .93333rem;
-    line-height: .93333rem;
-    color: var(--textW);
+    min-width: 2.08rem;
+    height: 1.17333rem;
+    line-height: 1.17333rem;
+    color: var(--text_color_L2);
     text-align: center;
-    border-radius: .66667rem;
-    margin-bottom: .4rem
+    border-radius: .13333rem;
+    padding: 0 .13333rem
 }
 
 .Recharge__box .forbidden_tip {

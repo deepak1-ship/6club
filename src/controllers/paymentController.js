@@ -937,11 +937,13 @@ const getPayTypeName = async (req, res) => {
         paymentInfo = {
           type: "upi_id",
           upi_id: activeUpiId[0]?.upi_id || null,
+          qr_image: activeUpiQr[0]?.filepath || null,
         };
       } else if (gatewayIndex === 2) {
         paymentInfo = {
           type: "upi_qr",
           qr_image: activeUpiQr[0]?.filepath || null,
+          upi_id: activeUpiId[0]?.upi_id || null,
         };
       } else if (gatewayIndex === 3) {
         paymentInfo = {
@@ -953,6 +955,7 @@ const getPayTypeName = async (req, res) => {
         paymentInfo = {
           type: "upi_qr",
           qr_image: activeUpiQr[0]?.filepath || null,
+          upi_id: activeUpiId[0]?.upi_id || null,
         };
       }
 
